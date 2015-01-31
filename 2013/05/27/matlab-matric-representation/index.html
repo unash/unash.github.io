@@ -1,0 +1,468 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Matlab矩阵及表示 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="matlab名为矩阵实验室，可见矩阵在整个软件中的重要地位。然而在入门matlab的时候，总觉得矩阵表示有点复杂。一维数组(向量)、二位数组(矩阵)、多维数组在本质上应该是一致的，但是实际情况并非如此。举个例子：
+a=[1;2;3] %a是一维数组（向量）
+b=[a,a,a] %b则变成了二维数组
+">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/05/27/matlab-matric-representation/" title="Matlab矩阵及表示" itemprop="url">Matlab矩阵及表示</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-05-27T03:01:43.000Z" itemprop="datePublished">May 27 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#_"><span class="toc-number">1.</span> <span class="toc-text"> </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#向量（vector)、矩阵(matrix)、数组(array)"><span class="toc-number">1.1.</span> <span class="toc-text">向量（vector)、矩阵(matrix)、数组(array)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#向量、一维数组"><span class="toc-number">1.2.</span> <span class="toc-text">向量、一维数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#矩阵、二维数组"><span class="toc-number">1.3.</span> <span class="toc-text">矩阵、二维数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多维数组"><span class="toc-number">1.4.</span> <span class="toc-text">多维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在C++中，定义如下："><span class="toc-number">1.4.1.</span> <span class="toc-text">在C++中，定义如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多维数组的使用"><span class="toc-number">1.4.2.</span> <span class="toc-text">多维数组的使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考内容"><span class="toc-number">1.5.</span> <span class="toc-text">参考内容</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>matlab名为矩阵实验室，可见矩阵在整个软件中的重要地位。然而在入门matlab的时候，总觉得矩阵表示有点复杂。一维数组(向量)、二位数组(矩阵)、多维数组在本质上应该是一致的，但是实际情况并非如此。举个例子：</p>
+<p><code>a=[1;2;3] %a是一维数组（向量）
+b=[a,a,a] %b则变成了二维数组
+c=[b,b,b] %c依然是二维数组
+d=[b;b;b] %d然然是二维数组</code></p>
+<p>可见，在matlab中，从一维向二维的转变与二维到三维的转变是不同的。本文希望在整理各种情况的基础上总结出一些矩阵表示的理念，并与C++中的多维数组做一下对比。</p>
+<h2 id="_"> </h2>
+<h3 id="向量（vector)、矩阵(matrix)、数组(array)">向量（vector)、矩阵(matrix)、数组(array)</h3>
+<p>之前是没怎么区分这几个概念的，后来发现原来并没有“多维矩阵”这一说，矩阵只能是二维的，向量只能是一维的，而数组则可以从一维到多维不等。之所以将向量、矩阵从数组体系中抽离出来，是因为向量、矩阵与数组并非同一概念，他们只是在形式上，某些部分碰巧重合了而已。</p>
+<h3 id="向量、一维数组">向量、一维数组</h3>
+<p><strong><span style="color: #0000ff;">vector</span></strong>，或称矢量，与标量相对，指一个同时具有大小和方向的几何对象，因常常以箭头符号标示以区别于其它量而得名。直观上，矢量通常被标示为一个带箭头的线段，记作<img src="https://upload.wikimedia.org/math/9/d/8/9d873d9d5aca82f8439a25404dcc820a.png" alt="\overrightarrow{AB}">。在常见的三维空间直角坐标系<strong>Oxyz</strong>里，基本矢量就是以横轴（<strong>Ox</strong>）、竖轴（<strong>Oy</strong>） 以及纵轴（<strong>Oz</strong>） 为方向的三个单位矢量 <img src="https://upload.wikimedia.org/math/a/d/2/ad215c8513baab4a97fece40fed15d17.png" alt="\vec{i}">、 <img src="https://upload.wikimedia.org/math/c/e/3/ce31f6eaf99ad208952de5b5d2a52d36.png" alt="\vec{j}">、 <img src="https://upload.wikimedia.org/math/0/c/e/0ce3c8c83ac88a97da62f18e619d599c.png" alt="\vec{k}">。这三个矢量取好以后，其它的矢量就可以通过三元数组来表示，因为它们可以表示成一定倍数的三个基本矢量的总合。比如说一个标示为(<em>2</em>,<em>1</em>,<em>3</em>)的矢量就是2个矢量 <img src="https://upload.wikimedia.org/math/a/d/2/ad215c8513baab4a97fece40fed15d17.png" alt="\vec{i}"> 加上1个矢量 <img src="https://upload.wikimedia.org/math/c/e/3/ce31f6eaf99ad208952de5b5d2a52d36.png" alt="\vec{j}"> 加上3个矢量 <img src="https://upload.wikimedia.org/math/0/c/e/0ce3c8c83ac88a97da62f18e619d599c.png" alt="\vec{k}"> 得到的矢量。<img src="https://upload.wikimedia.org/math/3/2/9/3296e627cc7a20c568e88b5cf1cb3ebd.png" alt="(a, b, c) = a\vec{i} + b\vec{j} + c\vec{k}.">，于是向量可以表示成[a,b,c]（行向量）或者<img src="http://latex.codecogs.com/gif.latex?[a,b,c]^{T}" alt="">（列向量）的形式，到此便与matlab中的向量对接起来来。不过对于概念上的向量，不同的元素可以属于不同的数据类型；但是在matlab中，向量元素的数据类型必须一致（不然没法表示呀）。</p>
+<p><strong><span style="color: #0000ff;">数组</span></strong>是电脑编程语言上，对于“Array”的中文称呼，台湾称陣列。数组中的每一个元素都属于同一个数据类型，不能把不同类型的数据放在同一个数组中。</p>
+<p>在matlab中，向量的形式是向量，但很多时候都是被当作数组来使用的。比如申明一个数组<code>a=[</code>1,2,3]（或者<code>a=[</code>1 2 3]，空格与逗号作用相同），使用a(i)来遍历其中的元素。</p>
+<p><strong><span style="color: #0000ff;">字符串数组的表示</span></strong>。其实在matlab中，字符串本身就是数组。令a=’abcd’，则a(2)=’b’。如果申请字符串数组，可以使用</p>
+<p><code>arr=[&#39;AAA&#39;;&#39;BBB&#39;;&#39;CCC&#39;] %则显示为字符串的向量;在这里,三个元素的长度必须相同,否则会报错;字符数组是以二维矩阵的形式存储的
+arr=[&#39;AAA&#39;,&#39;BBB&#39;,&#39;CCC&#39;] %显示为一个字符串，即AAABBBCCC;在这里，三个元素的长度可以不相同,因为arr与&#39;AAABBBCCC&#39;没有区别</code></p>
+<p><span style="color: #0000ff;"><strong>C++中的一维数组</strong></span>。在C++中声明一个一维数组：</p>
+<p><code>int a[10]? //栈变量
+int *a=new int[10] //堆变量</code></p>
+<p>与matlab很相似。</p>
+<h3 id="矩阵、二维数组">矩阵、二维数组</h3>
+<p>在数学中，矩阵(复数矩阵)是以行列排列的数值、符号或者表达式的方形阵列，矩阵中的items成为元素(elements)或者entries.二维数组又称为<strong>矩阵</strong>，行列数相等的矩阵称为<strong>方阵</strong>。与（向量、一维数组之间的关系）不同，（矩阵、二维数组）中的元素类型必须相同（当然在一些弱类型的语言中，数组元素的格式可以不同，javascript?）。在matlab中，定义矩阵可以如下：</p>
+<p><code>a=[11,12;21,22] %
+a1=[11,12]; a2=[21,22]; a=[a1;a2] %
+a1=[11;21]; a2=[12;22]; a=[a1,a2] %
+a12=a(1,2) %获取元素(1,2)
+a1=a(:,2) %一般的形式为a(x1,x2,x3…xi…xn),xi代表取数组a的第i个维度值（索引）为xi的东西，对于一个有n个维度的数组，如果到xi之后后面的index就没有来，则默认后面的index都是1.</code></p>
+<h3 id="多维数组">多维数组</h3>
+<p>matlab使用的是解释的、弱类型定义语言，变量在使用的时候不需要预先声明。matlab中多维数组的概念使用matrix表示的。可以用如下形式来定义多维数组：</p>
+<p><code>a=[11,12;21,22;31,32] %a是一维数组（向量）
+b=[a,a,a] %b则变成了二维数组
+c=[b,b,b] %c依然是二维数组
+d=[b;b;b] %d然然是二维数组</code></p>
+<p>?<a href="http://blog.exbye.com/wp-content/uploads/2013/05/image24.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb24.png" alt="image" title="image"></a> <a href="http://blog.exbye.com/wp-content/uploads/2013/05/image25.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb25.png" alt="image" title="image"></a> <a href="http://blog.exbye.com/wp-content/uploads/2013/05/image26.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb26.png" alt="image" title="image"></a> <a href="http://blog.exbye.com/wp-content/uploads/2013/05/image27.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb27.png" alt="image" title="image"></a></p>
+<h4 id="在C++中，定义如下：">在C++中，定义如下：</h4>
+<p><code>int a[3][3] //栈变量
+int(p)[常量1][常量2]...[常量n];? //
+p=new int[x][常量1][常量2]...[常量n];? //这一种方法只有最高维度是不定的
+int **a=new a[][10] //
+for(int i=0;i&amp;lt;10;i++){a[i]=new int[10];}? //这种方法，每个维度的个数都可以动态申请</code>//注意这两种定义方法的区别，他们在存储上是不同的。第一种最高维度的几个变量是在内存中分离的，第二种则在多个维度层次上，在内存中的存储是分离的。</p>
+<h4 id="多维数组的使用">多维数组的使用</h4>
+<p>假设数组d=ones(2,2,2,2) %四个维度，每个维度有两个值，每个值都=1</p>
+<p><a href="http://blog.exbye.com/wp-content/uploads/2013/05/image28.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb28.png" alt="image" title="image"></a>?? <a href="http://blog.exbye.com/wp-content/uploads/2013/05/image29.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb29.png" alt="image" title="image"></a> <a href="http://blog.exbye.com/wp-content/uploads/2013/05/image30.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb30.png" alt="image" title="image"></a> <a href="http://blog.exbye.com/wp-content/uploads/2013/05/image31.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb31.png" alt="image" title="image"></a><a href="http://blog.exbye.com/wp-content/uploads/2013/05/image32.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb32.png" alt="image" title="image"></a> <a href="http://blog.exbye.com/wp-content/uploads/2013/05/image33.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/05/image_thumb33.png" alt="image" title="image"></a></p>
+<p>从整体上看，从原始数组中截取多获得的数组，matlab都是用矩阵来显示的，无论所截出来的子数组有多少个元素，显示的时候，都是用最低的两个维度构建成矩阵显示（如图B）；对比图C、D，当高维度的值被限定之后，显示的结果去掉来这一个明确了的高维度；如果高维度没有在选择自数组的时候指定，则默认为1，即d(: ,: ,: ,1)=d(: ,: ,: ,: )；看E，最低维度与最高维度都是1，也会你会觉得最终的子数组应该是一个二维矩阵，不，依然是三维矩阵，在原始数组中的最高维度如果能够保留下来，则其不可能降维。另外要提一点的是，矩阵的最低维度是row index，其次是column index，维度依次增加。</p>
+<p>在C++中则不同，比如三维数组a[x1][x2][x3]，最高维度是x1，其次是x2，最低是x3。在声明变量的时候，可以使用p=new int[x][常量1][常量2]…[常量n]，也可以使用int **a=new a[][10]，前者是一步申请到所有的空间，低维度的维度值是固定的，后者是分布申请空间，先高维度后低维度。调用的形式都是a[1][2][1]的形式。<br>当然C++与matlab使用数组的时候还有一点明显的不同，C++的索引值是从0开始的，而matlab则从1开始。</p>
+<p>高维数组一般通过拆减成矩阵来计算。</p>
+<h3 id="参考内容">参考内容</h3>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E7%9F%A2%E9%87%8F" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E7%9F%A2%E9%87%8F</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E6%95%B0%E7%BB%84" target="_blank" rel="external">http://zh.wikipedia.org/wiki/%E6%95%B0%E7%BB%84</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Matrix_(mathematics" target="_blank" rel="external">http://en.wikipedia.org/wiki/Matrix_(mathematics)</a>)</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/array/">array</a><a href="/tags/C/">C++</a><a href="/tags/Matlab/">Matlab</a><a href="/tags/matrix/">matrix</a><a href="/tags/Vector/">Vector</a><a href="/tags/向量/">向量</a><a href="/tags/数组/">数组</a><a href="/tags/申明变量/">申明变量</a><a href="/tags/矩阵/">矩阵</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/软件使用/">软件使用</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/05/27/matlab-matric-representation/" data-title="Matlab矩阵及表示 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/05/27/matlab-one-function-one-file/" title="matlab 一个函数一个文件">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  matlab 一个函数一个文件</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/05/25/ml-logistic-regressing/"  title="机器学习——Logistic 回归">
+ <strong>NEXT:</strong><br/> 
+ <span>机器学习——Logistic 回归
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#_"><span class="toc-number">1.</span> <span class="toc-text"> </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#向量（vector)、矩阵(matrix)、数组(array)"><span class="toc-number">1.1.</span> <span class="toc-text">向量（vector)、矩阵(matrix)、数组(array)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#向量、一维数组"><span class="toc-number">1.2.</span> <span class="toc-text">向量、一维数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#矩阵、二维数组"><span class="toc-number">1.3.</span> <span class="toc-text">矩阵、二维数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多维数组"><span class="toc-number">1.4.</span> <span class="toc-text">多维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在C++中，定义如下："><span class="toc-number">1.4.1.</span> <span class="toc-text">在C++中，定义如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多维数组的使用"><span class="toc-number">1.4.2.</span> <span class="toc-text">多维数组的使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考内容"><span class="toc-number">1.5.</span> <span class="toc-text">参考内容</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

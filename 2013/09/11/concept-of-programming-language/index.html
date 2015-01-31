@@ -1,0 +1,759 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>编程语言中的概念辨析 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="ActiveX控件:理解为一类控件，或者迷你程序。需要安装在某一容器中，比如IE或者offic，不能够独立运行。可以使用一些语言比如C或者VB编写。ActiveX控件的表现形式有可能是exe，也有可能是dll或者ocx。
+Windows中的信息交换
+*剪切板
+*动态数据交换DDE
+*对象链接与嵌入OLE
+显示声明和隐式暗示
+ActiveX使用的核心技术是OLE，而ActiveX这一术语实际上是MicroSoft为了把OLE技术拓展到Internet而推出的新名称。
+在VB环境下，程序员可以使用内部控件和VBX组装应用程序，随后MicroSoft又引进了两项技术淘汰了原来的VBX模式，并用OLE控件对象（OCX）取代。OLE的优点是实现了不同程序设计语言组件的共享，缺点是臃肿笨拙。为了将此数据传输技术应用到Internet上，MicroSoft对其进行了精简，因此OLE别改名为ActiveX。
+dll组件与exe组件的区别在于，前者是运行在进程内，后者运行在进程外。ActiveXocx或称为控件，可以图形拖动。
+OLE 对象链接与嵌入
+COM组建对象模型
+Grid32.ocxMicrosoftGridControl
+
+jsp
+JSP是ServletAPI的一个扩展，它实现静态的HTML和动态的HTML混合编码。在被编译成Servlet之前，也是可以使用的。在JSP页面可以写Java代码，所以某种意义上讲，JSP也是Servlet。JSP把内容显示和内容生成分开，有些像asp.net。生成内容的逻辑代码被封装在JSP标识和JavaBeans组件中。编译JSP页面时，JSP页面被编译成JavaServlet。
+JavaServlet 
+用Java语言编写的Java应用程序，可以直接嵌入到网页当中，当用户加载JSP页面时，JavaApplet会被西再到用户的计算机上执行。
+asp（activeserverpage）
+严格意义上说，ASP本身不能称为语言。ASP只是提供了6个对象和一个Global.asa文件，并对脚本语言（VBScript或JavaScript）进行了扩充。所以，ASP强大功能的实现，在一定程度上依赖于脚本语言的功能。只能运行在微软的IIS中。
+.net
+包含了一种是用开放标准的XML格式交换信息的标准化格式，XML不需要请求者具备任何有关数据存储如何保存信息的专门知识——数据都以自描述的XML格式取出。
+asp.net
+是一种用于创建基于Web的应用程序的编程模型，不是语言。与asp的区别：
+1.语言独立性，可以使用C#，VB或J#，而典型的asp则仅限于JScript或者VBScript。
+2.编译而不是解释，asp在每次页面请求时都解释编程结构，而asp.net动态地将页面编译成可以运行得非常快的本机编程指令。
+3.事件驱动编程模式，asp总是自顶向下线性执行，并且HTML标记常常与程序指令混合在一起。asp.net引入了事件驱动模型，允许将代码与标记内容分离。
+4.服务器控件，asp需要动态地将HTML片段代码结合在一起呈现，asp.net则可以将公共的呈现和行为封装成服务器控件。
+C，B，C++，C#，J#语言
+VB，VC++编译环境，在编译环境中对语言进行了一些改动，比如提供类库等。最初VB没有.net环境。
+VC#，VJ#生长在.net平台上，VB也有在.net环境下的版本，所以说VB则需要指明是否是在.net平台上。在.net平台上对软件与网站的开发似乎差不多，可以利用.net下的VB或者C#，按照asp.net模型做出页面来。
+以下内容参照wiki百科中的类型系统。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/09/11/concept-of-programming-language/" title="编程语言中的概念辨析" itemprop="url">编程语言中的概念辨析</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-09-11T08:53:11.000Z" itemprop="datePublished">Sep 11 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#附录——语言速度对比"><span class="toc-number">1.</span> <span class="toc-text">附录——语言速度对比</span></a></li></ol>
+		</div>
+		
+		<p><strong>ActiveX控件</strong>:理解为一类控件，或者迷你程序。需要安装在某一容器中，比如IE或者offic，不能够独立运行。可以使用一些语言比如C或者VB编写。ActiveX控件的表现形式有可能是exe，也有可能是dll或者ocx。</p>
+<p>Windows中的信息交换</p>
+<p>*剪切板</p>
+<p>*动态数据交换DDE</p>
+<p>*对象链接与嵌入OLE</p>
+<p>显示声明和隐式暗示</p>
+<p>ActiveX使用的核心技术是OLE，而ActiveX这一术语实际上是MicroSoft为了把OLE技术拓展到Internet而推出的新名称。</p>
+<p>在VB环境下，程序员可以使用内部控件和VBX组装应用程序，随后MicroSoft又引进了两项技术淘汰了原来的VBX模式，并用OLE控件对象（OCX）取代。OLE的优点是实现了不同程序设计语言组件的共享，缺点是臃肿笨拙。为了将此数据传输技术应用到Internet上，MicroSoft对其进行了精简，因此OLE别改名为ActiveX。</p>
+<p>dll组件与exe组件的区别在于，前者是运行在进程内，后者运行在进程外。ActiveXocx或称为控件，可以图形拖动。</p>
+<p>OLE 对象链接与嵌入</p>
+<p>COM组建对象模型</p>
+<p>Grid32.ocxMicrosoftGridControl</p>
+<hr>
+<p><strong>jsp</strong></p>
+<p>JSP是ServletAPI的一个扩展，它实现静态的HTML和动态的HTML混合编码。在被编译成Servlet之前，也是可以使用的。在JSP页面可以写Java代码，所以某种意义上讲，JSP也是Servlet。JSP把内容显示和内容生成分开，有些像asp.net。生成内容的逻辑代码被封装在JSP标识和JavaBeans组件中。编译JSP页面时，JSP页面被编译成JavaServlet。</p>
+<p><strong>JavaServlet </strong></p>
+<p>用Java语言编写的Java应用程序，可以直接嵌入到网页当中，当用户加载JSP页面时，JavaApplet会被西再到用户的计算机上执行。</p>
+<p><strong>asp（activeserverpage）</strong></p>
+<p>严格意义上说，ASP本身不能称为语言。ASP只是提供了6个对象和一个Global.asa文件，并对脚本语言（VBScript或JavaScript）进行了扩充。所以，ASP强大功能的实现，在一定程度上依赖于脚本语言的功能。只能运行在微软的IIS中。</p>
+<p><strong>.net</strong></p>
+<p>包含了一种是用开放标准的XML格式交换信息的标准化格式，XML不需要请求者具备任何有关数据存储如何保存信息的专门知识——数据都以自描述的XML格式取出。</p>
+<p><strong>asp.net</strong></p>
+<p>是一种用于创建基于Web的应用程序的编程模型，不是语言。与asp的区别：</p>
+<p>1.语言独立性，可以使用C#，VB或J#，而典型的asp则仅限于JScript或者VBScript。</p>
+<p>2.编译而不是解释，asp在每次页面请求时都解释编程结构，而asp.net动态地将页面编译成可以运行得非常快的本机编程指令。</p>
+<p>3.事件驱动编程模式，asp总是自顶向下线性执行，并且HTML标记常常与程序指令混合在一起。asp.net引入了事件驱动模型，允许将代码与标记内容分离。</p>
+<p>4.服务器控件，asp需要动态地将HTML片段代码结合在一起呈现，asp.net则可以将公共的呈现和行为封装成服务器控件。</p>
+<p><strong>C，B，C++，C#，J#语言</strong></p>
+<p>VB，VC++编译环境，在编译环境中对语言进行了一些改动，比如提供类库等。最初VB没有.net环境。</p>
+<p>VC#，VJ#生长在.net平台上，VB也有在.net环境下的版本，所以说VB则需要指明是否是在.net平台上。在.net平台上对软件与网站的开发似乎差不多，可以利用.net下的VB或者C#，按照asp.net模型做出页面来。</p>
+<p>以下内容参照wiki百科中的类型系统。</p>
+<a id="more"></a>
+<p><strong>编译型语言 &amp; **</strong>解释型语言**</p>
+<p>运行时要不要作翻译。编译型编译之后就不会再编译了，而解释型每次在执行的时候，都会再翻译一次。编译之后的程序有时候就不能跨平台了，但是解释型的程序，一般保存成文本文件，很容易跨平台。Java有一个中间过程文件。</p>
+<p><strong>强类型定义语言 &amp; **</strong>弱类型定义语言**</p>
+<p>强类型定义语言：<s>要求变量的使用要严格符合定义</s>，在类型基础上构建的操作是严格定义的，如果没有定义则会报错；基本定义即为，禁止错误类型的参数继续运算；类型之间的转换不允许丢失信息（除非自定义转换或者强制类型转换）。</p>
+<p>弱类型定义语言，指一个语言可以隐式的转换类型（或直接转型）。</p>
+<p><strong>动态类型语言 &amp;**</strong>静态类型语言**</p>
+<p>判断数据类型的时期。动态类型语言是在运行的时候才知道数据的类型，“类型”信息是保留在变量值中的，而静态类型语言在编译的时候获取数据类型，保存在“变量”中。</p>
+<p>动态类型语言；动态语言，是指程序在运行时可以改变其结构：新的函数可以被引进，已有的函数可以被删除等（函数本身也是一种类型）；PHP、Ruby、Python、Javascript</p>
+<p>函数型语言：泛函编程，是一种编程范型，它将电脑运算视为数学上的函数计算，并且避免状态以及可变数据。函数编程语言最重要的基础是λ演算，值得注意的是函数式语言并不一定要是动态语言(dynamiclanguage)。</p>
+<p>其实很多语言都能够函数式编程，但是可能比较费劲；而lisp就是专门为函数式编程而出现的。</p>
+<p><strong>类型系统的安全性</strong></p>
+<p>类型运算和转换的安全性。如果它不允许导致不正确的情况的运算或转换，计算机科学就认为该语言是“类型安全”的。Java与C都是强类型语言，但是Java是安全的，C是不安全的，因为c的数组可以越界。</p>
+<p><strong>结构化语言 &amp; **</strong>非结构化语言**</p>
+<p>结构化语言：结构化语言就是将自然语言加上程序设计语言的控制结构就成了结构化语言</p>
+<p>非结构化语言：一个使用非结构化语言的程序经常包含按顺序排列的命令或声明，通常每个都占用一行。每一行都有编号或者标签：这样程序中的任意行都可以被执行。GoTo相关</p>
+<p><strong>过程化查询 &amp; **</strong>非过程化查询**</p>
+<p>过程化查询语言：关系代数</p>
+<p>非过程化查询语言：关系演算</p>
+<p>过程话的语言是CfortranpascalQbasicbasic</p>
+<p>非过程的（面向对象的）VBVCC＃delphiJava</p>
+<p>过程语言</p>
+<p>非过程语言</p>
+<p>VisualStudio中的莱姆达算式是函数式语言</p>
+<p>上面列出的很多术语也许只是一种思想，很多语言可能都能实现这种思想；但是有些语言是专门为这种思想而建立的，所以我们称这样的语言为XX语言。</p>
+<p>在程序编码中一些包含类型参数的类型，也就是说泛型的参数只可以代表类，不能代表个别对象。（这是当今较常见的定义）在程序编码中一些包含参数的类。其参数可以代表类或对象等等。（现在人们大多把这称作模板）不论使用哪个定义，泛型的参数在真正使用泛型时都必须作出指明。</p>
+<p><strong>高级语言，脚本语言。</strong></p>
+<p>没有严格的界限，通常高级语言可以针对各种任务，而脚本语言通常（至少是设计初阶段）针对具体的任务。</p>
+<p>Python是动态语言，是强类型定义语言（类型安全的语言）;VBScript是动态语言，是弱类型定义语言（类型不安全的语言）;JAVA是静态语言，是强类型定义语言（类型安全的语言）。</p>
+<p><a href="http://zh.wikipedia.org/wiki/%E9%A1%9E%E5%9E%8B%E7%B3%BB%E7%B5%B1" target="_blank" rel="external">http://zh.wikipedia.org/wiki/%E9%A1%9E%E5%9E%8B%E7%B3%BB%E7%B5%B1</a></p>
+<h2 id="附录——语言速度对比">附录——语言速度对比</h2>
+<p><table border="1" cellspacing="0" cellpadding="0"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>compare2</strong></td></p>
+<p><td valign="top"><strong>|-</strong></td></p>
+<p><td valign="top"><strong>|—-</strong></td></p>
+<p><td valign="top"><strong>25%</strong></td></p>
+<p><td valign="top"><strong>median</strong></td></p>
+<p><td valign="top"><strong>75%</strong></td></p>
+<p><td valign="top"><strong>—-|</strong></td></p>
+<p><td valign="top"><strong>-|</strong></td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Cgcc</strong></td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1.01</td></p>
+<p><td valign="top">1.3</td></p>
+<p><td valign="top">1.74</td></p>
+<p><td valign="top">1.98</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>C++g++</strong></td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1.17</td></p>
+<p><td valign="top">1.28</td></p>
+<p><td valign="top">1.42</td></p>
+<p><td valign="top">1.7</td></p>
+<p><td valign="top">1.7</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>FortranIntel</strong></td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1.24</td></p>
+<p><td valign="top">1.32</td></p>
+<p><td valign="top">1.86</td></p>
+<p><td valign="top">2.79</td></p>
+<p><td valign="top">5.74</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Ada2005GNAT</strong></td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1.13</td></p>
+<p><td valign="top">1.44</td></p>
+<p><td valign="top">1.76</td></p>
+<p><td valign="top">2.7</td></p>
+<p><td valign="top">4.63</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>ATS</strong></td></p>
+<p><td valign="top">1.1</td></p>
+<p><td valign="top">1.1</td></p>
+<p><td valign="top">1.34</td></p>
+<p><td valign="top">1.69</td></p>
+<p><td valign="top">2.07</td></p>
+<p><td valign="top">3.16</td></p>
+<p><td valign="top">7.14</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Java7</strong></td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1.51</td></p>
+<p><td valign="top">2.04</td></p>
+<p><td valign="top">2.45</td></p>
+<p><td valign="top">3.86</td></p>
+<p><td valign="top">10.81</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>HaskellGHC</strong></td></p>
+<p><td valign="top">1.22</td></p>
+<p><td valign="top">1.22</td></p>
+<p><td valign="top">1.5</td></p>
+<p><td valign="top">2.46</td></p>
+<p><td valign="top">3.7</td></p>
+<p><td valign="top">6.99</td></p>
+<p><td valign="top">8.22</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Scala</strong></td></p>
+<p><td valign="top">1.3</td></p>
+<p><td valign="top">1.3</td></p>
+<p><td valign="top">2</td></p>
+<p><td valign="top">2.6</td></p>
+<p><td valign="top">2.87</td></p>
+<p><td valign="top">4.17</td></p>
+<p><td valign="top">9.5</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>PascalFreePascal</strong></td></p>
+<p><td valign="top">1.52</td></p>
+<p><td valign="top">1.52</td></p>
+<p><td valign="top">2.51</td></p>
+<p><td valign="top">2.75</td></p>
+<p><td valign="top">3.31</td></p>
+<p><td valign="top">4.52</td></p>
+<p><td valign="top">5.63</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>C#Mono</strong></td></p>
+<p><td valign="top">1.36</td></p>
+<p><td valign="top">1.36</td></p>
+<p><td valign="top">1.98</td></p>
+<p><td valign="top">3.2</td></p>
+<p><td valign="top">5.44</td></p>
+<p><td valign="top">10.64</td></p>
+<p><td valign="top">23.29</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Clean</strong></td></p>
+<p><td valign="top">2.01</td></p>
+<p><td valign="top">2.01</td></p>
+<p><td valign="top">2.54</td></p>
+<p><td valign="top">3.53</td></p>
+<p><td valign="top">5.16</td></p>
+<p><td valign="top">9.09</td></p>
+<p><td valign="top">12.53</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>JavaScriptV8</strong></td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">2.23</td></p>
+<p><td valign="top">3.57</td></p>
+<p><td valign="top">12.61</td></p>
+<p><td valign="top">28.18</td></p>
+<p><td valign="top">29.76</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>LispSBCL</strong></td></p>
+<p><td valign="top">1.14</td></p>
+<p><td valign="top">1.14</td></p>
+<p><td valign="top">2.07</td></p>
+<p><td valign="top">3.59</td></p>
+<p><td valign="top">5.62</td></p>
+<p><td valign="top">10.93</td></p>
+<p><td valign="top">11.68</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>OCaml</strong></td></p>
+<p><td valign="top">1.86</td></p>
+<p><td valign="top">1.86</td></p>
+<p><td valign="top">2.4</td></p>
+<p><td valign="top">3.78</td></p>
+<p><td valign="top">4.79</td></p>
+<p><td valign="top">6.14</td></p>
+<p><td valign="top">6.14</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>F#Mono</strong></td></p>
+<p><td valign="top">1.6</td></p>
+<p><td valign="top">1.6</td></p>
+<p><td valign="top">2.86</td></p>
+<p><td valign="top">3.9</td></p>
+<p><td valign="top">4.94</td></p>
+<p><td valign="top">8.07</td></p>
+<p><td valign="top">25.64</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Racket</strong></td></p>
+<p><td valign="top">1.3</td></p>
+<p><td valign="top">1.39</td></p>
+<p><td valign="top">4.09</td></p>
+<p><td valign="top">5.46</td></p>
+<p><td valign="top">5.9</td></p>
+<p><td valign="top">8.6</td></p>
+<p><td valign="top">21.55</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Go</strong></td></p>
+<p><td valign="top">2.6</td></p>
+<p><td valign="top">2.6</td></p>
+<p><td valign="top">3.19</td></p>
+<p><td valign="top">7.35</td></p>
+<p><td valign="top">8.91</td></p>
+<p><td valign="top">9.23</td></p>
+<p><td valign="top">9.23</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Clojure</strong></td></p>
+<p><td valign="top">2.28</td></p>
+<p><td valign="top">2.28</td></p>
+<p><td valign="top">5.72</td></p>
+<p><td valign="top">8.69</td></p>
+<p><td valign="top">14.95</td></p>
+<p><td valign="top">17.04</td></p>
+<p><td valign="top">17.04</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>ErlangHiPE</strong></td></p>
+<p><td valign="top">3.12</td></p>
+<p><td valign="top">3.12</td></p>
+<p><td valign="top">7.9</td></p>
+<p><td valign="top">17.55</td></p>
+<p><td valign="top">25.98</td></p>
+<p><td valign="top">33.4</td></p>
+<p><td valign="top">33.4</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>SmalltalkVisualWorks</strong></td></p>
+<p><td valign="top">5.22</td></p>
+<p><td valign="top">5.22</td></p>
+<p><td valign="top">15.06</td></p>
+<p><td valign="top">21.22</td></p>
+<p><td valign="top">31.39</td></p>
+<p><td valign="top">55.9</td></p>
+<p><td valign="top">82.68</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>RubyJRuby</strong></td></p>
+<p><td valign="top">10.39</td></p>
+<p><td valign="top">10.39</td></p>
+<p><td valign="top">20.28</td></p>
+<p><td valign="top">28.58</td></p>
+<p><td valign="top">54.34</td></p>
+<p><td valign="top">71.23</td></p>
+<p><td valign="top">71.23</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Lua</strong></td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">1</td></p>
+<p><td valign="top">20.52</td></p>
+<p><td valign="top">30.33</td></p>
+<p><td valign="top">45.65</td></p>
+<p><td valign="top">54.04</td></p>
+<p><td valign="top">54.04</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>PHP</strong></td></p>
+<p><td valign="top">1.13</td></p>
+<p><td valign="top">1.13</td></p>
+<p><td valign="top">9.73</td></p>
+<p><td valign="top">39.35</td></p>
+<p><td valign="top">67.71</td></p>
+<p><td valign="top">98.32</td></p>
+<p><td valign="top">98.32</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Ruby1.9</strong></td></p>
+<p><td valign="top">6.91</td></p>
+<p><td valign="top">6.91</td></p>
+<p><td valign="top">10.51</td></p>
+<p><td valign="top">55.1</td></p>
+<p><td valign="top">99.45</td></p>
+<p><td valign="top">232.87</td></p>
+<p><td valign="top">272.18</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Python3</strong></td></p>
+<p><td valign="top">1.24</td></p>
+<p><td valign="top">1.24</td></p>
+<p><td valign="top">7.91</td></p>
+<p><td valign="top">55.45</td></p>
+<p><td valign="top">109.44</td></p>
+<p><td valign="top">165.38</td></p>
+<p><td valign="top">165.38</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Perl</strong></td></p>
+<p><td valign="top">2.16</td></p>
+<p><td valign="top">2.16</td></p>
+<p><td valign="top">14.82</td></p>
+<p><td valign="top">69.33</td></p>
+<p><td valign="top">110.72</td></p>
+<p><td valign="top">231.46</td></p>
+<p><td valign="top">231.46</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top"><strong>Mozart/Oz</strong></td></p>
+<p><td valign="top">7.39</td></p>
+<p><td valign="top">7.39</td></p>
+<p><td valign="top">41.62</td></p>
+<p><td valign="top">74.77</td></p>
+<p><td valign="top">105.06</td></p>
+<p><td valign="top">154.92</td></p>
+<p><td valign="top">154.92</td><br><br><br><br>数据来源：<a href="http://shootout.alioth.debian.org/u32/benchmark.php?test=all&amp;lang=all" target="_blank" rel="external">http://shootout.alioth.debian.org/u32/benchmark.php?test=all&amp;lang=all</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/概念辨析/">概念辨析</a><a href="/tags/编程语言/">编程语言</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/编程笔记/">编程笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/09/11/concept-of-programming-language/" data-title="编程语言中的概念辨析 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/09/11/ia-definition/" title="信息架构的定义">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  信息架构的定义</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/09/11/some-mfc-function/"  title="一些MFC函数">
+ <strong>NEXT:</strong><br/> 
+ <span>一些MFC函数
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#附录——语言速度对比"><span class="toc-number">1.</span> <span class="toc-text">附录——语言速度对比</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

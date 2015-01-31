@@ -1,0 +1,593 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Email学习笔记 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="foxmail 设置为POP3的比较好，功能多一点。
+IMAP的如果在服务器端删除的话客户端也会被删除掉
+谷歌邮箱支持的附件大小为：35041K byte，20120807
+电子邮箱的各种协议
+SMTP（Simple Mail Transfer Protocol）即简单邮件传输协议,它是一组用于由源">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/05/09/email-learning-notes/" title="Email学习笔记" itemprop="url">Email学习笔记</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-05-09T10:34:22.000Z" itemprop="datePublished">May 9 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#电子邮箱的各种协议"><span class="toc-number">1.</span> <span class="toc-text">电子邮箱的各种协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#邮件编码"><span class="toc-number">2.</span> <span class="toc-text">邮件编码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#base64"><span class="toc-number">2.1.</span> <span class="toc-text">base64</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#quoted-printable"><span class="toc-number">2.2.</span> <span class="toc-text">quoted-printable</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>foxmail 设置为POP3的比较好，功能多一点。</p>
+<p>IMAP的如果在服务器端删除的话客户端也会被删除掉</p>
+<p>谷歌邮箱支持的附件大小为：35041K byte，20120807</p>
+<h4 id="电子邮箱的各种协议">电子邮箱的各种协议</h4>
+<p>SMTP（Simple Mail Transfer Protocol）即简单邮件传输协议,它是一组用于由源地址到目的地址传送邮件的规则，由它来控制信件的中转方式。SMTP协议属于TCP/IP协议族，它帮助每台计算机在发送或中转信件时找到下一个目的地。通过SMTP协议所指定的服务器,就可以把E－mail寄到收信人的服务器上了，整个过程只要几分钟。SMTP服务器则是遵循SMTP协议的发送邮件服务器，用来发送或中转发出的电子邮件。</p>
+<p>POP3(Post Office Protocol 3)即邮局协议的第3个版本，它是规定个人计算机如何连接到互联网上的邮件服务器进行收发邮件的协议。它是因特网电子邮件的第一个离线协议标准，POP3协议允许用户从服务器上把邮件存储到本地主机。</p>
+<p>IMAP4协议与POP3协议一样也是规定个人计算机如何访问互联网上的邮件服务器进行收发邮件的协议，但是IMAP4协议同POP3协议相比更高级。IMAP4协议支持客户机在线或者离线访问并阅读服务器上的邮件，还能交互式的操作服务器上的邮件。IMAP4协议更人性化的地方是不需要像POP3协议那样把邮件下载到本地，用户可以通过客户端直接对服务器上的邮件进行操作（这里的操作是指：在线阅读邮件 在线查看邮件主题 大小 发件地址等信息)。用户还可以在服务器上维护自己邮件目录（维护是指移动 新建 删除 重命名 共享 抓取文本 等操作)。IMAP4协议弥补了POP3协议的很多缺陷，，由RFC3501定义。本协议是用于客户机远程访问服务器上电子邮件，它是邮件传输协议新的标准。</p>
+<p>IMAP4协议的默认端口：143，SMTP端口号是25，POP3端口110。</p>
+<h4 id="邮件编码">邮件编码</h4>
+<h5 id="base64">base64</h5>
+<p>BASE64编码是一种常用的将二进制数据转换为可打印<a href="http://baike.baidu.com/view/263416.htm" target="_blank" rel="external">字符</a>的编码。与HEX显示相比，它占用的空间较小。BASE64编码在RFC 3548 （参见扩展阅读）中定义。</p>
+<p>1、base64编解码原理</p>
+<p>将数据编码成BASE64编码时，以3字节数据为一组，转换为24bit的二进制数，将24bit的二进制数分成四组，每组6bit。对于每一组，得到一个数字：0-63。然后根据这个数字查表即得到结果。表如下：</p>
+<p><table border="1" cellspacing="0" cellpadding="0"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">Value</td></p>
+<p><td valign="top" width="46">Char</td></p>
+<p><td valign="top" width="50">Value</td></p>
+<p><td valign="top" width="46">Char</td></p>
+<p><td valign="top" width="50">Value</td></p>
+<p><td valign="top" width="46">Char</td></p>
+<p><td valign="top" width="50">Value</td></p>
+<p><td valign="top" width="46">Char</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">0</td></p>
+<p><td valign="top" width="46">A</td></p>
+<p><td valign="top" width="50">16</td></p>
+<p><td valign="top" width="46">Q</td></p>
+<p><td valign="top" width="50">32</td></p>
+<p><td valign="top" width="46">g</td></p>
+<p><td valign="top" width="50">48</td></p>
+<p><td valign="top" width="46">w</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">1</td></p>
+<p><td valign="top" width="46">B</td></p>
+<p><td valign="top" width="50">17</td></p>
+<p><td valign="top" width="46">R</td></p>
+<p><td valign="top" width="50">33</td></p>
+<p><td valign="top" width="46">h</td></p>
+<p><td valign="top" width="50">49</td></p>
+<p><td valign="top" width="46">x</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">2</td></p>
+<p><td valign="top" width="46">C</td></p>
+<p><td valign="top" width="50">18</td></p>
+<p><td valign="top" width="46">S</td></p>
+<p><td valign="top" width="50">34</td></p>
+<p><td valign="top" width="46">i</td></p>
+<p><td valign="top" width="50">50</td></p>
+<p><td valign="top" width="46">y</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">3</td></p>
+<p><td valign="top" width="46">D</td></p>
+<p><td valign="top" width="50">19</td></p>
+<p><td valign="top" width="46">T</td></p>
+<p><td valign="top" width="50">35</td></p>
+<p><td valign="top" width="46">j</td></p>
+<p><td valign="top" width="50">51</td></p>
+<p><td valign="top" width="46">z</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">4</td></p>
+<p><td valign="top" width="46">E</td></p>
+<p><td valign="top" width="50">20</td></p>
+<p><td valign="top" width="46">U</td></p>
+<p><td valign="top" width="50">36</td></p>
+<p><td valign="top" width="46">k</td></p>
+<p><td valign="top" width="50">52</td></p>
+<p><td valign="top" width="46">0</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">5</td></p>
+<p><td valign="top" width="46">F</td></p>
+<p><td valign="top" width="50">21</td></p>
+<p><td valign="top" width="46">V</td></p>
+<p><td valign="top" width="50">37</td></p>
+<p><td valign="top" width="46">l</td></p>
+<p><td valign="top" width="50">53</td></p>
+<p><td valign="top" width="46">1</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">6</td></p>
+<p><td valign="top" width="46">G</td></p>
+<p><td valign="top" width="50">22</td></p>
+<p><td valign="top" width="46">W</td></p>
+<p><td valign="top" width="50">38</td></p>
+<p><td valign="top" width="46">m</td></p>
+<p><td valign="top" width="50">54</td></p>
+<p><td valign="top" width="46">2</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">7</td></p>
+<p><td valign="top" width="46">H</td></p>
+<p><td valign="top" width="50">23</td></p>
+<p><td valign="top" width="46">X</td></p>
+<p><td valign="top" width="50">39</td></p>
+<p><td valign="top" width="46">n</td></p>
+<p><td valign="top" width="50">55</td></p>
+<p><td valign="top" width="46">3</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">8</td></p>
+<p><td valign="top" width="46">I</td></p>
+<p><td valign="top" width="50">24</td></p>
+<p><td valign="top" width="46">Y</td></p>
+<p><td valign="top" width="50">40</td></p>
+<p><td valign="top" width="46">o</td></p>
+<p><td valign="top" width="50">56</td></p>
+<p><td valign="top" width="46">4</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">9</td></p>
+<p><td valign="top" width="46">J</td></p>
+<p><td valign="top" width="50">25</td></p>
+<p><td valign="top" width="46">Z</td></p>
+<p><td valign="top" width="50">41</td></p>
+<p><td valign="top" width="46">p</td></p>
+<p><td valign="top" width="50">57</td></p>
+<p><td valign="top" width="46">5</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">10</td></p>
+<p><td valign="top" width="46">K</td></p>
+<p><td valign="top" width="50">26</td></p>
+<p><td valign="top" width="46">a</td></p>
+<p><td valign="top" width="50">42</td></p>
+<p><td valign="top" width="46">q</td></p>
+<p><td valign="top" width="50">58</td></p>
+<p><td valign="top" width="46">6</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">11</td></p>
+<p><td valign="top" width="46">L</td></p>
+<p><td valign="top" width="50">27</td></p>
+<p><td valign="top" width="46">b</td></p>
+<p><td valign="top" width="50">43</td></p>
+<p><td valign="top" width="46">r</td></p>
+<p><td valign="top" width="50">59</td></p>
+<p><td valign="top" width="46">7</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">12</td></p>
+<p><td valign="top" width="46">M</td></p>
+<p><td valign="top" width="50">28</td></p>
+<p><td valign="top" width="46">c</td></p>
+<p><td valign="top" width="50">44</td></p>
+<p><td valign="top" width="46">s</td></p>
+<p><td valign="top" width="50">60</td></p>
+<p><td valign="top" width="46">8</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">13</td></p>
+<p><td valign="top" width="46">N</td></p>
+<p><td valign="top" width="50">29</td></p>
+<p><td valign="top" width="46">d</td></p>
+<p><td valign="top" width="50">45</td></p>
+<p><td valign="top" width="46">t</td></p>
+<p><td valign="top" width="50">61</td></p>
+<p><td valign="top" width="46">9</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">14</td></p>
+<p><td valign="top" width="46">O</td></p>
+<p><td valign="top" width="50">30</td></p>
+<p><td valign="top" width="46">e</td></p>
+<p><td valign="top" width="50">46</td></p>
+<p><td valign="top" width="46">u</td></p>
+<p><td valign="top" width="50">62</td></p>
+<p><td valign="top" width="46">+</td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="50">15</td></p>
+<p><td valign="top" width="46">P</td></p>
+<p><td valign="top" width="50">31</td></p>
+<p><td valign="top" width="46">f</td></p>
+<p><td valign="top" width="50">47</td></p>
+<p><td valign="top" width="46">v</td></p>
+<p><td valign="top" width="50">63</td></p>
+<p><td valign="top" width="46">/</td><br><br><br><br>比如有数据：0x30 0x82 0x02</p>
+<p>编码过程如下：<br>1）得到16进制数据： 30 82 02<br>2）得到二进制数据： 00110000 10000010 00000010<br>3）每6bit分组： 001100 001000 001000 000010<br>4）得到数字： 12 8 8 2<br>5）根据查表得到结果 ： M I I C</p>
+<p>BASE64填充：在不够的情况下在右边加0。</p>
+<p>有三种情况：<br>1) 输入数据比特数是24的整数倍（输入字节为3字节整数倍），则无填充；<br>2) 输入数据最后编码的是1个字节（输入数据字节数除3余1），即8比特，则需要填充2个”==”，因为要补齐6比特，需要加2个00；<br>3）输入数据最后编码是2个字节（输入数据字节数除3余2），则需要填充1个”=”，因为补齐6比特，需要加一个00。</p>
+<h5 id="quoted-printable">quoted-printable</h5>
+<p>Quoted-printable, 或QP encoding, 没有规范的中文译名，可译为“可打印字符引用编码”、“使用可打印字符的编码”。Quoted-printable是使用可打印的ASCII字符 (如字母、数字与”=”)表示各种编码格式下的字符，以便能在7-bit数据通路上传输8-bit数据, 或者更一般地说在非8-bit clean媒体上正确处理数据.[1] 这被定义为MIME content transfer encoding，用于 e-mail.</p>
+<p>QP使用”=”开头的转义字符. 一般限制行宽为76，因为有些软件限制了行宽.</p>
+<p>MIME定义了在e-mail中发送各种信息的方法, 包括非英语的其它语言文本信息, 使用非ASCII的其它字符编码. 这些编码常常使用ASCII范围以外的值来编码字符，因此需要进一步被编码以便适用于non-8-bit-clean环境. Quoted-printable编码就是把任意字节序列映射为ASCII字符序列. Quoted-printable自身并不是一种字符编码方案, 而是一种在面向字节的编码时的数据编码布置(data coding layer)，即由编码的字符序列如何表示为字节流. QP是可逆的，即可以由原来的非ASCII字符流与QP编码后的字节流来回转换而不失信息.</p>
+<p>Quoted-printable与Base64是两种基本的MIME内容传输编码, 如果通常的”8bit”编码不适用. 如果文本不含很多非ASCII字符，quoted-printable编码的结果的可读性相当好[2]而且紧凑. 但是，如果输入的大多数是非ASCII字符，那么quoted-printable编码将变得既不可读又非常低效. Base64并不是人可读的，但对于所有数据其成本均匀，适用于二进制数据与非拉丁字母语言文本。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/base64/">base64</a><a href="/tags/email/">email</a><a href="/tags/imap/">imap</a><a href="/tags/pop/">pop</a><a href="/tags/quoted-printable/">quoted-printable</a><a href="/tags/smtp/">smtp</a><a href="/tags/协议/">协议</a><a href="/tags/邮箱/">邮箱</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/笔记/">笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/05/09/email-learning-notes/" data-title="Email学习笔记 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/05/09/show-windows-hibernation-button/" title="打开windows的休眠按钮">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  打开windows的休眠按钮</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/05/09/dvd-iso-files-notes/"  title="光盘ISO学习">
+ <strong>NEXT:</strong><br/> 
+ <span>光盘ISO学习
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#电子邮箱的各种协议"><span class="toc-number">1.</span> <span class="toc-text">电子邮箱的各种协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#邮件编码"><span class="toc-number">2.</span> <span class="toc-text">邮件编码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#base64"><span class="toc-number">2.1.</span> <span class="toc-text">base64</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#quoted-printable"><span class="toc-number">2.2.</span> <span class="toc-text">quoted-printable</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,509 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>字符编码研究 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="1. 一些概念
+字符集charset
+字符编码characteren coding
+常见字符集名称：ASCII字符集、GB2312字符集、BIG5字符集、GB18030字符集、Unicode字符集，OEM字符集(将ASCII从7bit扩展成8bit，有很多方案)等。
+字符编码：ASCII字符编码
+注">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/09/10/character-study-notes/" title="字符编码研究" itemprop="url">字符编码研究</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-09-10T09:09:43.000Z" itemprop="datePublished">Sep 10 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_一些概念"><span class="toc-number">1.</span> <span class="toc-text">1. 一些概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_支持多字节字符集(MBCS)"><span class="toc-number">2.</span> <span class="toc-text">2. 支持多字节字符集(MBCS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_字符集分类："><span class="toc-number">3.</span> <span class="toc-text">3. 字符集分类：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-_单字节字符集SBCS"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. 单字节字符集SBCS</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-_多字节字符集MBCS"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. 多字节字符集MBCS</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-_Unicode字符集"><span class="toc-number">3.3.</span> <span class="toc-text">3.3. Unicode字符集</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_在编程中的样子"><span class="toc-number">4.</span> <span class="toc-text">4. 在编程中的样子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_关于汉字编码"><span class="toc-number">5.</span> <span class="toc-text">5. 关于汉字编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-_Windows下的编码"><span class="toc-number">6.</span> <span class="toc-text">6. Windows下的编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-_其他"><span class="toc-number">7.</span> <span class="toc-text">7. 其他</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-_big_endian和little_endian"><span class="toc-number">7.1.</span> <span class="toc-text">3.1. big endian和little endian</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-_关于换行符"><span class="toc-number">7.2.</span> <span class="toc-text">3.2. 关于换行符</span></a></li></ol></li></ol>
+		</div>
+		
+		<h4 id="1-_一些概念">1. 一些概念</h4>
+<p>字符集charset</p>
+<p>字符编码characteren coding</p>
+<p><strong>常见字符集名称</strong>：ASCII字符集、GB2312字符集、BIG5字符集、GB18030字符集、Unicode字符集，OEM字符集(将ASCII从7bit扩展成8bit，有很多方案)等。</p>
+<p><strong>字符编码</strong>：ASCII字符编码</p>
+<p>注：最初是没有字符编码与字符集的区别的，ASCII既是字符编码又是字符集；后来由于字符应用环境的变化，字符集开始与字符编码概念分开。典型的是Unicode，它有很多种字符编码。而某种字符编码在最终存储的时候可能又有不同。</p>
+<p><strong>内码</strong>：在计算机科学及相关领域当中，内码指的是“将资讯编码后，透过某种方式储存在特定记忆装置时，装置内部的编码形式”。在不同的系统中，会有不同的内码。</p>
+<p><strong>交换码</strong>：解决方法则为，在交换文件前，文件提供者先将由内码形式储存的文件转换成交换码形式再做交换。在接收文件后，文件接收者再由交换码转成内码。</p>
+<p>为了方便起见，许多系统的内码则直接使用交换码，如ASCII广为各种系统所使用。</p>
+<p>Unicode编码系统为表达任意语言的任意字符而设计。它使用4字节的数字来表达每个字母、符号，或者表意文字(ideograph)。每个数字代表唯一的至少在某种语言中使用的符号。（并不是所有的数字都用上了，但是总数已经超过了65535，所以2个字节的数字是不够用的。）被几种语言共用的字符通常使用相同的数字来编码，除非存在一个在理的语源学(etymological)理由使不这样做。不考虑这种情况的话，每个字符对应一个数字，每个数字对应一个字符。即不存在二义性。不再需要记录”模式”了。U+0041总是代表’A’，即使这种语言没有’A’这个字符。</p>
+<p>UTF-8是ASCII(这里实际是指编码)的一个超集。因为一个纯ASCII字符串也是一个合法的UTF-8字符串，所以现存的ASCII文本不需要转换。为传统的扩展ASCII字符集设计的软件通常可以不经修改或很少修改就能与UTF-8一起使用。</p>
+<h4 id="2-_支持多字节字符集(MBCS)">2. 支持多字节字符集(MBCS)</h4>
+<p>多字节字符集(MBCS)是一种替代Unicode以支持无法用单字节表示的字符集（如日文和中文）的方法。为国际市场编程时应考虑使用Unicode或MBCS，或使程序能够通过更改开关来生成支持两种字符集之一的程序。</p>
+<p>最常见的MBCS实现是双字节字符集(DBCS)。一般来说，VisualC++（尤其是MFC）完全支持DBCS。</p>
+<p>现在熟知的256个字符的版本其实叫做EASCII编码方案，你可能会以为EASCII是一种编码方案，其实不然，他是一大堆基于ASCII编码方案的扩展，详细资料可以参见IEC_8859。</p>
+<p>VC++2008中的字符使用</p>
+<p>1.char *p=”abcdf”; thensizeof(p)=4 // (the length of a pointer)</p>
+<p>Char p[10]=”abcdf”; thensizeof(p)=15 // the size of the array</p>
+<p>String a=”somestring”; function sizeof(a) will show the fact memory of a</p>
+<p>2.char指针也可以指向中文字符，不过此时它是两个首位为1的字符组合而成的，占两个字节，所以用指针偏移只取一个字符的话，值为负值</p>
+<p>目前的总结如下：——万变不离其宗</p>
+<p>vc++中可以在项目属性中设置使用的代码页：未设置、Unicode宽字符、多字节字符集(MBCS)</p>
+<p>与此无关的是，c++中有两种字符，一种是ANSI字符（即ASCII），另外一种为Unicode字符。</p>
+<p>在VC中的ASCII字符猜测已经被扩展过了，不然是无法识别中文的。</p>
+<p>ASCII用数据类型char表示，Unicode用数据类型wchar_t表示，其中wchar_t通过重定义得到，重定义的代码为：type unsigned short wchar_t。</p>
+<p>这两种数据类型分别有对应的字符串处理函数。</p>
+<p>char类型的字符串为”string”，Unicode类型的字符串为L”string”；L是宏，告诉编译器这是一个Unicode字符。</p>
+<p>如果仅仅使用单纯的char与wchar_t，是涉及不到（未设置、Unicode宽字符、多字节字符集）的。宽字节就是Unicode编码（应该是UTC-16编码），多字节字符则相当，按照每一个字节读取，如果首位为0，则是char字符；如果首位为1，则继续读，然后组合成一个字符。在这种情况下，组合之后显示的字符可能因地区而异（不同地区使用的编码方式可能不同），但是这种方式是比较节省空间的，并且可以使用char的函数（这时候如果测量字符的数目，可能测不准）。</p>
+<p>对于多字节的编码的显示，涉及到了代码页的内容。ANSI标识对世界上的国家分别设定了相应的代码页。</p>
+<p>那么，对于一以那种方式进行编码呢。为此，引入了上述选项进行选择。选择的标识用TCHAR。对于一个TCHAR类型，使用TEXT(“string”)进行声明。如果使用了Unicode选项，则编译成Unicode宽字节，即每一个字符占两位，相当于L”string”；如果使用了多字节编码，则相当于使用了ANSI进行编码，字符占一位。</p>
+<p>UTF-8是UNICODE的一种变长字符编码又称万国码，由KenThompson于1992年创建。现在已经标准化为RFC3629。UTF-8用1到6个字节编码UNICODE字符。用在网页上可以同一页面显示中文简体繁体及其它语言(如日文，韩文)</p>
+<h4 id="3-_字符集分类：">3. 字符集分类：</h4>
+<h5 id="3-1-_单字节字符集SBCS">3.1. 单字节字符集SBCS</h5>
+<p>ASCII；</p>
+<p>EASCII(对ASCII的扩展，不是一种编码方案，而是一大堆基于ASCII编码方案的扩展)</p>
+<h5 id="3-2-_多字节字符集MBCS">3.2. 多字节字符集MBCS</h5>
+<p>一般是一个国家的扩展，所以基本兼容ASCII，按照我的理解，多字节字符集，其中的一个字符长度是固定的，比如在DBCS中，对于’A’,也是用的两位。</p>
+<p>之所以有多字节字符集与Unicode字符集之分，是因为多字节字符集的字符集不是通用的。</p>
+<p>l 双字节字符集DBCS</p>
+<p>GB2312，日本的**字符集…</p>
+<p>l 三字节字符集</p>
+<h5 id="3-3-_Unicode字符集">3.3. Unicode字符集</h5>
+<p>Unicode的字符集与字符编码是严格区分的，目前有UTF-8，UTF-16，UTF-32等编码格式。</p>
+<p>Unicode中每一个字符与一个无符整数对应，这个整数可能很大，甚至超过4个、5个字节。但是在存储的时候不用理他，因为要存储Unicode必须编码后放在文件中。</p>
+<p>UTF-16是双字节编码，UTF-32是四字节编码，（很有可能，它们都不能表示未来所有的字符），但是这样的编码效率比较低。于是常用的是utf-8编码。</p>
+<p>UTF-8编码是可变长编码，用1~6个字节来表示一个字符，有点像霍夫曼编码，我想这是字符编码的一个进化。</p>
+<h4 id="4-_在编程中的样子">4. 在编程中的样子</h4>
+<p>*我打开了IDE，在源码中定义了一个字符变量,它的内容为’a’。那么编译之后运行的时候，操作系统需要在内存中分配多大的单元存储’a’呢？所以我需要用char或者wchar——t来说明’a’所要获得的空间。char很明显，是ASCII字符，分配一个字节，在内存中存储’a’对应的值。但是如果是wchar_t,虽然type unsigned short wchar_t，但是一个short类型的值并不是占用两个字节，而取决于操作系统，因为在标准c++中是这么说明的。那好，我知道了’a’在内存中的样子。</p>
+<p>*但是如果是中文’我’呢，如果声明为char，在编译之后的exe文件中，肯定是有’我’这个字符的（以ASCII字符存储，不过在exe中怎么存就不知道了），但是，在运行的时候，系统只会分配一个字节来存放’我’,所以在内存中这个字节是一个负值。如果声明为wchar_t就可以了，声明为wchar_t之后（也就告诉了系统这是一个Unicode字符），在exe文件中会以’我’对应的Unicode整数存储在exe中，运行的时候有系统决定分配的内存空间并把这个整型值放到内存中。</p>
+<p>注意，在这一步的时候，可能会出现乱码。如果用户使用的操作系统不认识Unicode，那么这个内存中的整型值显示到屏幕的时候则是乱码。</p>
+<p>Windows在2000以上的版本中好像都认识Unicode。</p>
+<p>决定了运行时候的样子之后，我要保存源文件。这时候涉及到字符编码。</p>
+<p>当有其他字符出现的时候，操作系统就需要认识其他字符了。在没有Unicode字符集的时候，若想Windows显示中文，则需要Windows含有中文的字符集，并在程序编译的时候告诉编译器这是中文的字符集。为此微软引入了代码页。</p>
+<p>我想一个操作系统应该有一个默认的代码页，然后编译器由一个代码页。代码页即指定了字符集。这时候还没有wchar_t，一切都还是char。编译器将char字符或者字符串编译成当期编译器环境所设置成的代码页，比如GB2312的中文的字符’a’,对应的整型值是XX，那么IDE则将XX弄进exe里，在运行的时候，内存中存放的是XX，如果Windows认识GB2312，那么则能正确显示，如果不认识（即Windows系统或者文本编辑器没有这个代码页呢），显然就无法正确显示了。</p>
+<p>从键盘上输入了一个字符’a’，输入到了IDE中。那么操作系统就需要在内存中分配一个单元存储’a’,分配多大的空间呢。</p>
+<p>对于文本文件的流程：输入一个字符-&gt;操作系统识别这个键盘字符，并按照内定方式映射到内存中（并且在文本编辑器中显示）-&gt;保存文件（要求选择编码格式）-&gt;按照此编码编码成二进制文件保存在存储器中-&gt;请求该文件、获取该文件、读取该文件-&gt;内存中存放的是二进制-&gt;文本编辑器识别内存数据并将其显示。</p>
+<p>对于exe文件的编辑：定义数据类型-&gt;IDE按照指定方式（比如多字节还是宽字节）编译-&gt;运行时根据操作系统以及数据类型分配空间-&gt;认识当前的字符集并理解字符含义-&gt;处理这些字符。</p>
+<p>似乎进入内存之后，就不存在字符编码的问题了，而只涉及到字符集。</p>
+<p>所以原来的strcpy()等函数也许只是对内存进行复制罢了。</p>
+<h4 id="5-_关于汉字编码">5. 关于汉字编码</h4>
+<p>字符必须编码后才能被计算机处理。计算机使用的缺省编码方式就是计算机的内码。早期的计算机使用7位的ASCII编码，为了处理汉字，程序员设计了用于简体中文的GB2312和用于繁体中文的big5。</p>
+<p>GB2312(1980年)一共收录了7445个字符，包括6763个汉字和682个其它符号。汉字区的内码范围高字节从B0-F7，低字节从A1-FE，占用的码位是72*94=6768。其中有5个空位是D7FA-D7FE。</p>
+<p>GB2312支持的汉字太少。1995年的汉字扩展规范GBK1.0收录了21886个符号，它分为汉字区和图形符号区。汉字区包括21003个字符。</p>
+<p>从ASCII、GB2312到GBK，这些编码方法是向下兼容的，即同一个字符在这些方案中总是有相同的编码，后面的标准支持更多的字符。在这些编码中，英文和中文可以统一地处理。区分中文编码的方法是高字节的最高位不为0。按照程序员的称呼，GB2312、GBK都属于双字节字符集(DBCS)。</p>
+<p>2000年的GB18030是取代GBK1.0的正式国家标准。该标准收录了27484个汉字，同时还收录了藏文、蒙文、维吾尔文等主要的少数民族文字。从汉字字汇上说，GB18030在GB13000.1的20902个汉字的基础上增加了CJK扩展A的6582个汉字（Unicode码0x3400-0x4db5），一共收录了27484个汉字。</p>
+<p>CJK就是中日韩的意思。Unicode为了节省码位，将中日韩三国语言中的文字统一编码。GB13000.1就是ISO/IEC10646-1的中文版，相当于Unicode1.1。</p>
+<p>GB18030的编码采用单字节、双字节和4字节方案。其中单字节、双字节和GBK是完全兼容的。4字节编码的码位就是收录了CJK扩展A的6582个汉字。例如：UCS的0x3400在GB18030中的编码应该是8139EF30，UCS的0x3401在GB18030中的编码应该是8139EF31。</p>
+<p>微软提供了GB18030的升级包，但这个升级包只是提供了一套支持CJK扩展A的6582个汉字的新字体：新宋体-18030，并不改变内码。Windows的内码仍然是GBK。</p>
+<h4 id="6-_Windows下的编码">6. Windows下的编码</h4>
+<p>目前Windows的内核已经支持Unicode字符集，这样在内核上可以支持全世界所有的语言文字。但是由于现有的大量程序和文档都采用了某种特定语言的编码，例如GBK，Windows不可能不支持现有的编码，而全部改用Unicode。</p>
+<p>Windows使用代码页(codepage)来适应各个国家和地区。codepage可以被理解为前面提到的内码。GBK对应的codepage是CP936。</p>
+<p>微软也为GB18030定义了codepage：CP54936。但是由于GB18030有一部分4字节编码，而Windows的代码页只支持单字节和双字节编码，所以这个codepage是无法真正使用的。</p>
+<h4 id="7-_其他">7. 其他</h4>
+<h5 id="3-1-_big_endian和little_endian">3.1. big endian和little endian</h5>
+<p>bigendian和littleendian是CPU处理多字节数的不同方式。例如“汉”字的Unicode编码是6C49。那么写到文件里时，究竟是将6C写在前面，还是将49写在前面？如果将6C写在前面，就是big endian。如果将49写在前面，就是little endian。</p>
+<h5 id="3-2-_关于换行符">3.2. 关于换行符</h5>
+<p><table border="1" cellspacing="0" cellpadding="0"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td width="96">00001010</td></p>
+<p><td width="60">10</td></p>
+<p><td width="72">0A</td></p>
+<p><td width="195">LF(NLlinefeed,newline)</td></p>
+<p><td width="114">换行键</td><br></p>
+<p><tr></tr></p>
+<p><td width="96">00001101</td></p>
+<p><td width="60">13</td></p>
+<p><td width="72">0D</td></p>
+<p><td width="195">CR(carriagereturn)</td></p>
+<p><td width="114">回车键</td><br><br><br><br>注意换行键与回车键其实并不相同。</p>
+<p>在Windows的记事本中，输入一个回车符，然后使用二进制查看，代码是0D0A，即一次回车实际上输入了两个字符CRLF；如果输入两个回车，则是0D0A0D0A。在Linux下，不太一样。虽然很多程序不在乎DOS/Windows格式的CR/LF文本文件，但是有几个程序却在乎——最著名的是bash，只要一遇到回车，它就会出问题。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ASCII/">ASCII</a><a href="/tags/C/">C++</a><a href="/tags/MBCS/">MBCS</a><a href="/tags/Unicode/">Unicode</a><a href="/tags/字符编码/">字符编码</a><a href="/tags/字符集/">字符集</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/编程笔记/">编程笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/09/10/character-study-notes/" data-title="字符编码研究 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/09/10/pointer-pointer-function-and-function-pointer/" title="指针，指针函数与函数指针">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  指针，指针函数与函数指针</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/09/10/sbc-case-dbc-case/"  title="输入法全角半角的理解">
+ <strong>NEXT:</strong><br/> 
+ <span>输入法全角半角的理解
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_一些概念"><span class="toc-number">1.</span> <span class="toc-text">1. 一些概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_支持多字节字符集(MBCS)"><span class="toc-number">2.</span> <span class="toc-text">2. 支持多字节字符集(MBCS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_字符集分类："><span class="toc-number">3.</span> <span class="toc-text">3. 字符集分类：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-_单字节字符集SBCS"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. 单字节字符集SBCS</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-_多字节字符集MBCS"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. 多字节字符集MBCS</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-_Unicode字符集"><span class="toc-number">3.3.</span> <span class="toc-text">3.3. Unicode字符集</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_在编程中的样子"><span class="toc-number">4.</span> <span class="toc-text">4. 在编程中的样子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_关于汉字编码"><span class="toc-number">5.</span> <span class="toc-text">5. 关于汉字编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-_Windows下的编码"><span class="toc-number">6.</span> <span class="toc-text">6. Windows下的编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-_其他"><span class="toc-number">7.</span> <span class="toc-text">7. 其他</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-_big_endian和little_endian"><span class="toc-number">7.1.</span> <span class="toc-text">3.1. big endian和little endian</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-_关于换行符"><span class="toc-number">7.2.</span> <span class="toc-text">3.2. 关于换行符</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

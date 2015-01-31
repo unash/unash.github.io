@@ -1,0 +1,465 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>javascript笔记 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="JavaScript 并非Java的脚本版，事实上，除了名字中带有Java外，二者并没有任何相同点，JavaScript最早出现在Netscape Navigator 2浏览器中，当时Java技术如日中天，Netscape公司觉得改为JavaScript这个名字会更引人注目。
+连接外部文件时，不能在">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/06/06/javascript-notes/" title="javascript笔记" itemprop="url">javascript笔记</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-06-06T15:57:26.000Z" itemprop="datePublished">Jun 6 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>JavaScript 并非Java的脚本版，事实上，除了名字中带有Java外，二者并没有任何相同点，JavaScript最早出现在Netscape Navigator 2浏览器中，当时Java技术如日中天，Netscape公司觉得改为JavaScript这个名字会更引人注目。</p>
+<p>连接外部文件时，不能在&lt;script&gt;标记中放置任何代码。使用外部文件的另一个优点是浏览器会缓存它们。</p>
+<p>JavaScript对是否需要分号的要求很宽松。</p>
+<p>alert()函数显示的消息框是模态的。</p>
+<p>标签中的id在网页中必须是唯一的:document.getElementById(‘asd’).innerHTML=’Hello World’;</p>
+<p>访问段落的代码要放在该段落的后面。</p>
+<p>prompt(“提示语言”,默认值)</p>
+<p>document.write(“sdfsd”)</p>
+<p>parseInt() parseFloat() isNaN()</p>
+<p>使用数组的声明</p>
+<p>var myArray=new Array();</p>
+<p>或者var myArray=new Array(a,b,c)//参数不能只有一个</p>
+<p>调用myArray[0]</p>
+<p>JavaScript有二维数组，实际上，JavaScript只支持一维数组，不支持多维数组但是JaVaScript允许在一个数组的内部创建另一个数组，从而模拟出多维数组。</p>
+<p>DOM文档对象模型与BOM浏览器对象模型</p>
+<p>JavaScript内置对象模型：String，Array，Math，Number，Data，</p>
+<p>创建对象的新类型（引用类型），举例：</p>
+<blockquote>
+<p>function sampleClass(a,b,c)</p>
+<p>{</p>
+<p>this.aa=a;</p>
+<p>this.bb=b;</p>
+<p>thsi.cc=c;</p>
+<p>}<br>方法声明：<br>sampleClass.prototype.getA()</p>
+<p>{</p>
+<p>return this.aa;</p>
+<p>}<br>浏览器为JavaScript提供的对象集合通常称为浏览器对象模型，BOM没有标准的实现方式。浏览器对象模型框架：</p>
+</blockquote>
+<p>windows对象 是全局对象，包含比如alert()函数</p>
+<p><em>*</em>location对象 包含有关当前页面位置的信息，比如URL，端口，协议等</p>
+<p><em>*</em>history对象 跟踪用户访问的每一个页面，这个页面列表成为浏览器的历史栈</p>
+<p><em>*</em>navigator对象 包含浏览器和运行浏览器的操作系统的信息</p>
+<p><em>*</em>screen对象 包含有关客户机显示能力的信息</p>
+<p><em>*</em>document对象 不同浏览器的document对象存在较大差异</p>
+<p><strong>**</strong>forms对象</p>
+<p><strong>**</strong>images对象 集合，用var myImage=document.images[1]来得到myImage[1]的引用</p>
+<p><strong>**</strong>links对象</p>
+<p>标签的onclick属性</p>
+<p>所有用于交互操作的HTML元素都应放在HTML表单（form）中</p>
+<p>一次只能提交页面中一个表单的信息。action 属性可确定把表单提交到什么地方，method属性可确定如何提交信息；target属性可确定将表单的响应加载到那个框架上。</p>
+<p>&lt;onload=”window onload()”&gt;</p>
+<p>每一个框架都是一个不同的窗口，都有自己的window对象</p>
+<p>默认情况下，浏览器会组织弹出在页面加载时自动创建的新窗口。但一般不会组织用户必须执行某个操作（如单击链接或按钮）时打开的窗口</p>
+<p>window.open()方法弹出新的窗口。</p>
+<p>W3C的P3P建议：基本目标是确保Cookie不用来手机用户浏览习惯的私人信息。</p>
+<p>XHTML1.0是XML与HTML标准的结合，提供了一种规范，允许浏览器之外的其他客户端使用Web，如手机等；提供了一种通用的方法来定义自己的元素，而不能随意增加元素，特别适合新的标记语言，如WML（Wireless Markup Language）。</p>
+<p>Ajax=Asynchronous JavaScript XML,此技术的实现方式有很多种，比如使用内部框架等。</p>
+<p>Javascript的语法有些像C++ ，区分大小写</p>
+<p>parse解析</p>
+<p>首先有Java，然后NetScape将其改造成了Javascript，微软看着不错，搞出来了自己的Jscript。</p>
+<p>VBScript只有IE支持</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Javascript/">Javascript</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/编程笔记/">编程笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/06/06/javascript-notes/" data-title="javascript笔记 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/06/07/chinese-ir-tools-study/" title="中文信息抽取工具调研">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  中文信息抽取工具调研</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/06/06/css-notes/"  title="CSS笔记">
+ <strong>NEXT:</strong><br/> 
+ <span>CSS笔记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

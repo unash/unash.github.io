@@ -1,0 +1,693 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>VS Socket编程 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="以控制台下实现为例子
+准备
+include&amp;lt;Winsock2.h&amp;gt;
+需要在项目中添加依赖项：Ws2_32.lib
+代码
+此代码实现的功能是服务器端发送数据，客户端连接上服务器端并监听服务器端发送来的数据。
+客户端
+#include &quot;stdafx.h&quot;
+#include&amp;lt;Winso">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/09/11/visualstudio-socket-programming/" title="VS Socket编程" itemprop="url">VS Socket编程</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-09-11T08:23:01.000Z" itemprop="datePublished">Sep 11 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.</span> <span class="toc-text">准备</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include<Winsock2-h>"><span class="toc-number"></span> <span class="toc-text">include<Winsock2.h></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">1.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端"><span class="toc-number">1.1.</span> <span class="toc-text">客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器端"><span class="toc-number">1.2.</span> <span class="toc-text">服务器端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码解析"><span class="toc-number">2.</span> <span class="toc-text">代码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化部分"><span class="toc-number">2.1.</span> <span class="toc-text">初始化部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听准备"><span class="toc-number">2.2.</span> <span class="toc-text">监听准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送数据"><span class="toc-number">2.3.</span> <span class="toc-text">发送数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收数据"><span class="toc-number">2.4.</span> <span class="toc-text">接收数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#善后处理"><span class="toc-number">2.5.</span> <span class="toc-text">善后处理</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>以控制台下实现为例子</p>
+<h2 id="准备">准备</h2>
+<h1 id="include&lt;Winsock2-h&gt;">include&lt;Winsock2.h&gt;</h1>
+<p>需要在项目中添加依赖项：Ws2_32.lib</p>
+<h2 id="代码">代码</h2>
+<p>此代码实现的功能是服务器端发送数据，客户端连接上服务器端并监听服务器端发送来的数据。</p>
+<h3 id="客户端">客户端</h3>
+<pre class="lang:c++ decode:true" title="客户端代码">#include "stdafx.h"
+#include&lt;Winsock2.h&gt;
+void _tmain(int argc, _TCHAR* argv[])
+{
+ //加载socket动态链接库
+ WORD wVersionRequested;
+ WSADATA wsaData;
+ int err;
+wVersionRequested = MAKEWORD( 1, 1 );
+err = WSAStartup( wVersionRequested, &amp;wsaData );
+ if ( err != 0 ) {
+  return;
+ }
+if ( LOBYTE( wsaData.wVersion ) != 1 ||
+   HIBYTE( wsaData.wVersion ) != 1 ) {
+  WSACleanup( );
+  return; 
+ }
+ //创建客户端套接字
+    SOCKET client=socket(AF_INET,SOCK_STREAM,0);//流式套接字。（数据报套接字，原套接字）
+ SOCKADDR_IN svr_addr_in;//保存服务器端的地址信息
+ svr_addr_in.sin_family=AF_INET;//代表TCP/IP协议族
+ //inet_addr()把字符串变成无符号的长整型。获取服务器地址.0.0.1：本机做服务器,127.0.0.1是服务器的ip地址
+ svr_addr_in.sin_addr.S_un.S_addr=inet_addr("127.0.0.1");
+ //htons本函数将一个位数从主机字节顺序转换成网络字节顺序，该端口号要与服务器的端口号相同
+ svr_addr_in.sin_port=htons(6000);
+ while(connect(client,(sockaddr*)&amp;svr_addr_in,sizeof(svr_addr_in))!=0);//链接服务器,等于表示连上服务器
+ char b[1024];
+ for(int i=0;;i++)
+ {
+ recv(client,b,sizeof(b),0);//客户端接受文件
+  printf("%s",b);
+ }
+ closesocket(client);//关闭客户端套接字
+ WSACleanup();//卸载winsock动态链接库
+}</pre>
+
+<h3 id="服务器端">服务器端</h3>
+<pre class="lang:c++ decode:true" title="服务器端socket">#include "stdafx.h"
+#include&lt;Winsock2.h&gt;
+void  _tmain(int argc, _TCHAR* argv[])
+{
+ //加载socket动态链接库
+ WORD wVersionRequested;
+ WSADATA wsaData;
+ int err;
+wVersionRequested = MAKEWORD( 1, 1 );
+err = WSAStartup( wVersionRequested, &amp;wsaData );
+ if ( err != 0 ) {
+  return;
+ }
+if ( LOBYTE( wsaData.wVersion ) != 1 ||
+   HIBYTE( wsaData.wVersion ) != 1 ) {
+  WSACleanup( );
+  return; 
+ }
+ SOCKET svr=socket(AF_INET,SOCK_STREAM,0);
+ SOCKADDR_IN svr_addr_in;//创建一个服务器地址结构体，用于保存服务器的信息
+ svr_addr_in.sin_family=AF_INET;//协议家族
+ svr_addr_in.sin_addr.S_un.S_addr=inet_addr("127.0.0.1");//htonl(INADDR_ANY);//获取当前机子网卡ip地址
+ svr_addr_in.sin_port=htons(6000);//设置端口地址
+    bind(svr,(sockaddr*)&amp;svr_addr_in,sizeof(SOCKADDR_IN));//将socket绑定到本地机地址上面
+ //把服务器socket设置为监听socket，同时能监听个client客服
+ listen(svr,5);
+    SOCKADDR_IN client_addr_in;//用于保存客户端的信息
+ int len=sizeof(SOCKADDR_IN);
+    SOCKET client=accept(svr,(sockaddr*)&amp;client_addr_in,&amp;len);//等待（接受）客户端请求到来
+ char b[1024]="ss";
+ for(int i=0;;i++)
+ {
+ send(client,b,sizeof(b),0);//向服务器发送数据
+ //system("pause"):
+ }
+ closesocket(client);//关闭客户端套接字
+ closesocket(svr);//关闭服务器套接字
+    WSACleanup();//卸载socket链接库
+ return ;
+}</pre>
+
+<h2 id="代码解析">代码解析</h2>
+<h3 id="初始化部分">初始化部分</h3>
+<pre class="lang:c++ decode:true">WORD wVersionRequested MAKEWORD( 1, 1 );
+ WSADATA wsaData;
+int err= WSAStartup( wVersionRequested, &amp;wsaData );</pre>
+MAKEWORD(a,b)是一个宏，定义如下：
+<pre class="lang:c++ decode:true">#defineMAKEWORD(a,b)((WORD)(((BYTE)(((DWORD_PTR)(a))&amp;0xff))|((WORD)((BYTE)(((DWORD_PTR)(b))&amp;0xff)))&lt;&lt;8))</pre>
+目的是将两个单字节拼成一个双字节，比如(1,1)会被拼成0x0101.
+
+WSADATA为结构体，用于存储socket的内容，定义如下：
+<pre class="lang:c++ decode:true">typedef struct WSAData {
+        WORD                    wVersion;
+        WORD                    wHighVersion;
+#ifdef _WIN64
+        unsigned short          iMaxSockets;
+        unsigned short          iMaxUdpDg;
+        char FAR *              lpVendorInfo;
+        char                    szDescription[WSADESCRIPTION_LEN+1];
+        char                    szSystemStatus[WSASYS_STATUS_LEN+1];
+#else
+        char                    szDescription[WSADESCRIPTION_LEN+1];
+        char                    szSystemStatus[WSASYS_STATUS_LEN+1];
+        unsigned short          iMaxSockets;
+        unsigned short          iMaxUdpDg;
+        char FAR *              lpVendorInfo;
+#endif
+} WSADATA</pre>
+函数
+<pre class="lang:c++ decode:true">int WSAStartup(
+  __in          WORD wVersionRequested,
+  __out         LPWSADATA lpWSAData
+);</pre>
+The**WSAStartup**functioninitiatesuseoftheWinsockDLLbyaprocess.
+
+**Parameters**
+
+**wVersionRequested**
+
+ThehighestversionofWindowsSocketsspecificationthatthecallercanuse.Thehigh-orderbytespecifiestheminorversionnumber;thelow-orderbytespecifiesthemajorversionnumber.
+
+**ReturnValue**
+
+Ifsuccessful,the**WSAStartup**functionreturnszero.Otherwise,itreturnsoneoftheerrorcodeslistedbelow.TheWSAStartupfunctiondirectlyreturnstheextendederrorcodeinthereturnvalueforthisfunction.Acalltothe[**WSAGetLastError**](ms-help://MS.VSCC.v90/MS.MSDNQTR.v90.chs/winsock/winsock/wsagetlasterror_2.htm)functionisnotneededandshouldnotbeused.
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top">
+
+**Errorcode**
+
+</td>
+<td valign="top">**Meaning**</td>
+</tr>
+<tr>
+<td valign="top">[**WSASYSNOTREADY**](ms-help://MS.VSCC.v90/MS.MSDNQTR.v90.chs/winsock/winsock/windows_sockets_error_codes_2.htm#winsock.wsasysnotready_2)</td>
+<td valign="top">Theunderlyingnetworksubsystemisnotreadyfornetworkcommunication.</td>
+</tr>
+<tr>
+<td valign="top">[**WSAVERNOTSUPPORTED**](ms-help://MS.VSCC.v90/MS.MSDNQTR.v90.chs/winsock/winsock/windows_sockets_error_codes_2.htm#winsock.wsavernotsupported_2)</td>
+<td valign="top">TheversionofWindowsSocketssupportrequestedisnotprovidedbythisparticularWindowsSocketsimplementation.</td>
+</tr>
+<tr>
+<td valign="top">[**WSAEINPROGRESS**](ms-help://MS.VSCC.v90/MS.MSDNQTR.v90.chs/winsock/winsock/windows_sockets_error_codes_2.htm#winsock.wsaeinprogress_2)</td>
+<td valign="top">AblockingWindowsSockets1.1operationisinprogress.</td>
+</tr>
+<tr>
+<td valign="top">[**WSAEPROCLIM**](ms-help://MS.VSCC.v90/MS.MSDNQTR.v90.chs/winsock/winsock/windows_sockets_error_codes_2.htm#winsock.wsaeproclim_2)</td>
+<td valign="top">AlimitonthenumberoftaskssupportedbytheWindowsSocketsimplementationhasbeenreached.</td>
+</tr>
+<tr>
+<td valign="top">[**WSAEFAULT**](ms-help://MS.VSCC.v90/MS.MSDNQTR.v90.chs/winsock/winsock/windows_sockets_error_codes_2.htm#winsock.wsaefault_2)</td>
+<td valign="top">ThelpWSADataparameterisnotavalidpointer.</td>
+</tr>
+</tbody>
+</table>
+**Requirements**
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top">**Client**</td>
+<td valign="top">RequiresWindowsVista,WindowsXP,Windows2000Professional,WindowsNTWorkstation,WindowsMe,Windows98,orWindows95.</td>
+</tr>
+<tr>
+<td valign="top">**Server**</td>
+<td valign="top">RequiresWindowsServer2008,WindowsServer2003,Windows2000Server,orWindowsNTServer.</td>
+</tr>
+<tr>
+<td valign="top">**Header**</td>
+<td valign="top">DeclaredinWinsock2.h.</td>
+</tr>
+<tr>
+<td valign="top">**Library**</td>
+<td valign="top">UseWs2_32.lib.</td>
+</tr>
+<tr>
+<td valign="top">**DLL**</td>
+<td valign="top">RequiresWs2_32.dll.</td>
+</tr>
+</tbody>
+</table>
+
+### 连接准备
+
+<pre class="lang:c++ decode:true">//创建客户端套接字
+    SOCKET client=socket(AF_INET,SOCK_STREAM,0);//流式套接字。（数据报套接字，原套接字）
+ SOCKADDR_IN svr_addr_in;//保存服务器端的地址信息
+ svr_addr_in.sin_family=AF_INET;//代表TCP/IP协议族
+ //inet_addr()把字符串变成无符号的长整型。获取服务器地址.0.0.1：本机做服务器,127.0.0.1是服务器的ip地址
+ svr_addr_in.sin_addr.S_un.S_addr=inet_addr("127.0.0.1");
+ //htons本函数将一个位数从主机字节顺序转换成网络字节顺序，该端口号要与服务器的端口号相同
+ svr_addr_in.sin_port=htons(6000);
+ while(connect(client,(sockaddr*)&amp;svr_addr_in,sizeof(svr_addr_in))!=0);//链接服务器,等于表示连上服务器</pre>
+SOCKET为重定义变量，原始变量类型为_W64unsignedint.
+
+函数
+<pre class="lang:c++ decode:true">SOCKET WSAAPI socket(
+  __in          int af,
+  __in          int type,
+  __in          int protocol
+);</pre>
+The**socket**functioncreatesasocketthatisboundtoaspecifictransportserviceprovider.
+
+结构体**SOCKADDR_IN**
+<pre class="lang:c++ decode:true">struct sockaddr_in{
+short sin_family;    //Address family (must be AF_INET).
+unsigned short sin_port;    //IP port.
+struct in_addr sin_addr;    //IP address.
+char sin_zero[8];    //Padding to make structure the same size as SOCKADDR.
+};</pre>
+The**connect**functionestablishesaconnectiontoaspecifiedsocket.
+<pre class="lang:c++ decode:true">int connect(
+__in  SOCKET s,    //Descriptor identifying an unconnected socket.
+__in  const struct sockaddr* name,//Name of the socket in the sockaddr structure to which the connection should be established.
+  __in int namelen    //Length of name, in bytes.
+);</pre>
+
+<h3 id="监听准备">监听准备</h3>
+<pre class="lang:c++ decode:true">SOCKET svr=socket(AF_INET,SOCK_STREAM,0);
+ SOCKADDR_IN svr_addr_in;//创建一个服务器地址结构体，用于保存服务器的信息
+ svr_addr_in.sin_family=AF_INET;//协议家族
+ svr_addr_in.sin_addr.S_un.S_addr=inet_addr("127.0.0.1");//htonl(INADDR_ANY);//获取当前机子网卡ip地址
+ svr_addr_in.sin_port=htons(6000);//设置端口地址
+    bind(svr,(sockaddr*)&amp;svr_addr_in,sizeof(SOCKADDR_IN));//将socket绑定到本地机地址上面
+ //把服务器socket设置为监听socket，同时能监听个client客服
+ listen(svr,5);</pre>
+**bind**函数
+<pre class="lang:c++ decode:true">bind(
+    IN SOCKET s,
+    __in_bcount(namelen) const struct sockaddr FAR * name,
+    IN int namelen
+    );</pre>
+The**listen**functionplacesasocketinastateinwhichitislisteningforanincomingconnection.
+<pre class="lang:c++ decode:true">int listen(
+  __in     SOCKET s,    //Descriptor identifying a bound, unconnected socket.
+  __in     int backlog    //允许的最多的连接队列
+);</pre>
+
+<h3 id="发送数据">发送数据</h3>
+<pre class="lang:c++ decode:true">    SOCKADDR_IN client_addr_in;//用于保存客户端的信息
+ int len=sizeof(SOCKADDR_IN);
+    SOCKET client=accept(svr,(sockaddr*)&amp;client_addr_in,&amp;len);//等待（接受）客户端请求到来
+ char b[1024]="ss";
+ for(int i=0;;i++)
+ {
+ send(client,b,sizeof(b),0);//向服务器发送数据
+ //system("pause"):
+ }</pre>
+
+<h3 id="接收数据">接收数据</h3>
+<pre class="lang:c++ decode:true">char b[1024];
+ for(int i=0;;i++)
+ {
+ recv(client,b,sizeof(b),0);//客户端接受文件
+  printf("%s",b);
+ }</pre>
+**send**与**recv**函数的参数表都是
+<pre class="lang:c++ decode:true">IN SOCKET s,    // The descriptor that identifies a connected socket.
+__out_bcount_part(len, return) __out_data_source(NETWORK) char FAR * buf,
+// The buffer for incoming data.
+IN int len,// The length, in bytes, of the buf parameter.
+IN int flags
+//A pointer to flags that influences the behavior of this function. See remarks below.</pre>
+
+<h3 id="善后处理">善后处理</h3>
+<pre class="lang:c++ decode:true crayon-selected">closesocket(client);//关闭客户端套接字
+closesocket(svr);//关闭服务器套接字
+WSACleanup();//卸载winsock动态链接库</pre>  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Socket/">Socket</a><a href="/tags/VS/">VS</a><a href="/tags/网络编程/">网络编程</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/编程笔记/">编程笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/09/11/visualstudio-socket-programming/" data-title="VS Socket编程 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/09/11/vc-image-processing/" title="VC++图形处理">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  VC++图形处理</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/09/10/mysql-files-and-directory-distribution/"  title="Mysql目录及文件分布">
+ <strong>NEXT:</strong><br/> 
+ <span>Mysql目录及文件分布
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.</span> <span class="toc-text">准备</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include<Winsock2-h>"><span class="toc-number"></span> <span class="toc-text">include<Winsock2.h></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">1.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端"><span class="toc-number">1.1.</span> <span class="toc-text">客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器端"><span class="toc-number">1.2.</span> <span class="toc-text">服务器端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码解析"><span class="toc-number">2.</span> <span class="toc-text">代码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化部分"><span class="toc-number">2.1.</span> <span class="toc-text">初始化部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听准备"><span class="toc-number">2.2.</span> <span class="toc-text">监听准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送数据"><span class="toc-number">2.3.</span> <span class="toc-text">发送数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收数据"><span class="toc-number">2.4.</span> <span class="toc-text">接收数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#善后处理"><span class="toc-number">2.5.</span> <span class="toc-text">善后处理</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,419 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>2013年3月5日装机笔记 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="此次装机与以往不同，是为联想服务器安装系统。前因后果皆不描述，描述问题。此计算机配置为：英特尔6核2.0GHz；内存为64G，硬盘为2*2T使用优盘能够正常进入PE系统，但是在PE系统中只能看到4个磁盘驱动器，但是点击之后提示找不到硬盘。但是在使用U盘工具的时候，使用磁盘分区可以对这两块磁盘进行分区">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/05/27/20130305-install-os-notes/" title="2013年3月5日装机笔记" itemprop="url">2013年3月5日装机笔记</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-05-27T15:07:06.000Z" itemprop="datePublished">May 27 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#2014年1月4日补充"><span class="toc-number">1.</span> <span class="toc-text">2014年1月4日补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在装系统的时候无法显示硬盘"><span class="toc-number">1.1.</span> <span class="toc-text">在装系统的时候无法显示硬盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#大文件拷贝易假死"><span class="toc-number">1.2.</span> <span class="toc-text">大文件拷贝易假死</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>此次装机与以往不同，是为联想服务器安装系统。前因后果皆不描述，描述问题。<br>此计算机配置为：英特尔6核2.0GHz；内存为64G，硬盘为2*2T<br>使用优盘能够正常进入PE系统，但是在PE系统中只能看到4个磁盘驱动器，但是点击之后提示找不到硬盘。<br>但是在使用U盘工具的时候，使用磁盘分区可以对这两块磁盘进行分区，很正常，只是在进入系统之后无法打开硬盘。<br>于是开始了漫长的实验过程。<br>开始以为是硬盘接口的问题，然后按F2进入了BIOS，果然比普通的笔记本BIOS要复杂得多。<br>在硬盘接口设置的地方，有4中：Enable，IDE，AHCI，RAID。默认是AHCI。<br>然后我换了其他几个，依然是上面的问题，由此，排除是接口的问题。<br>使用WindowXP Ghost，Windows7，Windows8都不行，无论是用U盘安装还是用光盘安装。<br>开始怀疑是驱动的问题，但是这里还是有几个疑惑的：<br>第一：为什么使用U盘的分区工具，在不进入PE的时候可以看到硬盘分区信息呢？<br>第二：按理说，比较新的操作系统，比如windows7与windows8，应该会集成这种服务器的驱动啊？<br>在种种方式行不通的情况下，开始考虑是没有驱动器。即，需要在安装系统的时候同时安装驱动器。<br>在联想的官网上已经提供了一系列的驱动，而且是相关的，不过这些驱动的文件格式都是exe的，按理说，在安装操作系统前是没有办法使用的，事实也正是如此。<br>把这些驱动放在U盘中，插在电脑上，使用光盘或者U盘的windows2008来进行安装，在安装windows8,7或者2008的时候，加载驱动器；<br>这时候，系统并没有在U盘中找到驱动，所以说明.exe的驱动是不能用的。<br>（不过在使用PE的时候，exe是可以进行安装的，不过由于那时候磁盘还没有出现，所以不能安装在磁盘上，只能安装在U盘中，不过并没有起到多大作用。）<br>还是继续，考虑在系统安装的时候安装驱动，受到网上一个帖子的启发（<a href="http://chinayg188.blog.163.com/blog/static/3170712420121151273781/）：" target="_blank" rel="external">http://chinayg188.blog.163.com/blog/static/3170712420121151273781/）：</a><br>可以将驱动安装在其他电脑上，然后将安装的结果文件夹driver拷贝到U盘插到服务器上待使用。<br>我把硬盘、芯片相关的驱动下载了，然后安装，不过有几个安装会出错，没有详细记录（试试证明对后面的操作是没有影响的）<br>然后，重新进行系统安装，选在加载驱动程序，在U盘多个文件夹中搜索驱动都没有找到，几乎快要放弃了；但是，但是。。。<br>在其他电脑上安装这个驱动：IntelRST[c1rst21ws17_s64]，<br>在一个名为RAID Storage Technology enterprise Installation的文件夹中，-&gt;Drivers-&gt;SCU目录，然后扫描这个目录，就可以找到驱动了。<br>此目录下是如下几个文件：iaStorF.sys、iastors.cat、iaStorS.inf、iaStorS.sys<br>之所以选择SCU，是因为在BIOS中的启动顺序选项卡中，几个STAT驱动器都是空的，但是以SCU开头的设备有两个，猜测是硬盘，所以选择它。<br>装好驱动，在装系统的时候就能识别到硬盘了，这样基本已经接近成功了；<br>但是在选择分区进行安装的时候，提示当前磁盘分区不能安装系统；这个问题很久以前已经见过了，原来是和GPT有关，GPT是和MBR对应的一个磁盘格式，其主要目的是为了处理超过2T的磁盘，因为MBR对于超过2T的磁盘是无能为力的。<br>至于具体的格式细节，以后再研究。系统装好了，速度非常快。<br>安装7z之后，出现“请求的操作需要提升”，右键取消安装文件夹里各个7z程序的管理员权限就可以了。</p>
+<h3 id="2014年1月4日补充">2014年1月4日补充</h3>
+<h4 id="在装系统的时候无法显示硬盘">在装系统的时候无法显示硬盘</h4>
+<p>在其他电脑上安装这个驱动：IntelRST[c1rst21ws17_s64]，<br>在一个名为RAID Storage Technology enterprise Installation的文件夹中，-&gt;Drivers-&gt;SCU目录，然后扫描这个目录，就可以找到驱动了。<br>此目录下是如下几个文件：iaStorF.sys、iastors.cat、iaStorS.inf、iaStorS.sys<br>之所以选择SCU，是因为在BIOS中的启动顺序选项卡中，几个STAT驱动器都是空的，但是以SCU开头的设备有两个，猜测是硬盘，所以选择它。<br>装好驱动，在装系统的时候就能识别到硬盘了</p>
+<h4 id="大文件拷贝易假死">大文件拷贝易假死</h4>
+<p>USB3.0拷贝大文件，从硬盘中拷贝到移动硬盘中，速度平均在500M/s左右。<br>如果是比较零散的文件，硬盘可能会吃不消，直接卡掉了。<br>但是如果是一个单一的大文件，则比较顺利。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/PE/">PE</a><a href="/tags/win2008/">win2008</a><a href="/tags/windows/">windows</a><a href="/tags/windows-server/">windows server</a><a href="/tags/安装系统/">安装系统</a><a href="/tags/联想服务器/">联想服务器</a><a href="/tags/重装/">重装</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/软件使用/">软件使用</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/05/27/20130305-install-os-notes/" data-title="2013年3月5日装机笔记 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/05/28/association-rule-mining-notes/" title="关联规则挖掘笔记">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  关联规则挖掘笔记</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/05/27/install-win2003-in-winpe/"  title="WinPE系统下安装原版WIN2003">
+ <strong>NEXT:</strong><br/> 
+ <span>WinPE系统下安装原版WIN2003
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#2014年1月4日补充"><span class="toc-number">1.</span> <span class="toc-text">2014年1月4日补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在装系统的时候无法显示硬盘"><span class="toc-number">1.1.</span> <span class="toc-text">在装系统的时候无法显示硬盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#大文件拷贝易假死"><span class="toc-number">1.2.</span> <span class="toc-text">大文件拷贝易假死</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

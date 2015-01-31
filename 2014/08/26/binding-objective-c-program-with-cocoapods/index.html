@@ -1,0 +1,470 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>使用cocoapods进行联编 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="cocoapods是管理Objective-C 项目中各种库依赖的工具。系统的使用方法，可参考其官方网站，本文详细介绍一下使用cocoapods进行联编的方法。在给出具体可行的步骤之前，会有一些原理性的介绍。如果读者只为求实施方法，可点击这里。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/08/26/binding-objective-c-program-with-cocoapods/" title="使用cocoapods进行联编" itemprop="url">使用cocoapods进行联编</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-08-26T14:46:31.000Z" itemprop="datePublished">Aug 26 2014</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#podfile_与_podspec文件"><span class="toc-number">1.</span> <span class="toc-text">podfile 与 podspec文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-source_=_{_:git_=>_“http://EXAMPLE/demo_framework-git“,_:tag_=>_“0-0-1”_}"><span class="toc-number"></span> <span class="toc-text">s.source       = { :git => “http://EXAMPLE/demo_framework.git“, :tag => “0.0.1” }</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-resource_=_“icon-png”"><span class="toc-number"></span> <span class="toc-text">s.resource  = “icon.png”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-resources_=_“Resources/*-png”"><span class="toc-number"></span> <span class="toc-text">s.resources = “Resources/*.png”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-preserve_paths_=_“FilesToSave”,_“MoreFilesToSave”"><span class="toc-number"></span> <span class="toc-text">s.preserve_paths = “FilesToSave”, “MoreFilesToSave”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-framework_=_“SomeFramework”"><span class="toc-number"></span> <span class="toc-text">s.framework  = “SomeFramework”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-frameworks_=_“SomeFramework”,_“AnotherFramework”"><span class="toc-number"></span> <span class="toc-text">s.frameworks = “SomeFramework”, “AnotherFramework”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-requires_arc_=_true"><span class="toc-number"></span> <span class="toc-text">s.requires_arc = true</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-xcconfig_=_{_“HEADER_SEARCH_PATHS”_=>_“$(SDKROOT)/usr/include/libxml2”_}"><span class="toc-number"></span> <span class="toc-text">s.xcconfig = { “HEADER_SEARCH_PATHS” => “$(SDKROOT)/usr/include/libxml2” }</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-dependency_‘demo_framework_root’,_‘0-0-1’"><span class="toc-number"></span> <span class="toc-text">s.dependency ‘demo_framework_root’, ‘0.0.1’</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一次依赖的联编"><span class="toc-number">1.</span> <span class="toc-text">一次依赖的联编</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多次依赖的联编"><span class="toc-number">2.</span> <span class="toc-text">多次依赖的联编</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#之后怎么办_…"><span class="toc-number">3.</span> <span class="toc-text">之后怎么办 …</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git下的多人开发"><span class="toc-number">3.1.</span> <span class="toc-text">Git下的多人开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发布独立的framework/源码供第三方使用"><span class="toc-number">3.2.</span> <span class="toc-text">发布独立的framework/源码供第三方使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他的"><span class="toc-number">4.</span> <span class="toc-text">其他的</span></a></li></ol>
+		</div>
+		
+		<p>cocoapods是管理Objective-C 项目中各种库依赖的工具。系统的使用方法，可参考其<a href="http://cocoapods.org/" target="_blank" rel="external">官方网站</a>，本文详细介绍一下使用cocoapods进行联编的方法。在给出具体可行的步骤之前，会有一些原理性的介绍。如果读者只为求实施方法，可点击这里。<a id="more"></a></p>
+<h2 id="podfile_与_podspec文件">podfile 与 podspec文件</h2>
+<p>在使用cocoapods过程中，会产生两个重要的文件——podfile与podspec。podfile在引用项目中使用，说明当前项目使用什么framework，这些framework去哪里寻找。podfile的文件格式比较简单(与podspec皆为ruby格式的代码)，示例片段如下：</p>
+<p><pre class="lang:ruby decode:true" title="podfile范例">platform :ios, ‘6.0’<br>target “demo_app_main” do<br>    pod ‘demo_framework’, :path =&gt; ‘~/WorkSpace/demo_ios/demo_framework’<br>    pod ‘demo_framework_root’, :path =&gt; ‘~/WorkSpace/demo_ios/demo_framework_root’<br>    pod ‘pop’,  ‘~&gt; 1.0’ </pre></p>
+<pre><code>    <span class="variable">#pod</span> ‘framework1’, ‘version’ 或者 pod ‘framework1’, :head
+    <span class="variable">#pod</span> ‘framework2’, :git <span class="subst">=&amp;</span><span class="literal">gt</span>; ‘xxxx<span class="built_in">.</span>git’ :branch <span class="subst">=&amp;</span><span class="literal">gt</span>; ‘branch<span class="string">'
+    #pod ‘framework3’, :path =&amp;gt; ‘workspace的路径’</span>
+</code></pre><p>end<br>关键语句为：pod &lt;framework名&gt; &lt;描述framework的podspec文件的地址&gt;</p>
+<p>命令行切换到项目目录之后，运行 pod install，实际是告诉cocoapods去读取podfile，寻找podspec文件，将podspec文件描述的framework添加进来。&lt;描述framework的podspec文件的地址&gt; 可以有多种格式，也可以使用远程或者本地的git地址与分支。如果没有指明podspec的地址，那么则从cocoapods默认的源(默认路径为~/.cocoapods/repo)中寻找。那么，podspec文件中是什么呢？下面是一份podspec文件范例：</p>
+<p><pre class="lang:ruby decode:true">Pod::Spec.new do |s|<br>  s.name         = “demo_framework”<br>  s.version      = “0.0.1”<br>  s.summary      = “A short description of demo_framework.”<br>  s.homepage     = “<a href="http://EXAMPLE/demo_framework" target="_blank" rel="external">http://EXAMPLE/demo_framework</a>“<br>  s.license      = “MIT (example)”</pre></p>
+<h1 id="s-source_=_{_:git_=&gt;_“http://EXAMPLE/demo_framework-git“,_:tag_=&gt;_“0-0-1”_}">s.source       = { :git =&gt; “<a href="http://EXAMPLE/demo_framework.git" target="_blank" rel="external">http://EXAMPLE/demo_framework.git</a>“, :tag =&gt; “0.0.1” }</h1>
+<p>  s.source_files  = “demo_framework/<em>.{h,m}”<br>  s.exclude_files = “demo_framework/Exclude”<br>  s.public_header_files = “demo_framework/</em>.h”</p>
+<h1 id="s-resource_=_“icon-png”">s.resource  = “icon.png”</h1>
+<h1 id="s-resources_=_“Resources/*-png”">s.resources = “Resources/*.png”</h1>
+<h1 id="s-preserve_paths_=_“FilesToSave”,_“MoreFilesToSave”">s.preserve_paths = “FilesToSave”, “MoreFilesToSave”</h1>
+<h1 id="s-framework_=_“SomeFramework”">s.framework  = “SomeFramework”</h1>
+<h1 id="s-frameworks_=_“SomeFramework”,_“AnotherFramework”">s.frameworks = “SomeFramework”, “AnotherFramework”</h1>
+<h1 id="s-requires_arc_=_true">s.requires_arc = true</h1>
+<h1 id="s-xcconfig_=_{_“HEADER_SEARCH_PATHS”_=&gt;_“$(SDKROOT)/usr/include/libxml2”_}">s.xcconfig = { “HEADER_SEARCH_PATHS” =&gt; “$(SDKROOT)/usr/include/libxml2” }</h1>
+<h1 id="s-dependency_‘demo_framework_root’,_‘0-0-1’">s.dependency ‘demo_framework_root’, ‘0.0.1’</h1>
+<p>end<br><br>‘#’表示注释。在此份podspec文件中，重要的是 s.name，s.version，s.dependency，s.source_files几个段。分别描述了当前framework的名称，版本，引用内容(对联编特别重要)，所依赖的其他的framework。<a href="http://guides.cocoapods.org/syntax/podspec.html#specification" target="_blank" rel="external">cocoapods官网上</a>详细地介绍了podspec文件其他的属性字段，可以在命令行中通过如下语句创建podspec文件。</p>
+<blockquote>
+<p>pod spec create &lt;podspec的文件名&gt;<br>注：spec，specification，规格之意。</p>
+</blockquote>
+<h2 id="一次依赖的联编">一次依赖的联编</h2>
+<p>在没有使用cocoapods管理framework的时候，可以直接将framework的工程文件拖到引用工程中去，然后在引用工程中设置framework包含，如图：</p>
+<p><a href="http://blog.exbye.com/2014/08/binding-objective-c-program-with-cocoapods/drag_framework_to_project/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/08/drag_framework_to_project-1024x436.png" alt="drag_framework_to_project"></a></p>
+<p>这时候，会有提示出现：</p>
+<p><a href="http://blog.exbye.com/2014/08/binding-objective-c-program-with-cocoapods/drag_framework_to_project_choose/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/08/drag_framework_to_project_choose-1024x246.png" alt="drag_framework_to_project_choose"></a></p>
+<p>选择Yes，然后在项目的Build Phase中，引入framework的头文件即可。</p>
+<p><a href="http://blog.exbye.com/2014/08/binding-objective-c-program-with-cocoapods/drag_framework_to_project_build_phase/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/08/drag_framework_to_project_build_phase-1024x309.png" alt="drag_framework_to_project_build_phase"></a></p>
+<p>引入头文件之后，就可以进行联编了。对于cocoapods管理的引用工程，也可以用此方法。但是当framework也被cocoapods管理的时候，就无法使用这种方法了。因为，运行pod install之后，framework工程项目会被后缀为.xcworkspace的文件取代，而将此工程文件拖入引用工程之后，xcode无法识别。正确的做法是 ，在被引用framework工程中创建一个描述framework的podspec（参见前文的代码范例，如果是运行 pod spec create 命令创建的，需要注释掉s.source一行；然后修改s.source_files，这个文件会声明引用工程引入被引用工程中相应文件的快捷方式），然后在引用工程中创建一个podfile(参见前文的代码范例，路径使用:path。)，之后运行pod install。之后，打开.xcworkspace项目文件，会发现会多出pod-&gt;Development Pods目录，里面是被引用工程源文件的快捷方式，于是联编很方便。</p>
+<p>注: 本文所讲的framework是使用<a href="https://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=0CB0QFjAA&amp;url=%68%74%74%70%73%3a%2f%2f%67%69%74%68%75%62%2e%63%6f%6d%2f%6b%73%74%65%6e%65%72%75%64%2f%69%4f%53%2d%55%6e%69%76%65%72%73%61%6c%2d%46%72%61%6d%65%77%6f%72%6b&amp;ei=BYH8U7_eAYy78gXxyYKQDg&amp;usg=AFQjCNERTm_idMw_c-eTdtTUNCuAzODoRQ" target="_blank" rel="external">iOS-Universal-Framework</a>创建的，具体使用请百科之。</p>
+<h2 id="多次依赖的联编">多次依赖的联编</h2>
+<p>假设A是主工程。A依赖B，B依赖C。如果A中的podfile引用了B(中的podspec)，B中的podfile引用了C(中的podspec)。A中运行pod install，B中运行pod install。如你所料，这样是行不通的。</p>
+<p>大略会提示C中的某些文件找不到，自然，因为A的podfile在引用B的时候，并不知道C的存在。注意B的podspec是和B的podfile没有关系的。我们需要修改B的podspce中的s.dependency字段，将B工程引用的C加进来。如果C工程是一个编译好了的framework的话，添加pod源，使用类似【 s.dependency ‘demo_framework_root’, ‘0.0.1’ 】语句是可以的，不过B引用的C是源代码，并且我们希望在编辑源码A的时候可以修改C，这样就需要修改s.dependency字段。也许你想到了使用:git或者:path，就像podfile中的pod字段一样，很遗憾，cocoapods不支持在podspec中使用:path或:git。在编辑工程A的时候，依然会提示C中的某些文件没有找到。这也许算是cocoapods中的一个不足点，读者可以参考<a href="http://stackoverflow.com/questions/16905112/cocoapods-dependency-in-pod-spec-not-working" target="_blank" rel="external">这篇帖子</a>。然而联编不可不进行，可以采用如下方法。</p>
+<p>在A的podfile中，同时添加工程B与工程C的podspec地址，不需要编写B的podspec的s.dependency字段。然后执行A的pod install，可以发现在工程A中，B与C的源码都被引入进来了。这时候联编，如果修改了cocoapods管理的被引用文件，是可以反映到B与C中的。这样子，C工程可以单独编辑编译，B工程可以使用cocoapods编辑编译，A工程可以使用cocoapods编辑编译，开发工作完美解决。demo中demo_app_main是引用工程，demo_framework是被引用工程，demo_framerwork_root是二级被引用工程，按照上述思路进行联编之后，demo_app_main的工程展示如下：</p>
+<p><a href="http://blog.exbye.com/2014/08/binding-objective-c-program-with-cocoapods/demo_app_main_project_shotscreen/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/08/demo_app_main_project_shotscreen-225x300.png" alt="demo_app_main_project_shotscreen"></a></p>
+<p>podfile与podspec文件的地址在<a href="https://github.com/unash/ExBye/tree/master/Blog/binding-objective-c-program-with-cocoapods" target="_blank" rel="external">这里</a>.</p>
+<h2 id="之后怎么办_…">之后怎么办 …</h2>
+<h3 id="Git下的多人开发">Git下的多人开发</h3>
+<p>在必须要联编的情况下，可以将引用工程与被引用工程pull下来，针对被引用工程配置一个podfile，其s.source字段置空。另外配置一份podfile放在引用工程中，将其引用路径指向本地被引工程的开发目录，此podfile不需提交到版本库。每次开发的时候，pull一下，然后重新pod install一下(甚至不需要，如果其他第三方framework没有更新的话)，然后开发就可以了。开发之后push一下。其他人的配置与之相同。这样放在本地的podfile与提交到版本库中的podspec文件是不需要经常修改的，开发配置十分简单。</p>
+<h3 id="发布独立的framework/源码供第三方使用">发布独立的framework/源码供第三方使用</h3>
+<p>如果研究~/.cocoapods/repo路径中的内容你会发现，其实cocoapods提供了一个开源framework的列表，在~/.cocoapods/repo/master目录下，其目录结构为：</p>
+<blockquote>
+<p>—master</p>
+<p>——Specs</p>
+<p>———many dirs  #很多库名命名的文件夹</p>
+<p>————version dirs  #以库版本库命名的文件夹</p>
+<p>—————.podspec.json file.  #这个文件和 .podspec 文件的作用应该是一样的。<br>这个spec repo 是开源的，地址在<a href="https://github.com/CocoaPods/Specs" target="_blank" rel="external">这里</a>，并且在不断整理中，这样其他人在引用第三方的开源库的时候就比较方便了。但是有时候项目也需要引用一些闭源的库，故需要添加其他的源。添加其他的源，可以创建一个版本库。其目录结构为：<br>—pod repo source name  #自己创建的源的名称</p>
+<p>——many dir  #很多库名命名的文件夹</p>
+<p>———version dir  #以库版本库命名的文件夹</p>
+<p>————.podspec file<br>将我们创建的spec 库放到git中，然后运行 pod repos add [git地址]就可以将我们自己创建的spec库添加进来了。这部分也可参考官方文档。回到本节来，我们开发好了framework之后，可以提供给其他人一个framework，也可以以github地址的方式给其他人源码，然后在这个工程中创建一个podspec文件来说明。别人在使用的，别人只需要在podfile中加入这个git地址就可以；如果你创建的是开源项目，你也可以将你创建的podspec提交到 cocoapods 的开源spec中。在运行pod install的时候，cocoapods会自动将这些被引用工程拉到本地编译。</p>
+</blockquote>
+<p>当然很多情况下，framework开发者只想给外部提供一个二进制进口，这样也是可以的。只是在podfile的路径中，需要指明这个二进制framewok的git地址或者本地地址。</p>
+<h2 id="其他的">其他的</h2>
+<p>感觉cocoapod是一个很好的项目，使用的好的话，可以很优雅地管理十分复杂的依赖。本文主要写的是联编技巧。官网文档写的不多，也不复杂，初用者最好话点时间读读，以晓工具全貌。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/cocoapods/">cocoapods</a><a href="/tags/objective-c/">objective-c</a><a href="/tags/podfile/">podfile</a><a href="/tags/podspec/">podspec</a><a href="/tags/xcode/">xcode</a><a href="/tags/联编/">联编</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/编程笔记/">编程笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2014/08/26/binding-objective-c-program-with-cocoapods/" data-title="使用cocoapods进行联编 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/09/10/cloud-computing-technique/" title="云计算技术">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  云计算技术</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/08/03/experience-in-apple-products/"  title="体验苹果系">
+ <strong>NEXT:</strong><br/> 
+ <span>体验苹果系
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#podfile_与_podspec文件"><span class="toc-number">1.</span> <span class="toc-text">podfile 与 podspec文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-source_=_{_:git_=>_“http://EXAMPLE/demo_framework-git“,_:tag_=>_“0-0-1”_}"><span class="toc-number"></span> <span class="toc-text">s.source       = { :git => “http://EXAMPLE/demo_framework.git“, :tag => “0.0.1” }</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-resource_=_“icon-png”"><span class="toc-number"></span> <span class="toc-text">s.resource  = “icon.png”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-resources_=_“Resources/*-png”"><span class="toc-number"></span> <span class="toc-text">s.resources = “Resources/*.png”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-preserve_paths_=_“FilesToSave”,_“MoreFilesToSave”"><span class="toc-number"></span> <span class="toc-text">s.preserve_paths = “FilesToSave”, “MoreFilesToSave”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-framework_=_“SomeFramework”"><span class="toc-number"></span> <span class="toc-text">s.framework  = “SomeFramework”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-frameworks_=_“SomeFramework”,_“AnotherFramework”"><span class="toc-number"></span> <span class="toc-text">s.frameworks = “SomeFramework”, “AnotherFramework”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-requires_arc_=_true"><span class="toc-number"></span> <span class="toc-text">s.requires_arc = true</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-xcconfig_=_{_“HEADER_SEARCH_PATHS”_=>_“$(SDKROOT)/usr/include/libxml2”_}"><span class="toc-number"></span> <span class="toc-text">s.xcconfig = { “HEADER_SEARCH_PATHS” => “$(SDKROOT)/usr/include/libxml2” }</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#s-dependency_‘demo_framework_root’,_‘0-0-1’"><span class="toc-number"></span> <span class="toc-text">s.dependency ‘demo_framework_root’, ‘0.0.1’</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一次依赖的联编"><span class="toc-number">1.</span> <span class="toc-text">一次依赖的联编</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多次依赖的联编"><span class="toc-number">2.</span> <span class="toc-text">多次依赖的联编</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#之后怎么办_…"><span class="toc-number">3.</span> <span class="toc-text">之后怎么办 …</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git下的多人开发"><span class="toc-number">3.1.</span> <span class="toc-text">Git下的多人开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发布独立的framework/源码供第三方使用"><span class="toc-number">3.2.</span> <span class="toc-text">发布独立的framework/源码供第三方使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他的"><span class="toc-number">4.</span> <span class="toc-text">其他的</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

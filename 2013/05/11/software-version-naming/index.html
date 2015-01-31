@@ -1,0 +1,501 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>软件版本命名 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="软件版本阶段说明
+
+Base版: 此版本表示该软件仅仅是一个假页面链接，通常包括所有的功能和页面布局，但是页面中的功能都没有做完整的实现，只是做为整体网站的一个基础架构。
+Alpha版: 此版本表示该软件在此阶段主要是以实现软件功能为主，通常只在软件开发者内部交流，一般而言，该版本软件的Bug较多，">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/05/11/software-version-naming/" title="软件版本命名" itemprop="url">软件版本命名</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-05-11T07:36:16.000Z" itemprop="datePublished">May 11 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#软件版本阶段说明"><span class="toc-number">1.</span> <span class="toc-text">软件版本阶段说明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#版本命名规范"><span class="toc-number">2.</span> <span class="toc-text">版本命名规范</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#版本号定修改规则："><span class="toc-number"></span> <span class="toc-text">版本号定修改规则：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#文件命名规范"><span class="toc-number">1.</span> <span class="toc-text">文件命名规范</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#版本号的阶段标识"><span class="toc-number">2.</span> <span class="toc-text">版本号的阶段标识</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#验收测试修改_k"><span class="toc-number"></span> <span class="toc-text">验收测试修改 k</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#alpha版就是比beta还早的测试版，一般都是内部测试的版本"><span class="toc-number"></span> <span class="toc-text">alpha版就是比beta还早的测试版，一般都是内部测试的版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#是真正的正式版，正式上架零售版。在安装盘的i386文件夹里有一个_eula-txt，最后有一行EULAID，就是你的版本。比如简体中文正式版是EULAID:WX-4_PRO_RTL_CN，繁体中文正式版是_WX-4_PRO_RTL_TW。其中：如果是WX-开头是正式版，WB-开头是测试版。_PRE，代表家庭版；_PRO，代表专业版。"><span class="toc-number"></span> <span class="toc-text">是真正的正式版，正式上架零售版。在安装盘的i386文件夹里有一个 eula.txt，最后有一行EULAID，就是你的版本。比如简体中文正式版是EULAID:WX.4_PRO_RTL_CN，繁体中文正式版是 WX.4_PRO_RTL_TW。其中：如果是WX.开头是正式版，WB.开头是测试版。_PRE，代表家庭版；_PRO，代表专业版。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UTF8：Unicode_Transformation_Format_8_bit，对现有的中文系统不是好的解决方案。"><span class="toc-number"></span> <span class="toc-text">UTF8：Unicode Transformation Format 8 bit，对现有的中文系统不是好的解决方案。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#官方网站有一个表格，上面有一句话：“Different_products_require_different_Volume_Licensing_Keys_(VLKs)-_Refer_to_the_table_below_to_make_sure_you_have_the_correct_VLK_for_your_Microsoft_product-”，我想这就很好的说明了VLK指的是Key而不是产品了。_很明显的，FPP需要激活，VOL不需要激活"><span class="toc-number"></span> <span class="toc-text">官方网站有一个表格，上面有一句话：“Different products require different Volume Licensing Keys (VLKs). Refer to the table below to make sure you have the correct VLK for your Microsoft product.”，我想这就很好的说明了VLK指的是Key而不是产品了。 很明显的，FPP需要激活，VOL不需要激活</span></a>
+		</div>
+		
+		<h5 id="软件版本阶段说明">软件版本阶段说明</h5>
+<ul>
+<li>Base版: 此版本表示该软件仅仅是一个假页面链接，通常包括所有的功能和页面布局，但是页面中的功能都没有做完整的实现，只是做为整体网站的一个基础架构。</li>
+<li>Alpha版: 此版本表示该软件在此阶段主要是以实现软件功能为主，通常只在软件开发者内部交流，一般而言，该版本软件的Bug较多，需要继续修改。</li>
+<li>Beta版: 该版本相对于α版已有了很大的改进，消除了严重的错误，但还是存在着一些缺陷，需要经过多次测试来进一步消除，此版本主要的修改对像是软件的UI。</li>
+<li>RC版: 该版本已经相当成熟了，基本上不存在导致错误的BUG，与即将发行的正式版相差无几。</li>
+<li>Release版: 该版本意味“最终版本”，在前面版本的一系列测试版之后，终归会有一个正式版本，是最终交付用户使用的一个版本。该版本有时也称为标准版。一般情况下，Release不会以单词形式出现在软件封面上，取而代之的是符号(Ｒ)。</li>
+</ul>
+<h5 id="版本命名规范">版本命名规范</h5>
+<p>软件版本号由四部分组成，第一个1为主版本号，第二个1为子版本号，第三个1为阶段版本号，第四部分为日期版本号加希腊字母版本号，希腊字母版本号共有5种，分别为：base、alpha、beta、RC、release。例如：1.1.1.051021_beta。</p>
+<h1 id="版本号定修改规则：">版本号定修改规则：</h1>
+<ul>
+<li>主版本号(1)：当功能模块有较大的变动，比如增加多个模块或者整体架构发生变化。此版本号由项目决定是否修改。</li>
+<li>子版本号(1)：当功能有一定的增加或变化，比如增加了对权限控制、增加自定义视图等功能。此版本号由项目决定是否修改。</li>
+<li>阶段版本号(1)：一般是 Bug 修复或是一些小的变动，要经常发布修订版，时间间隔不限，修复一个严重的bug即可发布一个修订版。此版本号由项目经理决定是否修改。</li>
+<li>日期版本号(051021):用于记录修改项目的当前日期，每天对项目的修改都需要更改日期版本号。此版本号由开发人员决定是否修改。</li>
+<li>希腊字母版本号(beta):此版本号用于标注当前版本的软件处于哪个开发阶段，当软件进入到另一个阶段时需要修改此版本号。此版本号由项目决定是否修改。</li>
+</ul>
+<h5 id="文件命名规范">文件命名规范</h5>
+<p>文件名称由四部分组成：第一部分为项目名称，第二部分为文件的描述，第三部分为当前软件的版本号，第四部分为文件阶段标识加文件后缀，例如：项目外包平台测试报告1.1.1.051021_beta_b.xls，此文件为项目外包平台的测试报告文档，版本号为：1.1.1.051021_beta。<br>如果是同一版本同一阶段的文件修改过两次以上，则在阶段标识后面加以数字标识，每次修改数字加1，项目外包平台测试报告1.1.1.051021_beta_b1.xls<br>当有多人同时提交同一份文件时，可以在阶段标识的后面加入人名或缩写来区别，例如：项目外包平台测试报告 1.1.1.051021_beta_b_LiuQi.xls。当此文件再次提交时也可以在人名或人名缩写的后面加入序号来区别，例如：项目外包平台测试报告1.1.1.051021_beta_b_LiuQi2.xls</p>
+<h5 id="版本号的阶段标识">版本号的阶段标识</h5>
+<p>软件的每个版本中包括11个阶段，详细阶段描述如下：<br>阶段名称 阶段标识<br>需求控制 a<br>设计阶段 b<br>编码阶段 c<br>单元测试 d<br>单元测试修改 e<br>集成测试 f<br>集成测试修改 g<br>系统测试 h<br>系统测试修改 i<br>验收测试j</p>
+<h1 id="验收测试修改_k">验收测试修改 k</h1>
+<p>Alpha:<br>Alpha是内部测试版,一般不向外部发布,会有很多Bug.除非你也是测试人员,否则不建议使用.<br>是希腊字母的第一位,表示最初级的版本<br>alpha就是α，beta就是β</p>
+<h2 id="alpha版就是比beta还早的测试版，一般都是内部测试的版本">alpha版就是比beta还早的测试版，一般都是内部测试的版本</h2>
+<p>Beta：<br>很容易理解就是测试版，这个阶段的版本会一直加入新的功能。<br>RC：(Release Candidate)<br>Candidate是候选人的意思，用在软件上就是候选版本。Release.Candidate.就是发行候选版本。和Beta版最大的差别在于Beta阶段会一直加入新的功能，但是到了RC版本，几乎就不会加入新的功能了，而主要着重于除错!<br>RTM：全称为Release to Manufacture。<br>是给工厂大量压片的版本，内容跟正式版是一样的，不过 RTM.也有出120天评估版。但是说RTM.是测试版是错的。正式在零售商店上架前，是不是需要一段时间来压片，包装、配销呢?所以程序代码必须在正式发行前一段时间就要完成，这个完成的程序代码叫做Final.Code，这次Windows.XP开发完成，外国媒体用Windows XP.goes.gold来称呼。程序代码开发完成之后，要将母片送到工厂大量压片，这个版本就叫做RTM版。所以说，RTM版的程序码一定和正式版一样。但是和正式版也有不一样的地方：例如正式版中的OEM不能升级安装，升级版要全新安装的话会检查旧版操作系统光盘等，这些就是RTM和正式版不同的地方，但是它们的主要程序代码都是一样的。<br>OEM：<br>是给计算机厂商随着计算机贩卖的，也就是随机版。只能随机器出货，不能零售。只能全新安装 ，不能从旧有操作系统升级。如果买笔记型计算机或品牌计算机就会有随机版软件。包装不像零售版精美，通常只有一面CD和说明书(授权书)。<br>RVL：<br>号称是正式版，其实RVL.根本不是版本的名称。RVL.是一个Warez.Team，台湾分部叫RVL@TW.，它之间又释出一个.WinXP.RVL@TW.版本。它是某中文版＋英文Corpfiles破解的。<br>EVAL：<br>而流通在网络上的EVAL版，是微软帮媒体记者编辑上课给的，是所谓的「评估版」没错，你输入的金钥是30天的，就可用30天，输入的是180天的，就可用180天。功能上和零售版无乎没有区别。<br>RTL：Retail.(零售版)</p>
+<h1 id="是真正的正式版，正式上架零售版。在安装盘的i386文件夹里有一个_eula-txt，最后有一行EULAID，就是你的版本。比如简体中文正式版是EULAID:WX-4_PRO_RTL_CN，繁体中文正式版是_WX-4_PRO_RTL_TW。其中：如果是WX-开头是正式版，WB-开头是测试版。_PRE，代表家庭版；_PRO，代表专业版。">是真正的正式版，正式上架零售版。在安装盘的i386文件夹里有一个 eula.txt，最后有一行EULAID，就是你的版本。比如简体中文正式版是EULAID:WX.4_PRO_RTL_CN，繁体中文正式版是 WX.4_PRO_RTL_TW。其中：如果是WX.开头是正式版，WB.开头是测试版。_PRE，代表家庭版；_PRO，代表专业版。</h1>
+<p>版本号：<br>V（Version）：即版本，通常用数字表示版本号。(如:EVEREST Ultimate v4.20.1188 Beta )<br>Build：用数字或日期标示版本号的一种方式。(如:VeryCD eMule v0.48a Build 071112)<br>SP：Service Pack，升级包。(如:Windows XP SP 2/Vista SP 1)</p>
+<p>授权和功能划分：<br>试用版，通常都有时间限制，有些试用版软件还在功能上做了一定的限制。可注册或购买成为正式版。<br>Unregistered：未注册版，通常没有时间限制，在功能上相对于正式版做了一定的限制。可注册或购买成为正式版。<br>Demo：演示版，仅仅集成了正式版中的几个功能，不能升级成正式版。<br>Lite：精简版。<br>Full：完整版。</p>
+<p>开发阶段划分：<br>α（Alpha）版：内测版，内部交流或者专业测试人员测试用。Bug较多，普通用户最好不要安装。<br>β（Beta）版：公测版，专业爱好者大规模测试用，存在一些缺陷，该版本也不适合一般用户安装。<br>γ（Gamma）版：相当成熟的测试版，与即将发行的正式版相差无几。<br>RC版：Release Candidate候选版本，处于Gamma阶段。从Alpha到Beta再到Gamma是改进的先后关系，但RC1、RC2往往是取舍关系。<br>Final：正式版。</p>
+<p>语言划分:<br>SC：Simplified Chinese简体中文版。<br>GBK：简体中文汉字内码扩展规范版。<br>TC：Traditional Chinese繁体中文版。<br>BIG5：繁体中文大五码版。</p>
+<h1 id="UTF8：Unicode_Transformation_Format_8_bit，对现有的中文系统不是好的解决方案。">UTF8：Unicode Transformation Format 8 bit，对现有的中文系统不是好的解决方案。</h1>
+<p>●alpha 内部测试版<br>●beta 外部测试版<br>●demo 演示版<br>●Enhance 增强版或者加强版 属于正式版<br>●Free 自由版<br>●Full version 完全版 属于正式版<br>●shareware 共享版<br>●Release 发行版 有时间限制<br>●Upgrade 升级版<br>●Retail 零售版<br>●Cardware 属共享软件的一种，只要给作者回复一封电邮或明信片即可。（有的作者并由此提供注册码等），目前这种形式已不多见。<br>●Plus 属增强版，不过这种大部分是在程序界面及多媒体功能上增强。<br>●Preview 预览版<br>●Corporation &amp; Enterprise 企业版<br>●Standard 标准版<br>●Mini 迷你版也叫精简版，只有最基本的功能<br>●Premium — 贵价版<br>●Professional — 专业版<br>●Express — 特别版<br>●Deluxe — 豪华版<br>●Regged — 已注册版<br>●CN — 简体中文版<br>●CHT — 繁体中文版<br>●EN — 英文版<br>●Multilanguage — 多语言版<br>●Rip 是指从原版文件（一般是指光盘或光盘镜像文件）直接将有用的内容（核心内容）分离出来，剔除无用的文档，例如PDF说明文件啊，视频演示啊之类的东西，也可以算做是精简版吧…但主要内容功能是一点也不能缺少的！另：DVDrip是指将视频和音频直接从DVD光盘里以文件方式分离出来。<br>●trail 试用版（含有某些限制，如时间、功能，注册后也有可能变为正式版）<br>●RC 版 就是Release Candidate（候选版本）的简称。从微软的惯例来看推出RC版操作系统就代表正式版的操作系统已经离我们不远了，因为微软操作系统的开发步骤是这样的：内部测试-&gt;alpha公测-&gt;beta公测-&gt;RC版-&gt;正式版上市；通常微软的RC版本筛选会经历2-3个过程，也就是说微软会推出RC1、RC2或者RC3的操作系统，而随后就是正式版操作系统上市了，因此通常来看RC1版操作系统已经同最终零售版操作系统相差无几了。该版本已经完成全部功能并清除大部分的BUG。到了这个阶段只会除BUG，不会对软件做任何大的更改。<br>●RTM 版。这基本就是最终的版本，英文是 Release To Manufactur，意思是发布到生产商。<br>●Original Equipment Manufacturer (OEM)<br>You may license products through an Original Equipment Manufacturer (OEM). These products, such as Windows operating systems, come installed when you purchase a new computer.<br>OEM软件是给电脑生产厂的版本，无需多说。<br>●Full Packaged Product (FPP)-Retail<br>Physical, shrink-wrapped boxes of licensed product that can be purchased in a local retail store or any local software retailer.<br>FPP就是零售版（盒装软件），这种产品的光盘的卷标都带有”FPP”字样，比如英文WXP Pro的FPP版本的光盘卷标就是WXPFPP_EN，其中WX表示是Windows XP，P是Professional（H是Home），FPP表明是零售版本，EN是表明是英语。获得途径除了在商店购买之外，某些MSDN用户也可以得到。<br>●Volume Licensing for Organizations (VLO)<br>You may enjoy potentially significant savings by acquiring multiple product licenses. Depending on the size and type of your organization.<br>团体批量许可证（大量采购授权合约），这是为团体购买而制定的一种优惠方式。这种产品的光盘的卷标都带有”VOL”字样，取”Volume”前3个字母，以表明是批量，比如英文 WXP Pro的VOL版本的光盘卷标就是WXPVOL_EN，其中WX表示是Windows XP，P是Professional（VOL没有Home版本），VOL表明是团体批量许可证版本，EN是表明是英语。获得途径主要是集团购买，某些 MSDN用户也可以得到。<br>这种版本根据购买数量等又细分为“开放式许可证”、“选择式许可证”、“企业协议”、“学术教育许可证”等以下5种版本<br>·Open License<br>·Select License<br>·Enterprise Agreement<br>·Enterprise Subscription Agreement<br>·Academic Volume Licensing<br>由此可见，平时说的什么select/corp是许可证授权方式，他的出现是为了用若干种不同级别的优惠政策卖同一种软件，通过select/corp 许可证授权方式得到的xxx的光盘都是VOL这一种、是并不是有很多种，只不过是相同的VOL光盘配以不同的许可证方式；而Volume Licensing (Product) Keys，即VLK，它所指的只是一个Key（密匙），仅仅是一个为证明产品合法化、以及安装所使用的Key，因为根据VOL计划规定，VOL产品是不需要激活的！</p>
+<p>或者说，VLK不是指一种版本，而是指这种版本在部署（deploy）过程中所需要的Key，而需要VLK这种Key的版本应该叫做VOL！只不过在实际中，没有必要强调这种叫法、称呼的准确性，加之很多人的VOL版本光盘是通过企业的选择式许可证、企业协议等方式得到的等等原因，所以才会有很多人叫他为“选择版”等等。</p>
+<h1 id="官方网站有一个表格，上面有一句话：“Different_products_require_different_Volume_Licensing_Keys_(VLKs)-_Refer_to_the_table_below_to_make_sure_you_have_the_correct_VLK_for_your_Microsoft_product-”，我想这就很好的说明了VLK指的是Key而不是产品了。_很明显的，FPP需要激活，VOL不需要激活">官方网站有一个表格，上面有一句话：“Different products require different Volume Licensing Keys (VLKs). Refer to the table below to make sure you have the correct VLK for your Microsoft product.”，我想这就很好的说明了VLK指的是Key而不是产品了。 很明显的，FPP需要激活，VOL不需要激活</h1>
+<p>Beta 是希腊字母中的第二个字母β，在软件开发中指软件测试的第二阶段，由将来用户中的一部分人试用。以前，希腊字母alpha指软件开发过程中的第一阶段，包括部件测试，整件测试和系统测试。 Beta测试也指产品推出前的测试，软件商把beta测试版软件在网上发放给更多的用户进行实用测试为以后版本的出台做准备。</p>
+<p>Alpha版(内部测试版)：一般只在软件开发公司内部运行，不对外公开。主要是开发者自己对产品进行测试，检查产品是否存在缺陷、错误，验证产品功能与说明书、用户手册是否一致。</p>
+<p>Beta版(外部测试版)：软件开发公司为对外宣传，将非正式产品免费发送给具有典型性的用户，让用户测试该软件的不足之处及存在问题，以便在正式发行前进一步改进和完善。一般可通过Internet免费下载，也可以向软件公司索取。</p>
+<p>Demo版(演示版)：主要是演示正式软件的部分功能，用户可以从中得知软件的基本操作，为正式产品的发售扩大影响。如果是游戏的话，则只有一两个关卡可以玩。该版本也可以从Internet上免费下载。</p>
+<p>Enhace版(增强版或加强版)：如果是一般软件，一般称作“增强版”，会加入一些实用的新功能。如果是游戏，一般称作“加强版”，会加入一些新的游戏场景和游戏情节等。这是正式发售的版本。</p>
+<p>Free版(自由版)：这一般是个人或自由软件联盟组织的成员制作的软件，希望免费给大家使用，没有版权，一般也是通过Internet免费下载。</p>
+<p>Full Version版(完全版)：也就是正式版，是最终正式发售的版本。</p>
+<p>Shareware版(共享版)：有些公司为了吸引客户，对于他们制作的某些软件，可以让用户通过Internet免费下载的方式获取。不过，此版本软件多会带有一些使用时间或次数的限制，但可以利用在线注册或电子注册成为正式版用户。</p>
+<p>Release版(发行版)：不是正式版，带有时间限制，也是为扩大影响所做的宣传策略之一。比如Windows Me的发行版就限制了只能使用几个月，可从Internet上免费下载或由公司免费奉送。</p>
+<p>Uprgade版(升级版)：当你有某个软件以前的正式版本时，可以购买升级版，将你的软件升级为最新版。升级后的软件与正式版在功能上相同，但价格会低些，这主要是为了给原有的正版用户提供优惠。</p>
+<p>测试版与演示版</p>
+<p>α：代表该软件仅仅是一个初步完成品，通常只在软件开发者内部交流，也有很少一部分发布给专业测试人员。该版本软件的bug较多，而且极不稳定，用了之后也有可能导致系统崩溃。不过，普通用户难以得到它，即使得到最好也不要安装。</p>
+<p>β：该版本相对于α版已有了很大的改进，消除了严重的错误，但还是存在着一些缺陷，需要经过大规模的发布测试来进一步消除bug。这一版本通常由软件公司免费发布，用户可从相关的站点下载。通过一些专业爱好者的测试，将结果反馈给开发者，后者再进行有针对性的修改。该版本也不适合一般用户安装。</p>
+<p>γ：该版本已经相当成熟了，与即将发行的正式版相差无几，如果用户实在等不及了，尽可以装上一试。</p>
+<p>trial：试用版。试用版的软件在最近几年颇为流行，主要是得益于因特网的迅速发展。该版本软件通常都有时间限制，如20天、1个月等等，时间一到，用户就无法再使用了，除非交纳一定的费用进行注册和购买正式版。有些试用版软件还在功能上做了一定的限制。</p>
+<p>unregistered：未注册版。未注册版与试用版两者极其类似，只是未注册版通常没有时间限制，在功能上相对于正式版做了一定的限制，例如绝大多数网络电话软件的注册版和未注册版，两者之间在通话质量上有很大差距。还有些虽然在使用上与正式版毫无二致，但是动不动就会弹出一个恼人的消息框来提醒你注册，如看图软件 acdsee。用户如果对该软件感兴趣，可以通过指定的方法向软件公司注册。</p>
+<p>demo：非正式版软件中数该版本的知名度最大，称为演示版。演示版仅仅集成了正式版中的几个功能，颇有点像unregistered。不同的是，demo版一般不能升级和通过注册的方法变为正式版。</p>
+<p>以上是软件正式版本推出之前的几个版本，α、β、γ可以称为测试版，大凡成熟软件总会有多个测试版，如windows 98的β版，前前后后将近有10个。这么多的测试版一方面保证最终产品尽可能地满足用户的需要，另一方面也尽量减少了软件的bug，在这一点上很值得中国软件商学习。而trial、unregistered、demo有时统称为演示版，这一类版本的广告色彩较为浓厚，颇有点“先尝后买”的味道，对于普通用户而言自然是再好不过了。</p>
+<p>正式版</p>
+<p>不同类型软件的正式版本通常也有区别。</p>
+<p>release：该版本意味“最终释放版”，在出了一系列的测试版之后，终归会有一个正式版本，对于用户而言，购买该版本的软件绝对不会错。该版本有时也称为标准版。值得一提的是release通常不会以单词形式出现在软件封面上，取而代之的是符号(r)，如windows nt (r)4.0、ms－dos(r) 6.22等等。</p>
+<p>registered: 很显然该版本是与unregistered相对的注册版，注册版、release和standard版一样，都是软件的正式版本。只是注册版软件的前身有很大一部分是从网上下载的。</p>
+<p>standard：这是最常见的标准版，不论是什么软件，标准版一定存在。标准版中包含了该软件的基本组件及一些常用功能，可以满足一般用户的需求。其价格相对高一级版本而言还是平易近人的，如金山词霸Ⅲ标准版、office 97标准版等等。</p>
+<p>deluxe：顾名思义即为“豪华版”，豪华版通常是相对于标准版而言，无非是多了几个“华而不实”的功能，价格却要高出一大块，因此不推荐一般用户购买。此版本通常是为那些追求“完美”的发烧友所准备的。</p>
+<p>reference：该版本的型号常见于百科全书中，比较有名的是微软的encarta系列，reference是最高级别，其包含的主题、图像、影片剪辑等相对于 standard和deluxe版均有大幅增加，容量由一张光盘猛增至三张光盘，并且加入了不少新的交互功能，当然价格也不菲。可以这么说，这一版本的百科全书才能算是真正的百科全书，也是发烧友的收藏首选。</p>
+<p>professional：专业版。专业版是针对某些特定的开发工具软件而言的，专业版中有许多内容是标准版中所没有的，这些内容对于一个专业的软件开发人员来说是极为重要的功能。如微软的visual foxpro标准版并不具备编译成可执行文件的功能（.exe文件），这对于一个完整的开发项目而言显然是无法忍受的，除非客户机上也有foxpro，如果用专业版就没有这个问题了。</p>
+<p>enterprise：其中文译名为企业版。企业版是开发类软件中的极品（相当于百科全书中的 reference版）。拥有这一套版本的软件可以毫无障碍地开发任何级别的应用软件。如著名的visual c＋＋的企业版相对于专业版包括了几个附加的特性：如sql调试、扩展的存储过程向导、支持as/400对ole db的访问等。而这一版本的价格也是普通用户难以问津的。如，microsoft的visual studio 6.0 enterprise中文版的价格为23000元。</p>
+<p>其他版本</p>
+<p>除了以上介绍的一些版本外，还有一些专有版本名称。</p>
+<p>update：升级版。升级版的软件是不能独立使用的，该版本的软件在安装过程中会搜索原有的正式版，如不存在，则拒绝执行下一步。如microsoft office 97 升级版、windows 95升级版等等。不过有些升级版却是名不副实，经过改动，就可以……</p>
+<p>oem：oem通常是出现在硬件中，如今软件业也出现了oem产品。将自己的产品交给别的公司去卖，并打上对方的标记，双方互惠互利，一举两得。</p>
+<p>单机（网络）版：网络版在功能、结构上远比单机版复杂，如果留心一下软件的报价，你就会发现某些软件单机版和网络版的价格差别非常巨大，有些甚至多一个客户端口就要加不少钱。</p>
+<p>普及版：该版本有时也会被称为共享版，其特点是：价格便宜（有些甚至完全免费），功能单一，针对性强（当然也有占领市场、打击盗版等因素）。与试用版不同的是，该版本的软件一般不会有时间上的限制，当然如果用户想升级，最好还是去购买正式版。</p>
+<p>附：另一种命名规则</p>
+<p>版本控制比较普遍的 3 种命名格式 :</p>
+<p>一、GNU 风格的版本号命名格式 :<br>主版本号 . 子版本号 [. 修正版本号 [. 编译版本号 ]]<br>Major_Version_Number.Minor_Version_Number[.Revision_Number[.Build_Number]]<br>示例 : 1.2.1, 2.0, 5.0.0 build-13124</p>
+<p>二、Windows 风格的版本号命名格式 :<br>主版本号 . 子版本号 [ 修正版本号 [. 编译版本号 ]]<br>Major_Version_Number.Minor_Version_Number[Revision_Number[.Build_Number]]<br>示例: 1.21, 2.0</p>
+<p>三、.Net Framework 风格的版本号命名格式:<br>主版本号.子版本号[.编译版本号[.修正版本号]]<br>Major_Version_Number.Minor_Version_Number[.Build_Number[.Revision_Number]]</p>
+<p>版本号由二至四个部分组成：主版本号、次版本号、内部版本号和修订号。主版本号和次版本号是必选的；内部版本号和修订号是可选的，但是如果定义了修订号部分，则内部版本号就是必选的。所有定义的部分都必须是大于或等于 0 的整数。</p>
+<p>应根据下面的约定使用这些部分：</p>
+<p>Major ：具有相同名称但不同主版本号的程序集不可互换。例如，这适用于对产品的大量重写，这些重写使得无法实现向后兼容性。</p>
+<p>Minor ：如果两个程序集的名称和主版本号相同，而次版本号不同，这指示显著增强，但照顾到了向后兼容性。例如，这适用于产品的修正版或完全向后兼容的新版本。</p>
+<p>Build ：内部版本号的不同表示对相同源所作的重新编译。这适合于更改处理器、平台或编译器的情况。</p>
+<p>Revision ：名称、主版本号和次版本号都相同但修订号不同的程序集应是完全可互换的。这适用于修复以前发布的程序集中的安全漏洞。</p>
+<p>程序集的只有内部版本号或修订号不同的后续版本被认为是先前版本的修补程序 (Hotfix) 更新。</p>
+<p>版本号管理策略</p>
+<p>一、GNU 风格的版本号管理策略：<br>1．项目初版本时，版本号可以为 0.1 或 0.1.0, 也可以为 1.0 或 1.0.0，如果你为人很低调，我想你会选择那个主版本号为 0 的方式；<br>2．当项目在进行了局部修改或 bug 修正时，主版本号和子版本号都不变，修正版本号加 1；<br>3. 当项目在原有的基础上增加了部分功能时，主版本号不变，子版本号加 1，修正版本号复位为 0，因而可以被忽略掉；<br>4．当项目在进行了重大修改或局部修正累积较多，而导致项目整体发生全局变化时，主版本号加 1；<br>5．另外，编译版本号一般是编译器在编译过程中自动生成的，我们只定义其格式，并不进行人为控制。</p>
+<p>二、Window 下的版本号管理策略：<br>1．项目初版时，版本号为 1.0 或 1.00；<br>2. 当项目在进行了局部修改或 bug 修正时，主版本号和子版本号都不变，修正版本号加 1；<br>3. 当项目在原有的基础上增加了部分功能时，主版本号不变，子版本号加 1，修正版本号复位为 0，因而可以被忽略掉；<br>4. 当项目在进行了重大修改或局部修正累积较多，而导致项目整体发生全局变化时，主版本号加 1；<br>5. 另外 , 编译版本号一般是编译器在编译过程中自动生成的，我们只定义其格式，并不进行人为控制。</p>
+<p>另外，还可以在版本号后面加入 Alpha、Beta、Gamma、Current、RC (Release Candidate)、Release、Stable 等后缀，在这些后缀后面还可以加入 1 位数字的版本号。</p>
+<p>对于用户来说，如果某个软件的主版本号进行了升级，用户还想继续那个软件，则发行软件的公司一般要对用户收取升级费用；而如果子版本号或修正版本号发生了升级，一般来说是免费的。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/命名/">命名</a><a href="/tags/版本/">版本</a><a href="/tags/软件/">软件</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/参考内容/">参考内容</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/05/11/software-version-naming/" data-title="软件版本命名 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/05/12/open-source-protocal-notes/" title="开源协议参考">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  开源协议参考</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/05/11/videos-naming-rules/"  title="视频命名规则">
+ <strong>NEXT:</strong><br/> 
+ <span>视频命名规则
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#软件版本阶段说明"><span class="toc-number">1.</span> <span class="toc-text">软件版本阶段说明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#版本命名规范"><span class="toc-number">2.</span> <span class="toc-text">版本命名规范</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#版本号定修改规则："><span class="toc-number"></span> <span class="toc-text">版本号定修改规则：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#文件命名规范"><span class="toc-number">1.</span> <span class="toc-text">文件命名规范</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#版本号的阶段标识"><span class="toc-number">2.</span> <span class="toc-text">版本号的阶段标识</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#验收测试修改_k"><span class="toc-number"></span> <span class="toc-text">验收测试修改 k</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#alpha版就是比beta还早的测试版，一般都是内部测试的版本"><span class="toc-number"></span> <span class="toc-text">alpha版就是比beta还早的测试版，一般都是内部测试的版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#是真正的正式版，正式上架零售版。在安装盘的i386文件夹里有一个_eula-txt，最后有一行EULAID，就是你的版本。比如简体中文正式版是EULAID:WX-4_PRO_RTL_CN，繁体中文正式版是_WX-4_PRO_RTL_TW。其中：如果是WX-开头是正式版，WB-开头是测试版。_PRE，代表家庭版；_PRO，代表专业版。"><span class="toc-number"></span> <span class="toc-text">是真正的正式版，正式上架零售版。在安装盘的i386文件夹里有一个 eula.txt，最后有一行EULAID，就是你的版本。比如简体中文正式版是EULAID:WX.4_PRO_RTL_CN，繁体中文正式版是 WX.4_PRO_RTL_TW。其中：如果是WX.开头是正式版，WB.开头是测试版。_PRE，代表家庭版；_PRO，代表专业版。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UTF8：Unicode_Transformation_Format_8_bit，对现有的中文系统不是好的解决方案。"><span class="toc-number"></span> <span class="toc-text">UTF8：Unicode Transformation Format 8 bit，对现有的中文系统不是好的解决方案。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#官方网站有一个表格，上面有一句话：“Different_products_require_different_Volume_Licensing_Keys_(VLKs)-_Refer_to_the_table_below_to_make_sure_you_have_the_correct_VLK_for_your_Microsoft_product-”，我想这就很好的说明了VLK指的是Key而不是产品了。_很明显的，FPP需要激活，VOL不需要激活"><span class="toc-number"></span> <span class="toc-text">官方网站有一个表格，上面有一句话：“Different products require different Volume Licensing Keys (VLKs). Refer to the table below to make sure you have the correct VLK for your Microsoft product.”，我想这就很好的说明了VLK指的是Key而不是产品了。 很明显的，FPP需要激活，VOL不需要激活</span></a>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,643 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>字符编码概论 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="大约2年前对字符编码有过较深入的研究，后来零零散散的放到了《字符编码研究》中，不过由于粘贴比较仓促，思路不清晰并且不便于阅读。隔了一段时间，也忘记了一些内容。虽然网上已经有很多关于字符编码的文章了，但这些介绍字符编码的文章存在一个普遍的问题：没有结合具体的工具。而编码问题往往肆虐在各种设计不完善、概念混乱的软件中。故准备将整理旧文章，结合一些软件谈一谈字符集与字符编码。
+了解 字符编码是编写程序不得不经历的关卡，毕竟所有的源代码都是由文本字符堆砌而成的。最初计算机的世界里只有英文，使用7bit就足以将所有的英文字符与控制字符编码，但由于计算机是8bit的，所以ASCII标准使用8bit编码，最高位置0.比如字母a的编码为01100001，八进制数为61，详细的编码方案点击此处查看。在这种编码方案下，一个字符从存储到显示、复制、传输都是统一的，然而计算机的发明者们显然没有想到原属于军事领域的机器会改变世界，也压根没有考虑太多兼容性。当计算机开始涌入其他国家之后，为了方便本地区的人使用，一系列扩充计算机编码的需求提上日程。公司(比如微软)会制定编码方案，国家标准局(GB)也会制定编码方案，一些计算机的学会机构(Unicode联盟)也会制定编码方案，字符编码的混乱世界由此拉开帷幕。
+1.字符集与字符编码
+在ASCII畅行的时代，字符集与字符编码并无区分。因为计算机磁盘中存储的内容与内存中读取的一致，与屏幕上显示的一致，与网络中传输的一致。表示字符a的’01100001’无论在哪里都是一样的。但是当locale编码出现后，情况开始转变。对ASCII的扩充导致了无法再用单一的一个字节来表示字符，比如GBK中使用两个字节来表示编码，那么存储到文件中时，哪一个字节放在首位呢？有了选择，也就会有不同的标准。关于哪一个自己放在首位，产生了Little Endian与Big Endian两种编码方案，此处我们暂压不题。另外，连续的多字节字符，如何划分他们的边界呢？总之，字符集无法全部使用单一字节，造成了字符集与字符编码两种概念的分道扬镳。具体说来，字符集完成字符与某种数制数对对应的问题，而字符编码则完成这种数制的数在磁盘上的存储问题。以Unicode体系为例，凡是人类语言中出现的字符，在Unicode中都有且仅有唯一的数与其对应；当准备将这种字符存储在磁盘上时，代表此字符的数可以选择不同的编码方式存储在磁盘中，比如选择UTF8编码方式或者UTF-16编码方式。但在这种分层概念清晰地浮出水面之前，世界上已经有很多字符集或者编码方案了。
+2.中文字符集与字符编码
+处于中国，当谈中文字符编码。在ASCII基础上，GB先后发布了GB2312(1981年)、GB13000(1993年)、GB18030-2000(2000年)、GB18030-2005(2005年)，每次编码标准都兼容上一次的，并且所有的编码标准都兼容ASCII。
+GB2312
+全称《信息交换用汉字编码字符集·基本集》，又称GB0，由中国国家标准总局发布，1981年5月1日实施。GB2312编码通行于中国大陆；新加坡等地也采用此编码。中国大陆几乎所有的中文系统和国际化的软件都支持GB2312。GB2312标准共收录6763个汉字，同时收录了包括拉丁字母、希腊字母、日文平假名及片假名字母、俄语西里尔字母在内的682个字符。GB2312中对所收汉字进行了“分区”处理，每区含有94个汉字／符号。这种表示方式也称为区位码。01-09区为特殊符号；16-55区为一级汉字，按拼音排序；56-87区为二级汉字，按部首／笔画排序；10-15区及88-94区则未有编码。举例来说，“啊”字是GB2312之中的第一个汉字，它的区位码就是1601。
+但仅有区位码还不够，还需要将汉字存储在计算机中。在使用GB2312的程序通常采用EUC储存方法，以便兼容于ASCII。浏览器编码表上的“GB2312”，通常都是指“EUC-CN”表示法。每个汉字及符号以两个字节来表示。第一个字节称为“高位字节”，第二个字节称为“低位字节”。“高位字节”使用了0xA1-0xF7（把01-87区的区号加上0xA0），“低位字节”使用了0xA1-0xFE（把01-94加上0xA0）。而ASCII中的编码范围为0x01-0x7F，所以EUC-CN编码中是可以分辨出单个字节的ASCII字符的。由于一级汉字从16区起始，汉字区的“高位字节”的范围是0xB0-0xF7，“低位字节”的范围是0xA1-0xFE，占用的码位是72*94=6768。其中有5个空位是D7FA-D7FE。例如“啊”字在大多数程序中，会以两个字节，0xB0（第一个字节）0xA1（第二个字节）储存。（与区位码对比：0xB0=0xA0+16,0xA1=0xA0+1）。为直观显示，截取1区，2区，16区，17区的汉字编码图如下：
+
+
+
+
+
+[caption id=”attachment_2524” align=”aligncenter” width=”374”] 1区[/caption]
+
+
+[caption id=”attachment_2525” align=”aligncenter” width=”374”] 2区[/caption]
+
+
+
+[caption id=”attachment_2526” align=”aligncenter” width=”374”] 3区[/caption]
+
+
+[caption id=”attachment_2527” align=”aligncenter” width=”374”] 4区[/caption]这里是GB2312的EUC-CN编码表，备份链接参照这里。
+这时候有了内码与交换码的概念。内码指的是“将资讯编码后，透过某种方式储存在特定记忆装置时，装置内部的编码形式”；在交换文件前，文件提供者先将由内码形式储存的文件转换成交换码形式再做交换。在接收文件后，文件接收者再由交换码转成内码。所以可以认为区位码是一种交换码，而字符编码是内码。为了方便起见，许多系统的内码则直接使用交换码，如ASCII广为各种系统所使用。这有点类似我们后文中将要提到的字符集与字符编码，但与字符集不同之处在于，交换码会兼顾输入法层面。比如区位码就可以直接做成输入法，五笔输入法也可以认为是一种交换码，字符集的作用就简单多了。
+微软的GBK
+微软为了向世界推广windows，提出了针对不同国家代码页(Code Page)的概念，并使用GB2312制订了CP936。到1993年，Unicode1.1版本推出，收录中国大陆、台湾、日本及韩国通用字符集的汉字，总共有20902个。大陆制订了等同于Unicode 1.1版本的”GB 13000.1-93”，微软收录了GB 13000中的所有字符对GB2312进行了扩展(当然也是对CP936的扩展)，补充了GB2312中没有的字符比如”啰”、”镕”等，称为GBK(也就是CP936的扩展)，可见GBK是兼容GB2312的而非GB13000。而有趣的是，原始GB13000一直未被业界采用，后续国家标准GB18030技术上兼容GBK而非GB13000。GB2312、GBK都属于双字节字符集(DBCS)。
+虽然GBK与CP936相同，但后来可能会发生细微的变化使两种编码集产生差异，我们不在此列举他们，只简单的认为GBK就是微软在中国地区的代码页。在实际使用windows的时候，如果我们用记事本打开从其他区域windows拷贝过来的文件，很可能出现乱码，仅仅能正确显示ASCII中的字符，当将文本文件从一台电脑复制到另外一台电脑后，文件在磁盘中保存的二进制代码并未变化，如果文本文件非Unicode编码，记事本会依照windows中设定的系统区域的语言去调用相应的代码页解析二进制代码，同样的’11001110 11010010’在CP936下是’我’，但在韩文的EUC-KR(代码页为949)编码下就变成了’乖’。设置系统区域属性的位置：控制面板-&amp;gt;区域和语言-&amp;gt;管理-&amp;gt;更改系统区域设置，对话框如下：
+[caption id=”attachment_2531” align=”aligncenter” width=”934”] 系统区域设置[/caption]
+其他中文字符编码
+GB2312是一种简体中文的编码，与之同时产生的还有一种针对繁体中文的编码，它是由台湾财团法人信息工业策进会为五大中文套装软件所设计的中文共通内码，所以称为Big5(大五碼)。大五码也有着丰富的历史，感兴趣的可参考维基百科。
+在GBK之后，大陆又制定了GB18030等编码(标准文件在此处，编码字符集在此处)，成为取代GBK1.0的正式国家标准，该标准收录了27484个汉字，同时还收录了藏文、蒙文、维吾尔文等主要的少数民族文字。微软也为GB18030定义了代码页CP54936。但是由于GB18030有一部分4字节编码，用于编码从CJK扩展A引入的6582个汉字，而Windows的代码页只支持单字节和双字节编码，所以这个codepage是无法真正使用的。由于实际中GB18030出现较少，在此略去不题。
+3.Unicode
+Unicode终于姗姗来迟。Unicode联盟创建的目的就是为了统一世界上出现的所有字符。内码与交换码呈现了山雨欲来风满楼之势，字符集与字符编码清晰界限在unicode的世界中呼之欲出。与GB2312、GBK编码方案不同之处在于，unicode自诞生之时就从未认为世界上的字符是静态的、有限的，准确而言，Unicode本身就考虑了字符会不断增长这个事实，那么在自然世界里什么是不断增长的呢——自然数，这个整数可能很大。于是Unicode使用自然数来表示字符，每一个字符与一个无符整数对应。Unicode上按照区域、语言给出了几乎世界所有的字符集(当然字符集也在不断扩充中)，有Basic Latin (ASCII)，也有CJK Unified Ideographs (Han)(注：CJK 是中文Chinese、Japanese、Korean三国文字的缩写。它能够支持这三种文字)。可莫要认为为Unicode规定对应的整数是一件简单的事情，制定者需要了解字符的变迁历史、不同国别相似字符的异同，实际上这是一件相当耗费精力并且庞大的工程。
+UTF-8编码
+UTF-8编码是可变长编码，因为Unicode中大部分常见字符都在前面，所以能够节省存储空间。它是一种前缀码，可以用来表示Unicode标准中的任何字符，且其编码中的第一个字节仍与ASCII兼容。UTF-8的设计有以下的多字符组串行的特质：单字节字符的最高有效比特永远为0;多字节串行中的首个字符组的几个最高有效比特决定了串行的长度。最高有效位为110的是2字节串行，而1110的是三字节串行，如此类推;多字节串行中其余的字节中的首两个最高有效比特为10。表示如下：
+
+
+
+UCS-4编码
+UTF-8字节流
+
+U+00000000 – U+0000007F
+0xxxxxxx
+
+U+00000080 – U+000007FF
+110xxxxx 10xxxxxx
+
+U+00000800 – U+0000FFFF
+1110xxxx 10xxxxxx 10xxxxxx
+
+U+00010000 – U+001FFFFF
+11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+
+U+00200000 – U+03FFFFFF
+111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+
+U+04000000 – U+7FFFFFFF
+1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx重音文字、希腊字母或西里尔字母等使用2字节来存储，而常用的汉字就要使用3字节。另外，在一UTF-8编码的文件中会前缀上EF,BB,BF,称作是有BOM格式的编码，但是大部分文件是不需要这三个字节的，称作无BOM格式的编码。
+UTF-16与UTF-32
+Unicode还有一额不可变长的编码方案。UTF-16使用固定长度的2个字节，能够表示的字符个数为65535；UTF-32使用固定长度的4个字节，能够表示的字符个数少于1114111。从Unicode字符集映射到这两种编码方案的过程比较复杂，可参考维基百科了解。映射的方案导致了大尾序(big endian)和小尾序(little endian)两种存储形式。只需明白两种尾序表现，是在编码时连续成对的字节顺序相反。以Macintosh制作或存储的文字使用大尾序格式，以Microsoft或Linux制作或存储的文字使用小尾序格式(顺便说下，windows平台与UNIX/Linux平台在处理键盘回车键输入的符号上也有不同，windows采用回车+换行CR/LF表示下一行, 而UNIX/Linux采用换行符LF表示)。为了弄清楚UTF-16文件的大小尾序，在UTF-16文件的开首，都会放置一个U+FEFF字符作为Byte Order Mark（UTF-16LE以FF FE代表，UTF-16BE以FE FF代表），以显示这个文本文件是以UTF-16编码，其中U+FEFF字符在UNICODE中代表的意义是ZERO WIDTH NO-BREAK SPACE，顾名思义，它是个没有宽度也没有断字的空白。UTF-32编码由于占据的空间比较大，在实际中出现较少。
+Unicode小结
+可以认为Unicode走的是理想主义路线，各种编码方案走的是现实主义路线，目前已经形成标准的UTF-8，UTF-16，UTF-32三种编码方案都无法对所有的Unicode字符进行编码。Unicode提供了一个页面可以查询中文字符的UTF-8，UTF-16，UTF-32的编码，
+http://www.unicode.org/cgi-bin/GetUnihanData.pl
+小试牛刀-看看文本文件
+windows的记事本程序可以导出4中格式编码的文件，我们补充一个”UTF-8 BOM格式编码“，在文件中输入“我**[回车]a**”，另存为这几种编码，使用二进制查看：
+
+
+
+编码类型(记事本中的另存为)
+二进制
+Size
+编码集
+
+ANSI
+CE D2 0D 0A 61
+5
+GBK(由windows的区域属性决定)
+
+Unicode
+FF FE 11 62 0D 00 0A 00 61 00
+10
+UTF-16 Little Endian
+
+Unicode big endian
+FE FF 62 11 00 0D 00 0A 00 61
+10
+UTF-16 Big Endian
+
+UTF-8
+E6 88 91 0D 0A 61
+6
+UTF-8 no BOM
+
+UTF-8 BOM格式编码(补充)
+EF BB BF E6 88 91 0D 0A 61
+9
+UTF-8 has BOM很多信息就一目了然了。可以发现，微软在对概念的界定上相当不厚道。可以认为ANSI编码的文件在交换的时候容易出问题，而其他几种文件编码格式则较稳定。在大多数情况下，现在的程序都能够正确识别文本所使用的编码，一部分是由于文件编码前已经标记了，比如带有BOM的UTF-8编码文件；一部分是由于程序能够统计文本中字符的特征，以判断正确的编码方式，会有判断错误的情况，比如新建一个文本，输入”写”，保存之后，记事本默认会以ANSI编码方式保存，但是在打开的时候，由于文件中的字符过少，操作系统会误判断成UTF-8无BOM编码格式，所以就会出现乱码”д”。另外，当我们复制到本地一个文本文件打开的时候出现乱码时，很有可能这个文件使用了ANSI编码方式，所以我们只需要手动尝试其他地区的编码方案即可，在Notepad++，chrome中修改编码方式的位置如下：
+
+
+
+
+
+[caption id=”attachment_2550” align=”aligncenter” width=”533”] Chrome设置网页的编码方式[/caption]
+
+
+[caption id=”attachment_2551” align=”aligncenter” width=”280”] Notepad++设置文本的编码方式[/caption]Notepad++中的【转为…】可以将文件转换成其他形式的编码存储.
+4.本文小结
+实际上，字符编码的问题还远远未到能够做小结的时候，只不过本文已近4k字，多了不便阅读，故准备告一段落。字符编码整体的框架已经厘清，以后会逐步展开在不同软件中体现出来的字符编码问题。欲知Visual Studio、Mysql、正则表达式、Java、HTML中字符编码的故事，且听后文分解。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/05/13/character-encoding-general/" title="字符编码概论" itemprop="url">字符编码概论</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-05-13T08:13:35.000Z" itemprop="datePublished">May 13 2014</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-字符集与字符编码"><span class="toc-number">1.</span> <span class="toc-text">1.字符集与字符编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-中文字符集与字符编码"><span class="toc-number">2.</span> <span class="toc-text">2.中文字符集与字符编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GB2312"><span class="toc-number">2.1.</span> <span class="toc-text">GB2312</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#微软的GBK"><span class="toc-number">2.2.</span> <span class="toc-text">微软的GBK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他中文字符编码"><span class="toc-number">2.3.</span> <span class="toc-text">其他中文字符编码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Unicode"><span class="toc-number">3.</span> <span class="toc-text">3.Unicode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UTF-8编码"><span class="toc-number">3.1.</span> <span class="toc-text">UTF-8编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UTF-16与UTF-32"><span class="toc-number">3.2.</span> <span class="toc-text">UTF-16与UTF-32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unicode小结"><span class="toc-number">3.3.</span> <span class="toc-text">Unicode小结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小试牛刀-看看文本文件"><span class="toc-number">3.4.</span> <span class="toc-text">小试牛刀-看看文本文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-本文小结"><span class="toc-number">4.</span> <span class="toc-text">4.本文小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+		</div>
+		
+		<p>大约2年前对字符编码有过较深入的研究，后来零零散散的放到了《<a href="http://blog.exbye.com/2013/09/character-study-notes/" title="字符编码研究" target="_blank" rel="external">字符编码研究</a>》中，不过由于粘贴比较仓促，思路不清晰并且不便于阅读。隔了一段时间，也忘记了一些内容。虽然网上已经有很多关于字符编码的文章了，但这些介绍字符编码的文章存在一个普遍的问题：没有结合具体的工具。而编码问题往往肆虐在各种设计不完善、概念混乱的软件中。故准备将整理旧文章，结合一些软件谈一谈字符集与字符编码。</p>
+<p>了解 字符编码是编写程序不得不经历的关卡，毕竟所有的源代码都是由文本字符堆砌而成的。最初计算机的世界里只有英文，使用7bit就足以将所有的英文字符与控制字符编码，但由于计算机是8bit的，所以ASCII标准使用8bit编码，最高位置0.比如字母a的编码为01100001，八进制数为61，详细的编码方案<a href="http://blog.exbye.com/wp-content/uploads/2014/05/ASCII.jpg" target="_blank" rel="external">点击此处查看</a>。在这种编码方案下，一个字符从存储到显示、复制、传输都是统一的，然而计算机的发明者们显然没有想到原属于军事领域的机器会改变世界，也压根没有考虑太多兼容性。当计算机开始涌入其他国家之后，为了方便本地区的人使用，一系列扩充计算机编码的需求提上日程。公司(比如微软)会制定编码方案，国家标准局(GB)也会制定编码方案，一些计算机的学会机构(Unicode联盟)也会制定编码方案，字符编码的混乱世界由此拉开帷幕。<a id="more"></a></p>
+<h2 id="1-字符集与字符编码">1.字符集与字符编码</h2>
+<p>在ASCII畅行的时代，字符集与字符编码并无区分。因为计算机磁盘中存储的内容与内存中读取的一致，与屏幕上显示的一致，与网络中传输的一致。表示字符a的’01100001’无论在哪里都是一样的。但是当locale编码出现后，情况开始转变。对ASCII的扩充导致了无法再用单一的一个字节来表示字符，比如GBK中使用两个字节来表示编码，那么存储到文件中时，哪一个字节放在首位呢？有了选择，也就会有不同的标准。关于哪一个自己放在首位，产生了Little Endian与Big Endian两种编码方案，此处我们暂压不题。另外，连续的多字节字符，如何划分他们的边界呢？总之，字符集无法全部使用单一字节，造成了字符集与字符编码两种概念的分道扬镳。具体说来，<strong>字符集</strong>完成字符与某种数制数对对应的问题，而<strong>字符编码</strong>则完成这种数制的数在磁盘上的存储问题。以Unicode体系为例，凡是人类语言中出现的字符，在Unicode中都有且仅有唯一的数与其对应；当准备将这种字符存储在磁盘上时，代表此字符的数可以选择不同的编码方式存储在磁盘中，比如选择UTF8编码方式或者UTF-16编码方式。但在这种分层概念清晰地浮出水面之前，世界上已经有很多字符集或者编码方案了。</p>
+<h2 id="2-中文字符集与字符编码">2.中文字符集与字符编码</h2>
+<p>处于中国，当谈中文字符编码。在ASCII基础上，GB先后发布了GB2312(1981年)、GB13000(1993年)、GB18030-2000(2000年)、GB18030-2005(2005年)，每次编码标准都兼容上一次的，并且所有的编码标准都兼容ASCII。</p>
+<h3 id="GB2312"><strong>GB2312</strong></h3>
+<p>全称《信息交换用汉字编码字符集·基本集》，又称GB0，由中国国家标准总局发布，1981年5月1日实施。GB2312编码通行于中国大陆；新加坡等地也采用此编码。中国大陆几乎所有的中文系统和国际化的软件都支持GB2312。GB2312标准共收录6763个汉字，同时收录了包括拉丁字母、希腊字母、日文平假名及片假名字母、俄语西里尔字母在内的682个字符。GB2312中对所收汉字进行了“分区”处理，每区含有94个汉字／符号。这种表示方式也称为区位码。01-09区为特殊符号；16-55区为一级汉字，按拼音排序；56-87区为二级汉字，按部首／笔画排序；10-15区及88-94区则未有编码。举例来说，“啊”字是GB2312之中的第一个汉字，它的区位码就是1601。</p>
+<p>但仅有区位码还不够，还需要将汉字存储在计算机中。在使用GB2312的程序通常采用EUC储存方法，以便兼容于ASCII。浏览器编码表上的“GB2312”，通常都是指“EUC-CN”表示法。每个汉字及符号以两个字节来表示。第一个字节称为“高位字节”，第二个字节称为“低位字节”。“高位字节”使用了0xA1-0xF7（把01-87区的区号加上0xA0），“低位字节”使用了0xA1-0xFE（把01-94加上0xA0）。而ASCII中的编码范围为0x01-0x7F，所以EUC-CN编码中是可以分辨出单个字节的ASCII字符的。由于一级汉字从16区起始，汉字区的“高位字节”的范围是0xB0-0xF7，“低位字节”的范围是0xA1-0xFE，占用的码位是72*94=6768。其中有5个空位是D7FA-D7FE。例如“啊”字在大多数程序中，会以两个字节，0xB0（第一个字节）0xA1（第二个字节）储存。（与区位码对比：0xB0=0xA0+16,0xA1=0xA0+1）。为直观显示，截取1区，2区，16区，17区的汉字编码图如下：</p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<td>
+
+<p>[caption id=”attachment_2524” align=”aligncenter” width=”374”]<a href="http://blog.exbye.com/wp-content/uploads/2014/05/gb2312-1-block.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/05/gb2312-1-block.png" alt="1区"></a> 1区[/caption]</p></td><p></p>
+<td>
+
+<p>[caption id=”attachment_2525” align=”aligncenter” width=”374”]<a href="http://blog.exbye.com/wp-content/uploads/2014/05/gb2312-2-block.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/05/gb2312-2-block.png" alt="2区"></a> 2区[/caption]</p></td><br><p></p>
+<p><tr></tr></p>
+<td>
+
+<p>[caption id=”attachment_2526” align=”aligncenter” width=”374”]<a href="http://blog.exbye.com/wp-content/uploads/2014/05/gb2312-3-block.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/05/gb2312-3-block.png" alt="3区"></a> 3区[/caption]</p></td><p></p>
+<td>
+
+<p>[caption id=”attachment_2527” align=”aligncenter” width=”374”]<a href="http://blog.exbye.com/wp-content/uploads/2014/05/gb2312-4-block.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/05/gb2312-4-block.png" alt="4区"></a> 4区[/caption]</p></td><br><br><br><br><span style="line-height: 1.5em;">这里是</span><a href="http://www.knowsky.com/resource/gb2312tbl.htm" target="_blank" rel="external">GB2312的EUC-CN编码表</a><span style="line-height: 1.5em;">，备份链接</span><a href="https://googledrive.com/host/0Bw5LWH9QcwNGVklCNkM3by10Zms/GB2312%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E7%BC%96%E7%A0%81%E8%A1%A8.htm" target="_blank" rel="external">参照这里</a><span style="line-height: 1.5em;">。</span><p></p>
+<p>这时候有了<strong>内码</strong>与<strong>交换码</strong>的概念。内码指的是“将资讯编码后，透过某种方式储存在特定记忆装置时，装置内部的编码形式”；在交换文件前，文件提供者先将由内码形式储存的文件转换成交换码形式再做交换。在接收文件后，文件接收者再由交换码转成内码。所以可以认为区位码是一种交换码，而字符编码是内码。为了方便起见，许多系统的内码则直接使用交换码，如ASCII广为各种系统所使用。这有点类似我们后文中将要提到的字符集与字符编码，但与字符集不同之处在于，交换码会兼顾输入法层面。比如区位码就可以直接做成输入法，五笔输入法也可以认为是一种交换码，字符集的作用就简单多了。</p>
+<h3 id="微软的GBK">微软的GBK</h3>
+<p>微软为了向世界推广windows，提出了针对不同国家代码页(Code Page)的概念，并使用GB2312制订了CP936。到1993年，Unicode1.1版本推出，收录中国大陆、台湾、日本及韩国通用字符集的汉字，总共有20902个。大陆制订了等同于Unicode 1.1版本的”GB 13000.1-93”，微软收录了GB 13000中的所有字符对GB2312进行了扩展(当然也是对CP936的扩展)，补充了GB2312中没有的字符比如”啰”、”镕”等，称为GBK(也就是CP936的扩展)，可见GBK是兼容GB2312的而非GB13000。而有趣的是，原始GB13000一直未被业界采用，后续国家标准GB18030技术上兼容GBK而非GB13000。GB2312、GBK都属于<strong>双字节字符集(DBCS)</strong>。</p>
+<p>虽然GBK与CP936相同，但后来可能会发生细微的变化使两种编码集产生差异，我们不在此列举他们，只简单的认为GBK就是微软在中国地区的代码页。在实际使用windows的时候，如果我们用记事本打开从其他区域windows拷贝过来的文件，很可能出现乱码，仅仅能正确显示ASCII中的字符，当将文本文件从一台电脑复制到另外一台电脑后，文件在磁盘中保存的二进制代码并未变化，如果文本文件非Unicode编码，记事本会依照windows中设定的系统区域的语言去调用相应的代码页解析二进制代码，同样的’11001110 11010010’在CP936下是’我’，但在韩文的EUC-KR(代码页为949)编码下就变成了’乖’。设置<strong>系统区域</strong>属性的位置：控制面板-&gt;区域和语言-&gt;管理-&gt;更改系统区域设置，对话框如下：</p>
+<p>[caption id=”attachment_2531” align=”aligncenter” width=”934”]<a href="http://blog.exbye.com/wp-content/uploads/2014/05/windows-locale-setting.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/05/windows-locale-setting.png" alt="系统区域设置"></a> 系统区域设置[/caption]</p>
+<h3 id="其他中文字符编码">其他中文字符编码</h3>
+<p>GB2312是一种简体中文的编码，与之同时产生的还有一种针对繁体中文的编码，它是由台湾财团法人信息工业策进会为五大中文套装软件所设计的中文共通内码，所以称为Big5(大五碼)。大五码也有着丰富的历史，感兴趣的可参考<a href="http://zh.wikipedia.org/wiki/%E5%A4%A7%E4%BA%94%E7%A2%BC" target="_blank" rel="external">维基百科</a>。</p>
+<p>在GBK之后，大陆又制定了GB18030等编码(<a href="https://drive.google.com/a/exbye.com/#folders/0Bw5LWH9QcwNGVklCNkM3by10Zms" target="_blank" rel="external">标准文件在此处</a>，<a href="https://drive.google.com/a/exbye.com/#folders/0Bw5LWH9QcwNGVklCNkM3by10Zms" target="_blank" rel="external">编码字符集在此处</a>)，成为取代GBK1.0的正式国家标准，该标准收录了27484个汉字，同时还收录了藏文、蒙文、维吾尔文等主要的少数民族文字。微软也为GB18030定义了代码页CP54936。但是由于GB18030有一部分4字节编码，用于编码从CJK扩展A引入的6582个汉字，而Windows的代码页只支持单字节和双字节编码，所以这个codepage是无法真正使用的。由于实际中GB18030出现较少，在此略去不题。</p>
+<h2 id="3-Unicode">3.Unicode</h2>
+<p>Unicode终于姗姗来迟。Unicode联盟创建的目的就是为了统一世界上出现的所有字符。内码与交换码呈现了山雨欲来风满楼之势，字符集与字符编码清晰界限在unicode的世界中呼之欲出。与GB2312、GBK编码方案不同之处在于，unicode自诞生之时就从未认为世界上的字符是静态的、有限的，准确而言，Unicode本身就考虑了字符会不断增长这个事实，那么在自然世界里什么是不断增长的呢——自然数，这个整数可能很大。于是Unicode使用自然数来表示字符，每一个字符与一个无符整数对应。<a href="http://www.unicode.org/charts/#symbols" target="_blank" rel="external">Unicode上</a>按照区域、语言给出了几乎世界所有的字符集(当然字符集也在不断扩充中)，有<a href="http://www.unicode.org/charts/PDF/U0000.pdf" title="0000-007F" target="_blank" rel="external">Basic Latin (ASCII)</a>，也有<a href="http://www.unicode.org/charts/PDF/U4E00.pdf" title="4E00-9FCF" target="_blank" rel="external">CJK Unified Ideographs (Han)</a>(注：CJK 是中文Chinese、Japanese、Korean三国文字的缩写。它能够支持这三种文字)。可莫要认为为Unicode规定对应的整数是一件简单的事情，制定者需要了解字符的变迁历史、不同国别相似字符的异同，实际上这是一件相当耗费精力并且庞大的工程。</p>
+<h3 id="UTF-8编码"><span style="line-height: 1.5em;">UTF-8编码</span></h3>
+<p>UTF-8编码是可变长编码，<span style="line-height: 1.5em;">因为Unicode中大部分常见字符都在前面，所以</span><span style="line-height: 1.5em;">能够节省存储空间。它</span><span style="line-height: 1.5em;">是一种前缀码，可以用来表示Unicode标准中的任何字符，且其编码中的第一个字节仍与ASCII兼容。UTF-8的设计有以下的多字符组串行的特质：单字节字符的最高有效比特永远为0;多字节串行中的首个字符组的几个最高有效比特决定了串行的长度。最高有效位为110的是2字节串行，而1110的是三字节串行，如此类推;多字节串行中其余的字节中的首两个最高有效比特为10。表示如下：</span></p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>UCS-4编码</th></p>
+<p><th>UTF-8字节流</th><br></p>
+<p><tr></tr></p>
+<p><td>U+00000000 – U+0000007F</td></p>
+<p><td>0xxxxxxx</td><br></p>
+<p><tr></tr></p>
+<p><td>U+00000080 – U+000007FF</td></p>
+<p><td>110xxxxx 10xxxxxx</td><br></p>
+<p><tr></tr></p>
+<p><td>U+00000800 – U+0000FFFF</td></p>
+<p><td>1110xxxx 10xxxxxx 10xxxxxx</td><br></p>
+<p><tr></tr></p>
+<p><td>U+00010000 – U+001FFFFF</td></p>
+<p><td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td><br></p>
+<p><tr></tr></p>
+<p><td>U+00200000 – U+03FFFFFF</td></p>
+<p><td>111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</td><br></p>
+<p><tr></tr></p>
+<p><td>U+04000000 – U+7FFFFFFF</td></p>
+<p><td>1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</td><br><br><br><br>重音文字、希腊字母或西里尔字母等使用2字节来存储，而常用的汉字就要使用3字节。另外，在一UTF-8编码的文件中会前缀上EF,BB,BF,称作是有<strong>BOM格式的编码</strong>，但是大部分文件是不需要这三个字节的，称作无BOM格式的编码。</p>
+<h3 id="UTF-16与UTF-32">UTF-16与UTF-32</h3>
+<p>Unicode还有一额不可变长的编码方案。UTF-16使用固定长度的2个字节，能够表示的字符个数为65535；UTF-32使用固定长度的4个字节，能够表示的字符个数少于1114111。从Unicode字符集映射到这两种编码方案的过程比较复杂，可参考<a href="http://zh.wikipedia.org/wiki/UTF-16" target="_blank" rel="external">维基百科</a>了解。映射的方案导致了<strong>大尾序</strong>(big endian)和<strong>小尾序</strong>(little endian)两种存储形式。只需明白两种尾序表现，是在编码时连续成对的字节顺序相反。以Macintosh制作或存储的文字使用大尾序格式，以Microsoft或Linux制作或存储的文字使用小尾序格式(顺便说下，windows平台与UNIX/Linux平台在处理键盘回车键输入的符号上也有不同，windows采用回车+换行CR/LF表示下一行, 而UNIX/Linux采用换行符LF表示)。为了弄清楚UTF-16文件的大小尾序，在UTF-16文件的开首，都会放置一个U+FEFF字符作为Byte Order Mark（UTF-16LE以FF FE代表，UTF-16BE以FE FF代表），以显示这个文本文件是以UTF-16编码，其中U+FEFF字符在UNICODE中代表的意义是ZERO WIDTH NO-BREAK SPACE，顾名思义，它是个没有宽度也没有断字的空白。UTF-32编码由于占据的空间比较大，在实际中出现较少。</p>
+<h3 id="Unicode小结">Unicode小结</h3>
+<p>可以认为Unicode走的是理想主义路线，各种编码方案走的是现实主义路线，目前已经形成标准的UTF-8，UTF-16，UTF-32三种编码方案都无法对所有的Unicode字符进行编码。Unicode提供了一个页面可以查询中文字符的UTF-8，UTF-16，UTF-32的编码，</p>
+<p><a href="http://www.unicode.org/cgi-bin/GetUnihanData.pl" target="_blank" rel="external">http://www.unicode.org/cgi-bin/GetUnihanData.pl</a></p>
+<h3 id="小试牛刀-看看文本文件">小试牛刀-看看文本文件</h3>
+<p>windows的记事本程序可以导出4中格式编码的文件，我们补充一个”UTF-8 BOM格式编码<span style="line-height: 1.5em;">“，在文件中输入“<strong>我**</strong>[回车]a**”，另存为这几种编码，使用二进制查看：</span></p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td><strong>编码类型(记事本中的另存为)</strong></td></p>
+<p><td><strong>二进制</strong></td></p>
+<p><td><strong>Size</strong></td></p>
+<p><td><strong>编码集</strong></td><br></p>
+<p><tr></tr></p>
+<p><td>ANSI</td></p>
+<p><td>CE D2 0D 0A 61</td></p>
+<p><td>5</td></p>
+<p><td>GBK(由windows的区域属性决定)</td><br></p>
+<p><tr></tr></p>
+<p><td>Unicode</td></p>
+<p><td><strong>FF FE</strong> 11 62 0D 00 0A 00 61 00</td></p>
+<p><td>10</td></p>
+<p><td>UTF-16 Little Endian</td><br></p>
+<p><tr></tr></p>
+<p><td>Unicode big endian</td></p>
+<p><td><strong>FE FF</strong> 62 11 00 0D 00 0A 00 61</td></p>
+<p><td>10</td></p>
+<p><td>UTF-16 Big Endian</td><br></p>
+<p><tr></tr></p>
+<p><td>UTF-8</td></p>
+<p><td>E6 88 91 0D 0A 61</td></p>
+<p><td>6</td></p>
+<p><td>UTF-8 no BOM</td><br></p>
+<p><tr></tr></p>
+<p><td>UTF-8 BOM格式编码(补充)</td></p>
+<p><td><strong>EF BB BF</strong> E6 88 91 0D 0A 61</td></p>
+<p><td>9</td></p>
+<p><td>UTF-8 has BOM</td><br><br><br><br>很多信息就一目了然了。可以发现，微软在对概念的界定上相当不厚道。可以认为ANSI编码的文件在交换的时候容易出问题，而其他几种文件编码格式则较稳定。在大多数情况下，现在的程序都能够正确识别文本所使用的编码，一部分是由于文件编码前已经标记了，比如带有BOM的UTF-8编码文件；一部分是由于程序能够统计文本中字符的特征，以判断正确的编码方式，会有判断错误的情况，比如新建一个文本，输入”写”，保存之后，记事本默认会以ANSI编码方式保存，但是在打开的时候，由于文件中的字符过少，操作系统会误判断成UTF-8无BOM编码格式，所以就会出现乱码”д”。另外，当我们复制到本地一个文本文件打开的时候出现乱码时，很有可能这个文件使用了ANSI编码方式，所以我们只需要手动尝试其他地区的编码方案即可，在Notepad++，chrome中修改编码方式的位置如下：</p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<td>
+
+<p>[caption id=”attachment_2550” align=”aligncenter” width=”533”]<a href="http://blog.exbye.com/wp-content/uploads/2014/05/chrome-character-encoding-setting.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/05/chrome-character-encoding-setting.png" alt="Chrome设置网页的编码方式"></a> Chrome设置网页的编码方式[/caption]</p></td><p></p>
+<td>
+
+<p>[caption id=”attachment_2551” align=”aligncenter” width=”280”]<a href="http://blog.exbye.com/wp-content/uploads/2014/05/complex_character_encode_notepadplusplus.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/05/complex_character_encode_notepadplusplus.png" alt="Notepad++设置文本的编码方式"></a> Notepad++设置文本的编码方式[/caption]</p></td><br><br><br><br>Notepad++中的【转为…】可以将文件转换成其他形式的编码存储.<p></p>
+<h2 id="4-本文小结"><span style="font-size: 1.5em; line-height: 1.5em;">4.本文小结</span></h2>
+<p>实际上，字符编码的问题还远远未到能够做小结的时候，只不过本文已近4k字，多了不便阅读，故准备告一段落。字符编码整体的框架已经厘清，以后会逐步展开在不同软件中体现出来的字符编码问题。欲知Visual Studio、Mysql、正则表达式、Java、HTML中字符编码的故事，且听后文分解。</p>
+<a id="more"></a>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="http://zh.wikipedia.org/wiki/GB_2312" target="_blank" rel="external">http://zh.wikipedia.org/wiki/GB_2312</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E6%B1%89%E5%AD%97%E5%86%85%E7%A0%81%E6%89%A9%E5%B1%95%E8%A7%84%E8%8C%83" target="_blank" rel="external">http://zh.wikipedia.org/wiki/汉字内码扩展规范</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/代码页" target="_blank" rel="external">http://zh.wikipedia.org/wiki/代码页</a></li>
+<li><a href="http://msdn.microsoft.com/en-us/library/dd317756(VS.85" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/dd317756(VS.85).aspx</a>.aspx)</li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%A4%A7%E4%BA%94%E7%A2%BC" target="_blank" rel="external">http://zh.wikipedia.org/wiki/大五碼</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/UTF-8" target="_blank" rel="external">http://zh.wikipedia.org/wiki/UTF-8</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/UTF-16" target="_blank" rel="external">http://zh.wikipedia.org/wiki/UTF-16</a><br>&nbsp;</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ASCII/">ASCII</a><a href="/tags/character-set/">character set</a><a href="/tags/encoding/">encoding</a><a href="/tags/GB2312/">GB2312</a><a href="/tags/GBK/">GBK</a><a href="/tags/Unicode/">Unicode</a><a href="/tags/utf-16/">utf-16</a><a href="/tags/utf-32/">utf-32</a><a href="/tags/utf-8/">utf-8</a><a href="/tags/字符编码/">字符编码</a><a href="/tags/字符集/">字符集</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/笔记/">笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2014/05/13/character-encoding-general/" data-title="字符编码概论 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/05/14/effective-programming-notes/" title="《高效能程序员的修炼》札记">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  《高效能程序员的修炼》札记</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/05/08/the-improtance-of-living-statistic/"  title="《生活的艺术》札记">
+ <strong>NEXT:</strong><br/> 
+ <span>《生活的艺术》札记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-字符集与字符编码"><span class="toc-number">1.</span> <span class="toc-text">1.字符集与字符编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-中文字符集与字符编码"><span class="toc-number">2.</span> <span class="toc-text">2.中文字符集与字符编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GB2312"><span class="toc-number">2.1.</span> <span class="toc-text">GB2312</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#微软的GBK"><span class="toc-number">2.2.</span> <span class="toc-text">微软的GBK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他中文字符编码"><span class="toc-number">2.3.</span> <span class="toc-text">其他中文字符编码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Unicode"><span class="toc-number">3.</span> <span class="toc-text">3.Unicode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UTF-8编码"><span class="toc-number">3.1.</span> <span class="toc-text">UTF-8编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UTF-16与UTF-32"><span class="toc-number">3.2.</span> <span class="toc-text">UTF-16与UTF-32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unicode小结"><span class="toc-number">3.3.</span> <span class="toc-text">Unicode小结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小试牛刀-看看文本文件"><span class="toc-number">3.4.</span> <span class="toc-text">小试牛刀-看看文本文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-本文小结"><span class="toc-number">4.</span> <span class="toc-text">4.本文小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

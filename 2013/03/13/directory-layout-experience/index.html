@@ -1,0 +1,492 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>目录布局经验谈 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="1.前言
+给很多人弄过电脑，也看过了很多人的电脑目录布局，大部分的都很乱。作为一个对这方面强迫的人而言，我想我可以分享一些东西。这些年，关于目录、分类的那些事儿。
+分类是人学习记忆外界事物的一种方式。抽象而言，人们对于外界事物赋予的各种命名实质上也是一种分类。分类基于已有的认知，对所知的事情的宏观认">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/03/13/directory-layout-experience/" title="目录布局经验谈" itemprop="url">目录布局经验谈</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-03-13T15:05:05.000Z" itemprop="datePublished">Mar 13 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言"><span class="toc-number">1.</span> <span class="toc-text">1.前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-概述"><span class="toc-number">2.</span> <span class="toc-text">2.概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-目录图示"><span class="toc-number">3.</span> <span class="toc-text">3.目录图示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-原则"><span class="toc-number">4.</span> <span class="toc-text">4.原则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1原则之原则"><span class="toc-number">4.0.1.</span> <span class="toc-text">4.1原则之原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2移动速度"><span class="toc-number">4.0.2.</span> <span class="toc-text">4.2移动速度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3容易备份"><span class="toc-number">4.0.3.</span> <span class="toc-text">4.3容易备份</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4尽量少地冗余"><span class="toc-number">4.0.4.</span> <span class="toc-text">4.4尽量少地冗余</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5目录层级尽可能简单"><span class="toc-number">4.0.5.</span> <span class="toc-text">4.5目录层级尽可能简单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6寻找资料容易"><span class="toc-number">4.0.6.</span> <span class="toc-text">4.6寻找资料容易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7同级目录下子目录的数量"><span class="toc-number">4.0.7.</span> <span class="toc-text">4.7同级目录下子目录的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-8类目均衡"><span class="toc-number">4.0.8.</span> <span class="toc-text">4.8类目均衡</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-9个人资料与网络资料分离"><span class="toc-number">4.0.9.</span> <span class="toc-text">4.9个人资料与网络资料分离</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-10保留难找到的东西"><span class="toc-number">4.0.10.</span> <span class="toc-text">4.10保留难找到的东西</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-11可扩展到其他设备"><span class="toc-number">4.0.11.</span> <span class="toc-text">4.11可扩展到其他设备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-12关于统一性"><span class="toc-number">4.0.12.</span> <span class="toc-text">4.12关于统一性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-按内容说明"><span class="toc-number">5.</span> <span class="toc-text">5.按内容说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1关于软件分类"><span class="toc-number">5.0.1.</span> <span class="toc-text">5.1关于软件分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2关于图片分类"><span class="toc-number">5.0.2.</span> <span class="toc-text">5.2关于图片分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3文档备份"><span class="toc-number">5.0.3.</span> <span class="toc-text">5.3文档备份</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4系统备份"><span class="toc-number">5.0.4.</span> <span class="toc-text">5.4系统备份</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5快捷方式与目录的重定位"><span class="toc-number">5.0.5.</span> <span class="toc-text">5.5快捷方式与目录的重定位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6保留配置信息"><span class="toc-number">5.0.6.</span> <span class="toc-text">5.6保留配置信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-小结"><span class="toc-number">6.</span> <span class="toc-text">6.小结</span></a></li></ol>
+		</div>
+		
+		<h2 id="1-前言">1.前言</h2>
+<p>给很多人弄过电脑，也看过了很多人的电脑目录布局，大部分的都很乱。作为一个对这方面强迫的人而言，我想我可以分享一些东西。这些年，关于目录、分类的那些事儿。</p>
+<p>分类是人学习记忆外界事物的一种方式。抽象而言，人们对于外界事物赋予的各种命名实质上也是一种分类。分类基于已有的认知，对所知的事情的宏观认识。我们称某某东西为世界观，我们称某某东西为方法论，称某某东西是学科。分类与目录都有专门的学科，理论上我谈不了太多，我只能从实践上来总结，可能读得才更好玩；我不能谈论很多事物的分类，那样穷尽我一生也无法完成，我只能挑选几个角度。针对我们使用的计算机，我们使用的网络。这方面并有统一的说法，大部分都是经验之谈，和个人特质关系极强。以前不愿写这些东西，觉得大家用不到，在折腾分类与目录这一块走得远了，开始觉得把这一块弄得极端并非好事。很多时候都是这样，即使是一件有利的事情，做的多了，也会因治而乱。我想未来的某一刻，也许我会放下这么多东西。但是积累这么久的经验，不留下来，终觉得可惜。文章来自浮茗诗舍，<a href="http://blog.exbye.com/" target="_blank" rel="external">blog.exbye.com</a>，如有益处，可转载，希望注明出处，无力强求。是为前言。</p>
+<h2 id="2-概述">2.概述</h2>
+<p>目录的分法实际上是和整个人生观对应的，一个人对世界的理解会明显的影响到其分类。比如说，我关注过去、现在与未来，潜在地受着“尘封”一词的影响（凡过往者，皆加封印），这些都体现在了我的目录或者分类中。如前言所述，分类的一个目的在于理解与记忆，而我们每个人同时维护着很多分类，那么，最好的做法是，将这些目录统一在一个更大的框架之下，即人生观或者世界观。当然世界观之下可能还有一些中间层次作为过渡。如果本文写这些东西，估计就没完没了了，当然我也没有太大的能力去谈论这些。我只能就我这几年对目录强迫的一些经验，来做个人的总结。</p>
+<p>我花了很长的时间来处理自己的分类目录，渐渐地将他们在某种程度上统一了。依然要说明的是，这有好处，也有坏处。好处在于统一之后，我不需要想太多东西就知道应该把什么东西置于什么地方；坏处在于，我们所谓的思维定式。不题，大家自有判断。但是有分类的意识，起码是件好事。井然有序，各置其所。</p>
+<h2 id="3-目录图示">3.目录图示</h2>
+<p><span style="line-height: 1.5em;">下面连续排放了四张图，第一张是我硬盘的目录布局，后三张是我chrome浏览器书签的布局。后三张有层级关系，大家注意。</span></p>
+<p><a href="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image001.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image001_thumb.png" alt="clip_image001" title="clip_image001"></a> <a href="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image002.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image002_thumb.png" alt="clip_image002" title="clip_image002"></a><a href="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image003.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image003_thumb.png" alt="clip_image003" title="clip_image003"></a><a href="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image004.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image004_thumb.png" alt="clip_image004" title="clip_image004"></a></p>
+<p>chrome书签可视化之后是非常好看的。同时还可以进行书签相关信息的统计，比较有趣。</p>
+<p><a href="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image006.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image006_thumb.png" alt="clip_image006" title="clip_image006"></a></p>
+<p><a href="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image008.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/03/clip_image008_thumb.png" alt="clip_image008" title="clip_image008"></a></p>
+<h2 id="4-原则">4.原则</h2>
+<h4 id="4-1原则之原则">4.1原则之原则</h4>
+<p>不要创建复杂的规则，也不要使用复杂的规则。当然有些原则一旦熟悉了，就成了简单的常识。</p>
+<p>改变是痛苦的，但是习惯之后就不再痛苦，而会感觉到新习惯的快乐。</p>
+<h4 id="4-2移动速度">4.2移动速度</h4>
+<p><span style="line-height: 1.5em;">大部分人使用的是windows，很多人都是习惯这样的分区方式：C盘，系统；其他盘分别是文档，软件，媒体（视频，电影等），备份。这样的分区方式很常见以至于，许多磁盘分区工具都可以默认进行此种分区。但是这样分区有一个比较大的问题，在跨盘移动文件的时候，移动速度会比较慢，因为这相当于在磁盘的不同扇区上拷贝并删除数据。其次，对于windows7，当磁盘剩余容量小于总容量的时候会变红，如果有一个硬盘分区符号变红了，是很难看的。以前花了很长时间寻找去除变红的样子，未果。</span></p>
+<p>即使磁盘剩余的东西不至于变红，也难保几个磁盘使用的空间均衡。有时候会电影多一些，有时候会软件多一些。解除这一个问题的最好方法莫过于，把除C盘以外的分区合并成一个分区。C盘命名为WIN。其余的内容放在D盘，命名为DOC。虽然这样会使目录多了一层(分区那一层目录没有了)，但是逻辑上却变得简单了。D盘是自己的东西，C盘是安装的系统与软件，是软件公司的东西。当备份迁移时，只需要处理D盘。当然我们需要解决目录多了一层的问题，但这只是小问题，通过合理配置windows的快捷方式（库），打开深层目录还是比较方便的。</p>
+<p>对于320G的硬盘，我给C盘分了45G，给D盘分了250G。至于如何进行整数分区，参照<a href="http://blog.exbye.com/2013/03/integer-partitions-calculation-methods/" target="_blank" rel="external">整数分区计算方式</a>。</p>
+<h4 id="4-3容易备份">4.3容易备份</h4>
+<p>两类备份，文档备份与系统备份。尽量使需要备份的东西与不需要备份的东西分开，这样在备份的时候考虑问题会比较简单，能够比较容易地区分出那些是备份过的，哪些是没有备份过的。如果知道哪些内容没有备份，在平时使用的时候就需要注意了，不要轻易破坏。</p>
+<p>举个例子。安装一个SQL Server数据库，尽量将数据库管理软件与数据库数据分离开，因为前者并不是我们生产的东西，我们不需要备份。我们可以将安装了的软件放在C盘，将数据库数据放在D盘。将重要的内容都放在D盘（有些短期使用的资料放在桌面也可以，容易看到<img src="http://blog.exbye.com/wp-content/uploads/2013/03/wlEmoticon-winkingsmile.png" alt="眨眼">），备份的时候就容易看到了。</p>
+<h4 id="4-4尽量少地冗余">4.4尽量少地冗余</h4>
+<p><span style="line-height: 1.5em;">比如一个音乐文件，一个软件，最好不要出现在多个地方。以图片为例，因为图片比较小，有些冗余问题不大。但是如果是一个软件，那就比较麻烦了。比如我正在做一个作业，其中需要使用几个软件，当作业完成提交之后，最好的做法是在作业中标记出使用过的软件以及版本，然后将软件放到软件的目录之下。关于软件的目录布局策略，可参照后文。</span></p>
+<p>当然这样的分法又不是绝对的。如果是小软件不常用并且作业需要进行归档了（很少会再使用），则可以将此软件冗余放到作业项目中，否则，最好分离开，放到软件目录中方便以后使用。对于经常变动的文件，注意不要冗余就十分重要了，我们能够轻易地知道哪些是最新的版本，放置丢失修改。如果需要保留版本历史呢，不断的复制-重命名-修改是一个很糟糕的做法，使用版本控制软件才是王道。</p>
+<h4 id="4-5目录层级尽可能简单">4.5目录层级尽可能简单</h4>
+<p><span style="line-height: 1.5em;">当然这句话并不完全，完全的说法是，归档或者私密或者不常使用的东西，要使其目录路径相对较深；而对于经常使用的目录，层级相对较钱。</span></p>
+<p>D盘应当有一个目录放置近期（1~6个月）使用的东西，我放在D盘的这个文件夹叫做“当前文档”，对于windows，为了使安装的软件文档目录（SPSS，Matlab，Office等）自动地放在这个目录，所以需要把windows7的User下的文档移动位置到此目录。这样就可以一劳永逸了，这些东西都是一段时期内的东西，包括软件的数据文档。</p>
+<p>而对于归档的东西（这个东西属于你自己），比如课程作业（你会经常翻看你某年做的作业么，不会吧），结束了的项目内容，则放在另外一个目录中。我在D盘中对应的目录为“沉枫诗舍”。你也可以起你自己个性化名字。</p>
+<p>还有其他的一些资料，比如媒体、书籍，可以充分利用其播放器的特点，将其目录读入播放器中，就不需要从磁盘目录树访问这些内容了；软件（我指的是供安装的可执行文件）的使用频率不如媒体书籍，所以放在与媒体、书籍、当前文档同级目录就可以了。对于一些不得不深的目录，如果觉得双击几次比较麻烦的话，不妨多用用快捷方式，把D盘中在一段时期内可能会看的书籍快捷方式到桌面上。</p>
+<h4 id="4-6寻找资料容易">4.6寻找资料容易</h4>
+<p><span style="line-height: 1.5em;">整个信息组织的一个重要作用就是为了检索，不能轻易找到好资料的目录不是一个好目录。为了能够方便的找到资料，前文所说的缩短目录层级是以方面，另一方面要规范文件与目录的命名。</span></p>
+<p>命名很重要，命名保持稳定更重要。稳定的命名能够减轻我们配置路径、资料备份的难度。如果这一块的需求确实很强力的话，不妨自己制定一套规则。复杂的话可以将互联网上的命名一块统一进来。我在文章<a href="http://blog.exbye.com/2013/02/free-mail-synthesized-skills/" target="_blank" rel="external">免费邮箱综合使用攻略</a>中提到了一些原则，但不全面。以后如有机会可能会补充上。</p>
+<p>当然对于临时使用的文件或者目录，就不需要这么多条条框框来限制了。对了，在这里想到一点，谷歌整个服务体系的命名与布局相当完美，必是花了相当大的功夫。</p>
+<h4 id="4-7同级目录下子目录的数量">4.7同级目录下子目录的数量</h4>
+<p><span style="line-height: 1.5em;">一般控制在5~8个比较好，这样在选择目录的时候能够很快发现需要进入的目录。为了达到这一目的，分类法中有一些理念可以引入。扩九法，当目录超过8个时，将多余的目录放在第九个目录中，以此类推。如此一来，所有目录的子目录个数都不会超过9个。还有一个方法，名字忘掉了，即当子目录中有比较大、资料比较多的目录时，可以将其提取到上级目录。在我上面的第一个图中，在书籍资料文件夹里，目录“信息技术”实际上是从属于技能学习的，但是由于它的子目录比较多，内容比较多，所以提取到了与“技能学习”同一级的位置。</span></p>
+<h4 id="4-8类目均衡">4.8类目均衡</h4>
+<p>几个目录之间尽量均衡，这几乎是所有分类法中约定俗成的。以中图法为例，如今中国的大部分综合性高校图书馆都是使用的中图分类法，对于这些图书馆，类目可能不是均衡的。比如E（军事）的通常很少，TP(IT技术)则相当的多。这现象可能会给我们一个错觉，即类目是不均衡的。当然这是由于特定需求导致的选择造成的。对于一个大图书馆而言（比如国家图书馆），类目则是比较均衡的。</p>
+<p>但在硬盘目录布局中，影响均衡的不是容量大小，而是子类数量。比如一个文本文件夹A只有10M，但是它的子类数量很多；另一个视频文件夹B超过了1G，但是没有子类。我们可能就要将A的子类提取到与B相同的地位，以维护类目均衡。</p>
+<h4 id="4-9个人资料与网络资料分离">4.9个人资料与网络资料分离</h4>
+<p><span style="line-height: 1.5em;">互联网上的东西与自己的东西的分离。对于软件，现在大部分的软件都有其官方网站并且时长更新，没有太大的必要保存这些软件，我们所要做的仅仅是保留一个链接。还有一些资料我们是存储在互联网上的，比如邮件，还有云盘上的一些资料。就我个人是在这两块地方放置的东西比较多，但是两者有差异，参见</span><a href="http://blog.exbye.com/2013/02/free-mail-synthesized-skills/" target="_blank" rel="external">免费邮箱综合使用攻略</a><span style="line-height: 1.5em;">。虽然某些不负责的教材一直说，网络比个人保存资料更安全，但事实是，现在还未到这个阶段，至少整体上国内的互联网企业还没法做到这一点。所以，现在最最重要的东西保存的首要位置还是本地，我们的笔记本上。要分清哪些东西要放在网上，哪些东西不要放在网上，放在网上的目的是什么，是共享还是冗余备份；分清最新的版本是网上的还是本地的。</span></p>
+<p>别人的东西与自己的东西的分离。我们默认他人的东西由他人维护，我们只是使用者。把来自他人的资料与来自网络的资料等同对待，逻辑上就非常简单了。</p>
+<p>对于自己的产出，可以与大家分享。一个网站是极为合适的，所以就有了我的博客——<a href="http://blog.exbye.com" target="_blank" rel="external">浮茗诗舍</a>，以及<a href="http://blog.exbye.com/2013/03/directory-layout-experience/" target="_blank" rel="external">这篇文章</a>。</p>
+<h4 id="4-10保留难找到的东西">4.10保留难找到的东西</h4>
+<p><span style="line-height: 1.5em;">这几乎是不用说也明白的道理，但实际上并不是很多人会留意。 有些东西很容易从网络流失，比如涉及到版权的东西。以前verycd上有很多东西可以下载，后来就不可以了；以前115有很多东西，后来关闭了，就少了一扇门。我想百度文库、新浪爱问之类的平台，如果没有改革版权管理的方式，以后也会消失。所以当我们在上面发现了十分重要的资料时，最好将他们下载下来，而不是仅仅保留链接。</span></p>
+<p>保留难找到的东西，另外一层意思是，丢掉容易找到的东西。比如免费的商业软件，如QQ，飞信等。这些东西镜花水月，时常更新，保留一个连接跟着他们走就可以了。不过这里也有一个小点需要留意，商业小软件版本更迭之后，旧的版本官网可能就不提供了，而有些功能只有旧的版本有。比如QQ在2012版之前都是可以备份所有的人的聊天记录的，而2013年只能分开备份。所以有时候我希望找到旧的版本。当然了，把重要的功能去掉当属少数现象。估计腾讯觉得这个功能比较重要，以后还会加上（阴谋什么的就另当别论了）。</p>
+<h4 id="4-11可扩展到其他设备">4.11可扩展到其他设备</h4>
+<p><span style="line-height: 1.5em;">比如，linux系统；比如，Mp3，比如备份用的硬盘，比如相机。如果使用linux系统的话，其实也很好对应。把linux分成3个区，两个主分区，一个swap。一个主分区装系统，另一个一个主分区挂载到/home下，那么/home则类似于windows下的D盘。</span></p>
+<p>我们在听音乐时候，可能是在mp3；在看电子书的时候，可能是在平板上；在使用通讯录的时候，更多是在手机上。那么，我们应该明确一个信息中心（笔记本最合适），其余的数据都是这个信息中心的一份拷贝。至于对应关系，其余设备一般对应笔记本硬盘上的一个或多个目录。 由是，所有的信息围绕着信息中心笔记本分散展开。</p>
+<h4 id="4-12关于统一性">4.12关于统一性</h4>
+<p><span style="line-height: 1.5em;">如果仔细看本文的第一个图（磁盘目录）中的书籍资料文件夹与（书签）中专题学习目录的的话，会发现两者的布局是十分相似的，这就涉及到了我前文所说的统一性。 因为两者都在我基于我对信息理解的框架之下，这样的框架如果你也有一个，那么就可以把其光环笼罩在很多事情之上了。</span></p>
+<h2 id="5-按内容说明">5.按内容说明</h2>
+<h4 id="5-1关于软件分类">5.1关于软件分类</h4>
+<p><span style="line-height: 1.5em;">最初我的软件是这么分的：媒体类软件、工具性软件、学习型软件(准备精学的一些大软件，比如SQL Server)、系统、驱动、游戏。但是后来觉得这样并不好，因为硬盘上之所以存软件，一是因为想在离线的时候使用，二是因为有些软件找到或下载比较难。所以后来我就改变了策略，将软件目录下的布局改成了：驱动(一装系统就要用)、系统(软件很大，下载麻烦，需保留)、保留(特别好用的小软件，由非常难找)、学术(比如网络分析工具，结构方程软件)、资料(主要是在做软件的时候可能会用到)、游戏(小时候玩的有些，或者会经常想念的游戏)、学习(想要学习的大软件，有很多是破解的)、开源(只是为了减少重复下载)、免费(每次装机的时候，可能会再去下载最新版本)，专题(搜集的与某一专题相关的软件，比如所有的都是磁盘分区的软件)。后来由于磁盘空间不足，把开源、免费这两个目录都删除了，依然不影响使用。</span></p>
+<h4 id="5-2关于图片分类">5.2关于图片分类</h4>
+<p><span style="line-height: 1.5em;">信息图片：比如ASCII的图片，图片的功用和书籍差不多，放在书籍资料中。</span></p>
+<p>素材图片：主要是为了软件调用，我放在软件目录里面。</p>
+<p>照片影像：这个属于私人的东西，应该和上面两种完全分开，我放在沉枫诗舍里面。</p>
+<p>我以为按照功能分是硬盘目录布局中重要的一个方式，因为计算机本身就是一个工具，重点在于提供功能。</p>
+<h4 id="5-3文档备份">5.3文档备份</h4>
+<p><span style="line-height: 1.5em;">涉及到备份的问题，你需要买一个备份用的硬盘，这是先决条件。网上很容易下载到的东西不备份，比如QQ，360；开源的东西不备份；但是这些东西必要时可以在浏览器书签中保留路径。</span></p>
+<p>自己的东西完全备份，包括自己做过的项目，作业，照片录像，写过的东西，聊天记录。凡是与自己有关并且属于自己的东西都应该保留。也许当时不觉得，但是如果过了5年甚至十几年，看到这些东西，一定会多有感慨。比如，某些照片，某个人，以及与这个人有关的一去不复返的故事。</p>
+<p>可能你的备份硬盘比较大，那么可以放置一些你暂时用不到、或者别人可以用到的东西，比如我会把Linux的操作系统放在其中。保留费空间，丢失了也没关系只是比较麻烦。</p>
+<p>如果进行了比较科学的分类之后，备份是完全备份的。这里推荐一个开源的备份工具，<a href="http://sourceforge.net/projects/freefilesync/" target="_blank" rel="external">FreeFileSync</a>，速度很快，非常好用。推荐学一学。</p>
+<p>对于文档备份，还有一点需要说明的是，有些东西需要备份它的历史。比如保留了一个记事本随笔或者一份自己写的源码，随笔或代码这些东西可能是经常更新的，更新即包括删掉某些内容，也包括增加某些内容。如果希望以后可以查看很久很久以前的那个阶段都在想些什么，这时候就需要回溯版本的历史。使用一个版本控制系统是必要的。关于SVN的简单使用，可以参照<a href="http://blog.exbye.com/2012/12/simple_tortoisesvn_tutorial/" target="_blank" rel="external">TortoiseSVN极简教程</a>。word的2013版本也集成了版本控制的功能，我没有怎么研究。</p>
+<h4 id="5-4系统备份">5.4系统备份</h4>
+<p><span style="line-height: 1.5em;">下面说一下系统备份。策略是C盘全备份，但是备份的时期需要注意。一个在装完干净的系统之后，在装了必要的驱动以及必要的软件(比如我用SVN与Notepad++，这两个是必装软件，QQ之类的都不是必装)、对目录进行了重定位、设置了电源管理、屏保等杂项之后，就可以对C盘进行镜像了。以前windowsXP系统常常使用ghost进行C盘镜像，而windows7则包含很好完成C盘镜像的功能。镜像内容放在D盘根目录下，设置为隐藏。</span></p>
+<p>使用电脑的时候，经常会装一些只在一段时间内才会用到的大软件，当用得久了，C盘的垃圾就会非常多。这时候进行一定的文件转移（如果布局合理，快捷方式合理，转移到东西并不多），然后就可以C盘还原了。还原速度很快，无需人值守。可以每隔3个月左右弄一次，据个人情况而定。之后电脑与新装的无异，速度很快。</p>
+<h4 id="5-5快捷方式与目录的重定位">5.5快捷方式与目录的重定位</h4>
+<p>这里仅针对windows7而言，windowXP其实类似。C盘-&gt;User-&gt;[系统用户名]目录下，有很多文档目录，我们的目的就是把这些目录对应到比较好用的目录上。如果用IE的话，可以把收藏夹对应到D盘的某目录；我的文档已经对应到了D盘的当前文档；下载文件夹可以对应到桌面，把chrome或者IE的下载目录都调整到这个下载目录，这样查找打开一个下载文件会很方便。以此类推。</p>
+<p>至于如何更换路径，大家右键文件件-&gt;属性-&gt;位置选项卡；填写好路径，就可以点击“移动”了。</p>
+<p><a href="http://blog.exbye.com/wp-content/uploads/2013/03/image.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/03/image_thumb.png" alt="image" title="image"></a></p>
+<h4 id="5-6保留配置信息">5.6保留配置信息</h4>
+<p>我们已经进行了C盘镜像，还原之后，如果再装大软件的话，有时候进行软件配置会是一件麻烦事。可以对这些配置文件进行备份，或者将配置信息保存到D盘的某目录下，因为配置信息也可以作为自己的一项产出。这些可以配置的东西包括但不限于：MS office模板、Foxmail、聊天记录，浏览器插件的配置等。有些配置是可调节配置目录的，就把他们调节到D盘的配置文件的目录上；有些是可以到处配置文件的，可以在还原系统之前导出配置文件。习惯之后，要导出配置文件的软件会比较稳定，可以维护一个小笔记记录这些需要备份配置的软件，避免遗忘。</p>
+<h2 id="6-小结">6.小结</h2>
+<p><span style="line-height: 1.5em;">没想到写完这几千字竟然会用掉3天的时间，把零散的经验整理得有条理并不是一蹴而就的。在这之前，网上似乎没有更加系统的资料了。当然这写文字亦不能将所有的点囊括进来，我只是尽可能地把框架描述清楚，除了一些理念原则相同之外，不同的人处理目录的方式应该也是不同的，真都一样当有多枯燥！归结起来，还是习惯就好，对这种事情强迫起来并非好事，大家择优而取。@</span><a href="http://blog.exbye.com" target="_blank" rel="external">浮茗诗舍</a><span style="line-height: 1.5em;">于2013.3.14。</span></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/书签/">书签</a><a href="/tags/分类/">分类</a><a href="/tags/原则/">原则</a><a href="/tags/备份/">备份</a><a href="/tags/布局/">布局</a><a href="/tags/目录/">目录</a><a href="/tags/经验/">经验</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/组织管理/">组织管理</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/03/13/directory-layout-experience/" data-title="目录布局经验谈 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/03/13/integer-partitions-calculation-methods/" title="整数分区计算方式">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  整数分区计算方式</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/03/12/microfilm-one-minute-life/"  title="苍蝇的一分钟生命">
+ <strong>NEXT:</strong><br/> 
+ <span>苍蝇的一分钟生命
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言"><span class="toc-number">1.</span> <span class="toc-text">1.前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-概述"><span class="toc-number">2.</span> <span class="toc-text">2.概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-目录图示"><span class="toc-number">3.</span> <span class="toc-text">3.目录图示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-原则"><span class="toc-number">4.</span> <span class="toc-text">4.原则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1原则之原则"><span class="toc-number">4.0.1.</span> <span class="toc-text">4.1原则之原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2移动速度"><span class="toc-number">4.0.2.</span> <span class="toc-text">4.2移动速度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3容易备份"><span class="toc-number">4.0.3.</span> <span class="toc-text">4.3容易备份</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4尽量少地冗余"><span class="toc-number">4.0.4.</span> <span class="toc-text">4.4尽量少地冗余</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5目录层级尽可能简单"><span class="toc-number">4.0.5.</span> <span class="toc-text">4.5目录层级尽可能简单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6寻找资料容易"><span class="toc-number">4.0.6.</span> <span class="toc-text">4.6寻找资料容易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7同级目录下子目录的数量"><span class="toc-number">4.0.7.</span> <span class="toc-text">4.7同级目录下子目录的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-8类目均衡"><span class="toc-number">4.0.8.</span> <span class="toc-text">4.8类目均衡</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-9个人资料与网络资料分离"><span class="toc-number">4.0.9.</span> <span class="toc-text">4.9个人资料与网络资料分离</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-10保留难找到的东西"><span class="toc-number">4.0.10.</span> <span class="toc-text">4.10保留难找到的东西</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-11可扩展到其他设备"><span class="toc-number">4.0.11.</span> <span class="toc-text">4.11可扩展到其他设备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-12关于统一性"><span class="toc-number">4.0.12.</span> <span class="toc-text">4.12关于统一性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-按内容说明"><span class="toc-number">5.</span> <span class="toc-text">5.按内容说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1关于软件分类"><span class="toc-number">5.0.1.</span> <span class="toc-text">5.1关于软件分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2关于图片分类"><span class="toc-number">5.0.2.</span> <span class="toc-text">5.2关于图片分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3文档备份"><span class="toc-number">5.0.3.</span> <span class="toc-text">5.3文档备份</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4系统备份"><span class="toc-number">5.0.4.</span> <span class="toc-text">5.4系统备份</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5快捷方式与目录的重定位"><span class="toc-number">5.0.5.</span> <span class="toc-text">5.5快捷方式与目录的重定位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6保留配置信息"><span class="toc-number">5.0.6.</span> <span class="toc-text">5.6保留配置信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-小结"><span class="toc-number">6.</span> <span class="toc-text">6.小结</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

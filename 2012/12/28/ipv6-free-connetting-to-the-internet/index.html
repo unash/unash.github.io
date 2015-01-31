@@ -1,0 +1,454 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>IPv6免费上网教程 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="☆实现功能
+在IPv6的网络环境下，可以访问万维网。可以访问国内的，而且具有翻*墙的效果。教程稍有复杂，但有些步骤读者可能已经设置好了，通篇读写来之后能够对整个设置有一个比较清晰的了解。Here we go！
+☆网络环境要求
+具有IPv6的网络环境，一般高校校园网的网络是ipv6与ipv4混合的（如果对各个高校IPv地址感兴趣的话，可以访问这个列表）。然而即使是IPv6网络，当使用了路由之后，有可能会变成ipv4网。在将学校的网络接口接入到路由器之后，路由器通常有两种设置模式，一种是交换机模式，一种是路由模式。交换机模式下，不改变网络的类，即原来是ipv6的经过交换机之后依然是ipv6；但是在路由模式下，经过之后则会变成ipv4模式，这样就无法使用ipv6了。然而路由器的默认设置是路由模式，那么可以设置为交换机模式。以市场上销售的那种百元左右的小型路由器为例，通常的做法是，不使用路由器上的WAN端口，只使用剩下的LAN端口连接所有的网线。即所有的网线都接在LAN上，重启一些就可以了。
+☆IPV6的安装
+具有了ipv6的网络之后，还需要电脑支持ipv6网络。windows 7，已经默认安装了IPV6协议。但是对于windows XP，需要先安装IPV6，可搜索一下如何安装。安装成功之后，在cmd命令行中，键入ipconfig -all，会出现一串的内容，其中会出现ipv6相关的内容，比如类似2001:0:9d38:6ab8:18d8:26df:5d96:f4df类似的地址。OK，IPv6访问无碍，可以进行主要的设置步骤了。
+☆host文件的使用
+ipv6网络安装之后，为了能否访问国内外的ipv6网络（其实主要是国外的，国内的比如ipv6.baidu.com虽然可以打开首页，但是也只是首页而已，其他的页面是无法通过ipv6访问的），需要修改host文件，下载地址见括号（本地下载，去掉txt后缀名；官方下载）。复制到目录C:\Windows\System32\drivers\etc中，替换掉原来的hosts文件。之后，在浏览器中输入www.google.com，就可以访问了。如果不出大的问题的话，也可以访问维基百科www.wikipedia.org，包括google的其他的大部分服务也可以访问。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/12/28/ipv6-free-connetting-to-the-internet/" title="IPv6免费上网教程" itemprop="url">IPv6免费上网教程</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2012-12-28T08:17:35.000Z" itemprop="datePublished">Dec 28 2012</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#☆实现功能"><span class="toc-number">1.</span> <span class="toc-text">☆实现功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆网络环境要求"><span class="toc-number">2.</span> <span class="toc-text">☆网络环境要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆IPV6的安装"><span class="toc-number">3.</span> <span class="toc-text">☆IPV6的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆host文件的使用"><span class="toc-number">4.</span> <span class="toc-text">☆host文件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆代理的设置"><span class="toc-number">5.</span> <span class="toc-text">☆代理的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆Goagent的使用"><span class="toc-number">6.</span> <span class="toc-text">☆Goagent的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆Proxy_SwitchSharp的使用"><span class="toc-number">7.</span> <span class="toc-text">☆Proxy SwitchSharp的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆注意事项"><span class="toc-number">8.</span> <span class="toc-text">☆注意事项</span></a></li></ol>
+		</div>
+		
+		<h3 id="☆实现功能">☆实现功能</h3>
+<p>在IPv6的网络环境下，可以访问万维网。可以访问国内的，而且具有翻*墙的效果。教程稍有复杂，但有些步骤读者可能已经设置好了，通篇读写来之后能够对整个设置有一个比较清晰的了解。Here we go！</p>
+<h3 id="☆网络环境要求">☆网络环境要求</h3>
+<p>具有IPv6的网络环境，一般高校校园网的网络是ipv6与ipv4混合的（如果对各个高校IPv地址感兴趣的话，可以访问<a href="http://www.ipv426.com/a/20121205/720.html" target="_blank" rel="external">这个列表</a>）。然而即使是IPv6网络，当使用了路由之后，有可能会变成ipv4网。在将学校的网络接口接入到路由器之后，路由器通常有两种设置模式，一种是交换机模式，一种是路由模式。交换机模式下，不改变网络的类，即原来是ipv6的经过交换机之后依然是ipv6；但是在路由模式下，经过之后则会变成ipv4模式，这样就无法使用ipv6了。<br>然而路由器的默认设置是路由模式，那么可以设置为交换机模式。以市场上销售的那种百元左右的小型路由器为例，通常的做法是，不使用路由器上的WAN端口，只使用剩下的LAN端口连接所有的网线。即所有的网线都接在LAN上，重启一些就可以了。</p>
+<h3 id="☆IPV6的安装">☆IPV6的安装</h3>
+<p>具有了ipv6的网络之后，还需要电脑支持ipv6网络。windows 7，已经默认安装了IPV6协议。但是对于windows XP，需要先安装IPV6，可搜索一下如何安装。安装成功之后，在cmd命令行中，键入ipconfig -all，会出现一串的内容，其中会出现ipv6相关的内容，比如类似<span style="color: #0000a0;">2001:0:9d38:6ab8:18d8:26df:5d96:f4df类似的</span>地址。OK，IPv6访问无碍，可以进行主要的设置步骤了。</p>
+<h3 id="☆host文件的使用">☆host文件的使用</h3>
+<p>ipv6网络安装之后，为了能否访问国内外的ipv6网络（其实主要是国外的，国内的比如ipv6.baidu.com虽然可以打开首页，但是也只是首页而已，其他的页面是无法通过ipv6访问的），需要修改host文件，下载地址见括号（<a href="http://blog.exbye.com/wp-content/uploads/2012/12/hosts.txt" target="_blank" rel="external">本地下载</a>，去掉txt后缀名；<a href="https://ipv6-hosts.googlecode.com/hg/hosts" target="_blank" rel="external">官方下载</a>）。复制到目录C:\Windows\System32\drivers\etc中，替换掉原来的hosts文件。之后，在浏览器中输入<a href="http://www.google.com" target="_blank" rel="external">www.google.com</a>，就可以访问了。<br>如果不出大的问题的话，也可以访问维基百科<a href="http://www.wikipedia.org" target="_blank" rel="external">www.wikipedia.org</a>，包括google的其他的大部分服务也可以访问。</p>
+<a id="more"></a>
+<h3 id="☆代理的设置">☆代理的设置</h3>
+<p>完成上面的步骤之后，进度已经完成了30%了，下一步需要设置访问代理。我们知道，由于G<em>F</em>W的存在，国外的很多网站无法访问，由此催生了代理方法的发展，其中一个比较知名的是goagent，架设在google的Google AppEngine上。更多相关内容，可以去<a href="https://code.google.com/p/goagent/" target="_blank" rel="external">goagent的官方网站</a>看看。</p>
+<p>要从头开始使用goagent，首先需要申请一个google账户，之后进入<cite><a href="https://appengine.google.com/?" target="_blank" rel="external">https://<strong>appengine</strong>.google.com/</a></cite>? ，开通google appengine的服务，新建一个应用。<br><a href="http://blog.exbye.com/2012/12/ipv6_free_connetting_to_the_internet/google_appengine_homepage/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2012/12/google_appengine_homepage.png" alt="google_appengine_homepage"></a><br><a href="http://blog.exbye.com/2012/12/ipv6_free_connetting_to_the_internet/google_create_an_application/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2012/12/google_create_an_application.png" alt="google_create_an_application"></a><br>创建成功之后，记住application的<strong>名字</strong>，然后下载<a href="https://code.google.com/p/goagent/" target="_blank" rel="external">GoAgent官方</a>服务器文件，解压；如果这个网址打不开，那么使用<a href="http://pan.baidu.com/share/link?shareid=216557&amp;uk=4079685794" target="_blank" rel="external">百度网盘下载</a>，或者使用<a href="https://docs.google.com/file/d/0Bw5LWH9QcwNGaFUxNkNUNWt3aWM/edit?usp=sharing" target="_blank" rel="external">谷歌网盘下载</a>。解压之后上传的过程参考<a href="https://code.google.com/p/goagent/" target="_blank" rel="external">GoAgent官方</a>中的文档，此处不再赘述。如果上传成功，在使用local文件夹中的程序的时候，需要修改一下proxy.ini文件，将[gae]的这一段修改为如下：<br><code>[gae]
+appid = XXXXX _#这里XXXXX更换为你自己的Google AppEngine的application名字_
+password =
+path = /2
+profile = google_ipv6
+crlf = 1
+window = 4</code><br>然后用管理员身份启动goagent.exe程序，在得到如图所示的效果之后，基本就可以了：<br><a href="http://blog.exbye.com/2012/12/ipv6_free_connetting_to_the_internet/goagent_nomal_windows/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2012/12/goagent_nomal_windows.png" alt="goagent_nomal_windows"></a></p>
+<h3 id="☆Goagent的使用">☆Goagent的使用</h3>
+<p>启动之后，还需要修改一下浏览器的代理设置，才能够使用。通常设置的地方在<strong>Internet选项-&gt;连接-&gt;本地连接</strong>，设置代理的地址为127.0.0.1，端口为8087（这个端口可以修改，在proxy.ini文件中）。确定之后，就可以使用浏览器访问万维网了。</p>
+<h3 id="☆Proxy_SwitchSharp的使用">☆Proxy SwitchSharp的使用</h3>
+<p>但是这样设置之后，如果没有启动代理，在希望不通过代理访问网络的时候，还需要手动取消代理，比较麻烦，如果是chrome浏览器的话，这样的问题就可以大大化简了。下载Google chrome proxy switchysharp，本地下载安装方式（<a href="http://blog.exbye.com/wp-content/uploads/2012/12/ProxySwitchysharp.txt" target="_blank" rel="external">右键另存为此文件</a>，修改后缀名为.crx，<span style="text-decoration: line-through;">安装到chrome（如果不知道怎么安装，就直接把这个文件拖到google浏览器中</span>，直接安装已经行不通来，需要通过<strong>工具-&gt;扩展程序</strong>进行安装），或者使用<a href="https://chrome.google.com/webstore/detail/proxy-switchysharp/dpplabbmogkhghncfbfdeeokoefdjegm?utm_source=chrome-ntp-icon" target="_blank" rel="external">谷歌网盘下载</a>并直接安装。安装成果之后在浏览器窗口的右上角会出现图标<img src="http://blog.exbye.com/wp-content/uploads/2012/12/switchysharp_icon.png" alt="">，点击，进入设置。读者估计自己看看就学会了，不赘述。通过插件SwitchyProxy,可以比较灵活地切换代理。</p>
+<p>如果懒得配置了，可以下载我<a href="https://docs.google.com/file/d/0Bw5LWH9QcwNGWkVNOGtOR3pxV0k/edit?usp=sharing" target="_blank" rel="external">这个witchyProxy的备份文件</a>，直接还原就可以了。</p>
+<p>☆<strong>其他IPv6访问方式</strong></p>
+<p>如果只是临时使用网络而懒得再去设置代理，浮茗在此推荐一个代理网站，可以直接通过修改url访问外网。</p>
+<p>访问网址为：<a href="http://www.sixxs.net/tools/gateway/" target="_blank" rel="external">http://www.sixxs.net/tools/gateway/</a></p>
+<p><a href="http://blog.exbye.com/wp-content/uploads/2013/06/image5.png" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2013/06/image_thumb5.png" alt="image" title="image"></a></p>
+<p>在最后的那个框中输入你需要访问的地址，然后点击Browse over IPv6，就可以直接访问了。</p>
+<p>☆<strong>其他翻*墙方式</strong></p>
+<p>gapproxy</p>
+<p>free door（直译成中文，不过反动的内容太多了，下策）</p>
+<h3 id="☆注意事项">☆注意事项</h3>
+<p>由于Goagent经常被屏蔽之后就不能用了，所以如果某日不可以通过代理上网了，则不妨下载一个新的goagent服务器文件重新上传使用。<br>google的application有流量限制，每天不可超过1G，所以用代理上网时，每天尽量控制在1G之内。</p>
+<p>无论使用的什么代理，如果对代理的原理不清楚，请勿通过代理进行一些涉及财务的操作，以防密码泄露。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/GoAgent/">GoAgent</a><a href="/tags/hosts/">hosts</a><a href="/tags/IPv6/">IPv6</a><a href="/tags/互联网/">互联网</a><a href="/tags/代理/">代理</a><a href="/tags/免费/">免费</a><a href="/tags/校园网/">校园网</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/笔记/">笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2012/12/28/ipv6-free-connetting-to-the-internet/" data-title="IPv6免费上网教程 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/12/29/the-last-poem/" title="最后的咏叹调">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  最后的咏叹调</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/12/28/simple-tortoisesvn-tutorial/"  title="TortoiseSVN极简教程">
+ <strong>NEXT:</strong><br/> 
+ <span>TortoiseSVN极简教程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#☆实现功能"><span class="toc-number">1.</span> <span class="toc-text">☆实现功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆网络环境要求"><span class="toc-number">2.</span> <span class="toc-text">☆网络环境要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆IPV6的安装"><span class="toc-number">3.</span> <span class="toc-text">☆IPV6的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆host文件的使用"><span class="toc-number">4.</span> <span class="toc-text">☆host文件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆代理的设置"><span class="toc-number">5.</span> <span class="toc-text">☆代理的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆Goagent的使用"><span class="toc-number">6.</span> <span class="toc-text">☆Goagent的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆Proxy_SwitchSharp的使用"><span class="toc-number">7.</span> <span class="toc-text">☆Proxy SwitchSharp的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#☆注意事项"><span class="toc-number">8.</span> <span class="toc-text">☆注意事项</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

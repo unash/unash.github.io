@@ -1,0 +1,542 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>创建微信公众平台 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="基础内容
+微信是一把利器,我们日常用它来交流,商家用它来营销.于是我们以商家的视角,来看一下微信为其提供的服务.微信公众平台的管理入口为 https://mp.weixin.qq.com ,尚不明白如此大的品牌,微信为何依然使用qq.com域名.且说公众平台的注册流程,">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/09/13/dev-wechat-public-platform/" title="创建微信公众平台" itemprop="url">创建微信公众平台</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-09-13T01:29:57.000Z" itemprop="datePublished">Sep 13 2014</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础内容"><span class="toc-number">1.</span> <span class="toc-text">基础内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用API"><span class="toc-number">2.</span> <span class="toc-text">使用API</span></a></li></ol>
+		</div>
+		
+		<h2 id="基础内容">基础内容</h2>
+<p>微信是一把利器,我们日常用它来交流,商家用它来营销.于是我们以商家的视角,来看一下微信为其提供的服务.微信公众平台的管理入口为 <a href="https://mp.weixin.qq.com" target="_blank" rel="external">https://mp.weixin.qq.com</a> ,尚不明白如此大的品牌,微信为何依然使用qq.com域名.且说公众平台的注册流程,<a id="more"></a>有如下过程:</p>
+<blockquote>
+<p>基本信息 =&gt; 邮箱激活 =&gt; 选择类型 =&gt; 信息登记 =&gt; 公众号信息<br>注册过程不是本文的重点. 注册结束之后,将得到如下管理界面:</p>
+</blockquote>
+<p>[caption id=”attachment_2847” align=”aligncenter” width=”848”]<a href="http://blog.exbye.com/2014/09/dev-wechat-public-platform/wechat_public_platform_panel/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/09/wechat_public_platform_panel-1024x451.png" alt="微信公众平台控制面板"></a> 微信公众平台控制面板[/caption]</p>
+<p>微信公众平台分两种类型:订阅号,服务号. 从注册方面来说, 订阅号可以个人注册,不用缴费; 服务号一般需要以团体机构的身份去申请,并且在申请过程中需要缴纳一定费用. 从使用方面来说, 订阅号无法获取公众平台的appkey与appsecret, 因而与之相关的功能无法使用, (虽然订阅号可以申请测试的appkey与appsecret, 但测试账号与正式的账号并非一物); 而服务号具有更加强大的功能, 比如可以在程序中获取用户信息, 在手机端的聊天界面, 可以显示底部菜单等. 本文仅为创建使用订阅号,提供一定指导.</p>
+<p>按下不表, 且回到上图界面. 订阅号的常规功能已经可在界面上操作, 比如管理用户信息, 设置用户的自动回复. 能把繁杂的功能抽丝去茧整合成简洁的操作面板, 确实显示了微信强大的产品能力(对比以前管理 虚拟主机 的那种界面). PS: 左侧导航链接文案作者一定有词语对齐的强迫症^ - ^.</p>
+<h2 id="使用API">使用API</h2>
+<p>当然界面的操作能力总是有限的, 我们想用代码来控制. 整体上, 使用微信公众平台的架构如下:</p>
+<p>[caption id=”attachment_2853” align=”aligncenter” width=”798”]<a href="http://blog.exbye.com/2014/09/dev-wechat-public-platform/wechat_public_platform_architecture/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/09/wechat_public_platform_architecture.png" alt="微信公众平台架构"></a> 微信公众平台架构[/caption]</p>
+<p>开发者要做的, 是在自己的服务器(公众平台服务器)上按照微信的API规范部署代码, 响应由微信服务器传递过来的用户请求. 所以你需要有一份自己的web服务器. 微信官方给出了一份php的代码范例:<a href="http://mp.weixin.qq.com/mpres/htmledition/res/wx_sample.zip" target="_blank" rel="external">http://mp.weixin.qq.com/mpres/htmledition/res/wx_sample.zip</a>.本文做了一些重命名与结构调整工作,以方便读者理解. Show the code:</p>
+<p><pre class="wrap:false scroll:true expand:true lang:php decode:true" title="微信公众平台代码范例">&lt;?php<br>define(“TOKEN”, “Weixin”);  ////web response</pre></p>
+<p>//wechat response<br>$wechatResponse = new wechatResponseClass();  //创建响应微信请求的类<br>$wechatResponse-&gt;valid();   //验证请求消息是否来源 微信<br>$wechatResponse-&gt;receiveRequest();  // 接受由微信传送过来的用户请求(比如用户发送的文本消息)<br>$wechatResponse-&gt;sendResponse();    //反馈给用户消息</p>
+<p>class wechatResponseClass<br>{<br>    private $openIdUser;    //用户的openId<br>    private $openIdServer;  //公众账号的openId<br>    private $requestMsgType;   //消息类型，如果为空，则不需要回复此条消息<br>    private $requestMsgContent;    //文本消息内容</p>
+<pre><code><span class="comment">/**!
+*<span class="phpdoc"> @brief</span> 验证微信访问是否合法
+*/</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">valid</span><span class="params">()</span>
+</span>{
+    <span class="variable">$echoStr</span> = <span class="variable">$_GET</span>[<span class="string">"echostr"</span>];
+    <span class="comment">//valid signature , option</span>
+    <span class="keyword">if</span>(<span class="variable">$this</span>-&amp;gt;checkSignature()){
+        <span class="keyword">echo</span> <span class="variable">$echoStr</span>;
+        <span class="keyword">exit</span>;
+    }
+}
+
+<span class="comment">/**!
+*<span class="phpdoc"> @brief</span> 接受用户的请求信息,并将其解析
+*/</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">receiveRequest</span><span class="params">()</span>
+</span>{
+    <span class="comment">//get post data, May be due to the different environments</span>
+    <span class="variable">$requestString</span> = <span class="variable">$GLOBALS</span>[<span class="string">"HTTP_RAW_POST_DATA"</span>];
+        <span class="comment">//extract post data</span>
+    <span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$requestString</span>))
+    {            
+        <span class="variable">$requestXmlObj</span> = simplexml_load_string(<span class="variable">$requestString</span>, <span class="string">'SimpleXMLElement'</span>, LIBXML_NOCDATA);
+        <span class="variable">$this</span>-&amp;gt;openIdUser = <span class="variable">$requestXmlObj</span>-&amp;gt;FromUserName; <span class="comment">//来源openId</span>
+        <span class="variable">$this</span>-&amp;gt;openIdServer = <span class="variable">$requestXmlObj</span>-&amp;gt;ToUserName;  <span class="comment">//公共账号openId</span>
+        <span class="variable">$this</span>-&amp;gt;requestMsgType = <span class="variable">$requestXmlObj</span>-&amp;gt;MsgType; <span class="comment">//消息类型</span>
+        <span class="keyword">switch</span> (<span class="variable">$this</span>-&amp;gt;requestMsgType) {
+            <span class="keyword">case</span> <span class="string">'text'</span>:    <span class="comment">//文本类型消息</span>
+                <span class="variable">$this</span>-&amp;gt;requestMsgContent = trim(<span class="variable">$requestXmlObj</span>-&amp;gt;Content);  <span class="comment">//内容</span>
+                <span class="keyword">break</span>;
+
+            <span class="keyword">default</span>:
+                <span class="variable">$this</span>-&amp;gt;requestMsgType = <span class="string">""</span>;   <span class="comment">//无法适配的消息类型</span>
+                <span class="keyword">break</span>;
+        }
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="variable">$this</span>-&amp;gt;requestMsgType = <span class="string">""</span>;
+    }
+}
+<span class="comment">/**!
+*<span class="phpdoc"> @brief</span> 给用户发送的提示, 此处调
+*/</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sendResponse</span><span class="params">()</span>
+</span>{
+    <span class="variable">$this</span>-&amp;gt;sendMsgText();  <span class="comment">//发送文本回复</span>
+}
+
+<span class="comment">/**!
+*<span class="phpdoc"> @brief</span> 用微信定义的文本消息结构, 给用户发送文本消息
+*/</span>
+<span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">sendMsgText</span><span class="params">()</span></span>{ <span class="comment">//发送文本消息</span>
+    <span class="comment">// $userInfo = new userInfoClass();</span>
+    <span class="keyword">if</span> (<span class="variable">$this</span>-&amp;gt;requestMsgType != <span class="string">""</span>) {
+      <span class="comment">//  $textContent = "Welcome to wechat world!".$userInfo-&amp;gt;get_user_info($this-&amp;gt;openIdUser);</span>
+        <span class="variable">$textContent</span> = <span class="string">"亲爱的你好,本公共账号还在开发中...\n你可以访问我的博客 http://blog.exbye.com\n也可以通过邮件给我留言: nirvana@exbye.com."</span>;
+    }
+    <span class="keyword">else</span>{
+        <span class="variable">$textContent</span> = <span class="string">""</span>;
+    }
+    <span class="variable">$msgType</span> = <span class="string">"text"</span>;
+    <span class="variable">$time</span> = time();
+    <span class="variable">$textMsg</span> = sprintf(<span class="variable">$this</span>-&amp;gt;tplText, <span class="variable">$this</span>-&amp;gt;openIdUser, <span class="variable">$this</span>-&amp;gt;openIdServer, <span class="variable">$time</span>, <span class="variable">$msgType</span>, <span class="variable">$textContent</span>);
+    <span class="keyword">echo</span> <span class="variable">$textMsg</span>;
+}
+
+<span class="comment">/**!
+*<span class="phpdoc"> @brief</span> 在将此接口提供给微信调用时,微信会发送一个get请求,请求内容包括签名时间戳等信息.
+* 本web页面将token、timestamp、nonce三个参数进行排序,使用sha1加密并将加密后的字符串与signature对比.
+* 如果一致,那么认为这是一次合法的微信请求. 此举, 我想应该防止第三方伪造 微信 的请求.
+*/</span>
+<span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">checkSignature</span><span class="params">()</span>
+</span>{
+    <span class="variable">$signature</span> = <span class="variable">$_GET</span>[<span class="string">"signature"</span>];
+    <span class="variable">$timestamp</span> = <span class="variable">$_GET</span>[<span class="string">"timestamp"</span>];
+    <span class="variable">$nonce</span> = <span class="variable">$_GET</span>[<span class="string">"nonce"</span>];    
+
+    <span class="variable">$token</span> = TOKEN;
+    <span class="variable">$tmpArr</span> = <span class="keyword">array</span>(<span class="variable">$token</span>, <span class="variable">$timestamp</span>, <span class="variable">$nonce</span>);
+    sort(<span class="variable">$tmpArr</span>);
+    <span class="variable">$tmpStr</span> = implode( <span class="variable">$tmpArr</span> );
+    <span class="variable">$tmpStr</span> = sha1( <span class="variable">$tmpStr</span> );
+
+    <span class="keyword">if</span>( <span class="variable">$tmpStr</span> == <span class="variable">$signature</span> ){
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }<span class="keyword">else</span>{
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+}
+<span class="comment">/**!
+*<span class="phpdoc"> @brief</span> 文本回复模板, 同样也可以创建图片回复模板,音频回复模板等.
+* 但由于涉及二进制回复内容(音频\视频\图片)的回复,都需要使用使用appkey,即需要进行开发者认证.
+* 故此处不再演示.
+*/</span>
+<span class="keyword">private</span> <span class="variable">$tplText</span>=<span class="string">"&amp;lt;xml&amp;gt;
+                &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+                &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+                &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+                &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt;
+                &amp;lt;Content&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Content&amp;gt;
+                &amp;lt;FuncFlag&amp;gt;0&amp;lt;/FuncFlag&amp;gt;
+                &amp;lt;/xml&amp;gt;"</span>; 
+</code></pre><p>}<br>?&gt;<br>注释都在代码里了. 读者可将此代码保存到index.php文件中, 并将文件放到支持php的web服务器上, 不过在此之前,需要修改一些内容,看图:</p>
+<p>[caption id=”attachment_2858” align=”aligncenter” width=”814”]<a href="http://blog.exbye.com/2014/09/dev-wechat-public-platform/wechat_modify_url_and_token/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/09/wechat_modify_url_and_token-1024x570.png" alt="修改接口配置信息"></a> 修改接口配置信息[/caption]</p>
+<p>至此, 部署就基本完成了. 然后在微信公众账号控制面板中:</p>
+<blockquote>
+<p>设置 =&gt; 公众账号设置 =&gt; 二维码</p>
+</blockquote>
+<p>你就可以生成一个二维码,供 其他人扫码添加了.比如我的Nirvana公众账号二维码(快快扫码关注吧^ - ^):</p>
+<p>[caption id=”attachment_2860” align=”aligncenter” width=”430”]<a href="http://blog.exbye.com/2014/09/dev-wechat-public-platform/qrcode_for_gh_a20c771e6a50_430/" target="_blank" rel="external"><img src="http://blog.exbye.com/wp-content/uploads/2014/09/qrcode_for_gh_a20c771e6a50_430.jpg" alt="Nirvana订阅号二维码"></a> Nirvana订阅号二维码[/caption]</p>
+<p><strong>参考资料</strong>: <a href="http://mp.weixin.qq.com/wiki/index.php?title=%E9%A6%96%E9%A1%B5" title="%E9%A6%96%E9%A1%B5" target="_blank" rel="external">微信官方文档</a>. PS: 文档也很容易阅读.</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/wechat/">wechat</a><a href="/tags/公众平台/">公众平台</a><a href="/tags/开发/">开发</a><a href="/tags/微信/">微信</a><a href="/tags/腾讯/">腾讯</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/笔记/">笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2014/09/13/dev-wechat-public-platform/" data-title="创建微信公众平台 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/10/12/the-easy-way-to-stop-smoking-notes/" title="《这本书能让你戒烟》札记">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  《这本书能让你戒烟》札记</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/09/10/cloud-computing-technique/"  title="云计算技术">
+ <strong>NEXT:</strong><br/> 
+ <span>云计算技术
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础内容"><span class="toc-number">1.</span> <span class="toc-text">基础内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用API"><span class="toc-number">2.</span> <span class="toc-text">使用API</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,413 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>《SQL反模式》读后记 | 浮茗诗舍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="浮茗">
+    
+    <meta name="description" content="这几天读了《SQL Antipatterns Avoiding the Pitfalls of Database Programming》原著者为Bill Karwin，翻译为谭震林，Push Chen。读了一段时间之后才弄清楚“反模式”的含义，看出作者对其所持的态度。直观理解，反模式应该是违反数据库设计中的一些规则的模式，然而实际上并非书中所有的设计都是与常规设计所悖的（比如第三章，树的设计，并不违反数据库范式）。这些设计可能有利于数据库的实施，提高查询的性能，但是会造成一定的风险(主要的风险在于不利于数据库功能的扩展)，而作者则主要介绍了这些设计模式的优点以及如何避免其中存在的问题。在系统设计中，如果对数据库的设计进行了一些思考，很容易就能在本书中找到一些共鸣。经验越多，反而能从本书中学到很多（好比我在抽取数据库样本的时候所写的博文，在本书中就有所涉及，读过之后确实收获不少）。书的槽点在于翻译（亦可能原著便是如此）：章节的名字太过抽象了，你能从“不用钥匙的入口”中看到第五章到底是讲什么的么？下面回归一下书中内容，结合书的纲目(注：纲目数据粘贴自豆瓣)，并做相应笔记。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="浮茗诗舍" title="浮茗诗舍"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="浮茗诗舍">浮茗诗舍</a></h1>
+				<h2 class="blog-motto">忆客丝白</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/12/18/sql-antipatterns-reading-note/" title="《SQL反模式》读后记" itemprop="url">《SQL反模式》读后记</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="浮茗">浮茗</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-12-18T05:53:43.000Z" itemprop="datePublished">Dec 18 2013</time>
+    Updated:<time datetime="2015-01-31T07:17:09.000Z" itemprop="dateModified">Jan 31 2015</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<div>这几天读了《SQL Antipatterns Avoiding the Pitfalls of Database Programming》</div><br><div>原著者为Bill Karwin，翻译为谭震林，Push Chen。</div><br><div></div><br><div>读了一段时间之后才弄清楚“反模式”的含义，看出作者对其所持的态度。直观理解，反模式应该是违反数据库设计中的一些规则的模式，然而实际上并非书中所有的设计都是与常规设计所悖的（比如第三章，树的设计，并不违反数据库范式）。这些设计可能有利于数据库的实施，提高查询的性能，但是会造成一定的风险(主要的风险在于不利于数据库功能的扩展)，而作者则主要介绍了这些设计模式的优点以及如何避免其中存在的问题。在系统设计中，如果对数据库的设计进行了一些思考，很容易就能在本书中找到一些共鸣。经验越多，反而能从本书中学到很多（好比我在抽取数据库样本的时候所写的<a href="http://blog.exbye.com/2013/12/random_select_from_db_using_sql/" target="_blank" rel="external">博文</a>，在本书中就有所涉及，读过之后确实收获不少）。书的槽点在于翻译（亦可能原著便是如此）：章节的名字太过抽象了，你能从“不用钥匙的入口”中看到第五章到底是讲什么的么？</div><br><div>下面回归一下书中内容，结合书的纲目(注：纲目数据粘贴自<a href="http://book.douban.com/subject/6800774/" target="_blank" rel="external">豆瓣</a>)，并做相应笔记。</div><br><div><a id="more"></a></div><br><div><strong>第1 章 引言　　1</strong><br><span style="color: #0000ff;"><strong>第一部分 逻辑型数据库设计反模式</strong></span><br><strong>第2 章 乱穿马路　　10</strong></div><br><div>2.1 目标：存储多值属性　　11<br>2.2 反模式：格式化的逗号分隔列表　　11</div><br><div>对于存储1-n型的数据(book,keywords)，一般的设计模式是建立两张表。一张表存放1，一张表存放1-n的对应关系。这样的结构符合关系数据库范式，但是经常要做连接查询会降低性能，所以可能把两张表放在一张表在中。</div><br><div>但存在的问题有：分隔符选择，列表长度限制。</div><br><div>这章的要点在于，如果想使得功能比较容易扩展（规范的设计模式），可能会降低性能。<br><strong>第3 章 单纯的树　　18</strong><br>树也是经常要用到的数据结构，在数据库中我以前常用到的是(childId,childName,parentId)，这是大部分程序员很快会想到的问题的，但是当做实际查询与展示时，必须经过多次表连接操作，降低性能，作者给出了三种方法（反而是觉得这些方法更像是所谓的“反模式”）：路径枚举，嵌套集，闭包表。</div><br><div>路径枚举：(1, 1/, name1), (3, 1/2, name3)，如此形式；方便找到祖先，找到同级所有节点</div><br><div>嵌套集：(node, left_node, right_node, content)，及存储子节点，如此形式；没看出有多少好的地方</div><br><div>闭包表：即将(祖先,后代)关系放在单独的一张表中存储，这样在查询某个节点的后代的时候十分方便不过在插入的时候比较麻烦，当不需要修改已有的树节点结构的时候，这种方式性能是比较高的。</div><br><div>读这一章的主要想法是：我们在执行数据库update操作的时候，一个事务只是更新一张表记录，实际上为了方便以后的查询，在update的时候可以更新多张表记录，而往往忘了这一点。</div><br><div><strong>第4 章 需要ID　　 34</strong></div><br><div>与主键有关。我反思了一下自己，确实是已经习惯了每张表有一个自增的id作为主键，但是并不一定必须如此。在关系数据库理论中主键是可以由多个字段共同组成的，而实际中由于这样为数据库造成了麻烦而而我们弃用。（原因也在于，实际中遇到的数据远没有理论中的那般规范）<br><strong>第5 章 不用钥匙的入口　　43</strong></div><br><div>主要指出不用外键（参照完整性所造成的问题）<br><strong>第6 章 实体—属性—值　　50</strong><br><strong>第7 章 多态关联　　64</strong><br>第6章与第7章讲的同一个问题：如果将元数据视作值对待。<br><strong>第8 章 多列属性　　 75</strong><br><strong>第9 章 元数据分裂　　　82</strong><br>第8章与第9章讲的同一个问题：如何将值视作元数据对待。</div><br><div>对于8，不是很严格，如果转化后的多个字段的值都变成1与0，就严格了。<br><span style="color: #0000ff;"><strong>第二部分 物理数据库设计反模式</strong></span><br><strong>第10 章 取整错误　　 94</strong><br>要在数据库中存储小数，有两类选择：float与NUMERIC。</div><br><div>在使用float的时候可能会出问题，因为float根据IEEE 754标准，使用二进制表示；所以对于数据59.95，系统只能使用与59.95相近的浮点型数据59.950000762939来表示，故59.95不一定等于59.95。所以推荐使用NUMERIC来存储，对于同样的精度（比如10位有效是数字），59.95就是59.95。</div><br><div>那么在程序设计语言中，似乎并没有考虑很多这个问题，为什么呢？因为在编程中大多使用的是离散型数值，都是精确的；而即使使用了浮点值，也通常不对他们作等值判断的操作。而在数据库中，比如财务数据库，等值判断操作则是一项常规的操作了。</div><br><div><strong>第11 章 每日新花样　　100</strong><br>关于用户自定义完整性。比如DBMS用户定义了字符串集合{“AA”,”BB”}，那么这种限制如何体现呢？如果这种限制存储在数据库模式中，那么当限制增加到{“AA”,”BB”,”CC”}的时候，则需要停止DBMS，然后修改DB模式，在启动；在设计网页表单的时候，需要从DBMS的系统表中查询用户自定义的数据范围，这样才能构建下拉列表。总之，如果使用关系数据库中的用户自定义完整性，在修改表模式的时候是比较麻烦的，所以通常是在数据库中设计一张定义完整性的表，在构筑网页表单的时候，只需要查询这一张表就可以了；而且这样还支持自定义集合的变更操作。</div><br><div>抽象来看，其实这也是一种将元数据存储在表中的方式；关系数据库理论本身，似乎更适合设计不变的数据库结构；而当数据库结构经常变动时，遵循关系数据库理论反而不是一种很好的方法。<br><strong>第12 章 幽灵文件　　107</strong><br>关于二进制文件的数据库存取。</div><br><div>如果文件存储在数据库之外，则程序代码必须考虑文件系统；当对数据库中的记录处理的时候，可能也需要处理文件系统中的二进制文件，容易出错；文件不支持delete，不支持事务隔离，不支持回滚操作，不支持数据库备份，不支持SQL的访问权限设置。</div><br><div>存在的好处如下：数据库在没有图片的时候能精益（InAsh注：就是“文件很小”的意思）很多；备份数据库文件更快；图片存在数据库之外可以使用预览功能。</div><br><div>当然也可以将二进制文件单独放在一张表中，当需要的时候，使用表连接操作进行查询。<br><strong>第13 章 乱用索引　　114</strong><br>这一章补充了我不清楚的知识。索引并不一定能够加速表查询，需要清楚索引的原理才能正确使用。主键不需要手动创建索引；索引只不过是将值按照顺序排列，并支持使用二分法等算法进行查找。<br><span style="color: #0000ff;"><strong>第三部分 查询反模式</strong></span><br><strong>第14 章 对未知的恐惧　　126</strong><br>关于NULL，将其认为是一种特殊的值就可以了。</div><br><div>NULL+一个值=NULL；NULL进行数值比较操作=NULL；NULL字符串拼接一个值=NULL。</div><br><div>如果想避免NULL引起纠纷，将列设置为Not Null。<br><strong>第15 章 模棱两可的分组　　135</strong><br>在使用group操作时可能出现的问题。对于表(student, grade)，我使用max操作来寻找最高的分数，但仅仅使用group并不能得到与最高分相对应的学生，我还必须使用嵌套查询才能获得。<br><strong>第16 章 随机选择　　144</strong><br>这个作为博文【<a href="http://blog.exbye.com/2013/12/random_select_from_db_using_sql/" target="_blank" rel="external">数据库记录中随机抽取样本</a>】的补充。</div><br><div>1.使用rand()然后排序，效率会比较低，适合从数据库，随机选择多个记录作为数据样本；</div><br><div>2.根据记录总数，使用概率确定需要定位的id集合，构造查询语句并执行，适合需要选择的样本记录并不是很高的情况；需要数据库中有伪键或者平滑的字段(1，3，5…)</div><br><div>3.获取所有的键值，随机选择一个。与方法2相似，适合没有伪键的情况；</div><br><div>4.使用偏移量选择随机行。如果样本数量为1，当然合适；如果样本数量&gt;1，那么就不是严格随机的了；并且，这种方法需要用到非标准的LIMIT子句，MySQL，PostgreSQL和SQLite支持这一子句。</div><br><div>5.使用专有解决方法，在MS SQL Server 2005中，增加了一个TABLE-SAMPLE子句：</div><br><div><br><pre class="lang:mysql decode:true ">SELECT <em> FROM Bugs TABLESAMPLE (1 ROWS)</em></pre><br></div><br><div>在Oracle中有一个类似SAMPLE子句，比如返回表中1% 的记录：</div><br><div><br><pre class="lang:plsql decode:true ">SELECT  FROM (SELECT <em> FROM Bugs SAMPLE(1) ORDER BY dbms_random.value) WHERE ROWNUM=1;</em></pre><br></div><br><div><strong>第17 章 可怜人的搜索引擎　　150</strong><br>通常使用模式匹配来搜索文本，但是无法完成比较高级的匹配；解决方案：</div><br><div>1.使用数据库扩展，MySql中可以针对字符串类型的字段定义全文索引，并使用布尔运算、正则等来匹配</div><br><div>其他数据库中也有类似技术，不提；</div><br><div>2.使用第三方搜索引擎：Sphinx Search, Apache Lucene.<br><strong>第18 章 意大利面条式查询　　162</strong><br>略。<br><strong>第19 章 隐式的列　　 170</strong><br>对于表的查询，SQL不支持“除了我不想要的字段，其他都要”的语法。<br><span style="color: #0000ff;"><strong>第四部分 应用程序开发反模式</strong></span><br><strong>第20 章 明文密码　　　178</strong><br>略。<br><strong>第21 章 SQL 注入　　188</strong><br>略。<br><strong>第22 章 伪键洁癖　　202</strong><br>这个比较有趣。除了使用int来作为伪键之外，还可以使用GUID。有些数据库提供全局唯一标识符（GUID）来随机生成伪键值。GUID是一个128位的伪随机数，GUID相比于传统的伪键生成方法，至少有两个优势之处：</div><br><div>1.可以在数据库中并发的生成伪键，而不用担心生成同样的值</div><br><div>2.没有人会再抱怨有断档（破除强迫之妙计啊）。</div><br><div><strong>第23 章 非礼勿视　　209</strong><br>主要是说在用程序连接数据库的时候，需要注意执行数据库查询之后的返回值。<br><strong>第24 章 外交豁免权　　215</strong></div><br><div>与团队合作有关。软件开发中的代码是有版本控制的，而在数据库的不断进化中却没有相应的版本控制方案，这为版本回溯造成了麻烦，除了数据库模式没有版本控制，开发文档也没有比较好的版本控制。也可能我并没有深入到一项大型的项目开发中所以对此方面了解不多，应该有些专门的书籍讨论这些问题了，不提。<br><strong>第25 章 魔豆　　225</strong><br>MVC。矛盾平衡问题。<br><span style="color: #0000ff;"><em>*第五部分 附录</em></span><br>附录A 规范化规则　　240<br>附录B 参考书目　　252</div><br><div></div>  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/DataBase/">DataBase</a><a href="/tags/sql/">sql</a><a href="/tags/SQL反模式/">SQL反模式</a><a href="/tags/书籍/">书籍</a><a href="/tags/数据库/">数据库</a><a href="/tags/读后感/">读后感</a><a href="/tags/随机/">随机</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/笔记/">笔记</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2013/12/18/sql-antipatterns-reading-note/" data-title="《SQL反模式》读后记 | 浮茗诗舍" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/12/22/one-year-from-birth/" title="开博周年记">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  开博周年记</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/12/15/ash-note/"  title="零散笔记">
+ <strong>NEXT:</strong><br/> 
+ <span>零散笔记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/参考内容/" title="参考内容">参考内容<sup>13</sup></a></li>
+		
+			<li><a href="/categories/应用推荐/" title="应用推荐">应用推荐<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/" title="建站系统">建站系统<sup>6</sup></a></li>
+		
+			<li><a href="/categories/心理笔记/" title="心理笔记">心理笔记<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的图片/" title="我的图片">我的图片<sup>11</sup></a></li>
+		
+			<li><a href="/categories/我的小说/" title="我的小说">我的小说<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的文档/" title="我的文档">我的文档<sup>9</sup></a></li>
+		
+			<li><a href="/categories/我的演示/" title="我的演示">我的演示<sup>3</sup></a></li>
+		
+			<li><a href="/categories/我的程序/" title="我的程序">我的程序<sup>6</sup></a></li>
+		
+			<li><a href="/categories/我的网站/" title="我的网站">我的网站<sup>2</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/" title="我的诗歌">我的诗歌<sup>24</sup></a></li>
+		
+			<li><a href="/categories/推介/" title="推介">推介<sup>1</sup></a></li>
+		
+			<li><a href="/categories/建站系统/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/插件介绍/" title="插件介绍">插件介绍<sup>1</sup></a></li>
+		
+			<li><a href="/categories/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/我的图片/摄影笔记/" title="摄影笔记">摄影笔记<sup>1</sup></a></li>
+		
+			<li><a href="/categories/海螺志/" title="海螺志">海螺志<sup>3</sup></a></li>
+		
+			<li><a href="/categories/笔记/" title="笔记">笔记<sup>47</sup></a></li>
+		
+			<li><a href="/categories/算法笔记/" title="算法笔记">算法笔记<sup>6</sup></a></li>
+		
+			<li><a href="/categories/组织管理/" title="组织管理">组织管理<sup>10</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/" title="编程笔记">编程笔记<sup>19</sup></a></li>
+		
+			<li><a href="/categories/网站介绍/" title="网站介绍">网站介绍<sup>14</sup></a></li>
+		
+			<li><a href="/categories/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>36</sup></a></li>
+		
+			<li><a href="/categories/我的诗歌/落叶沉枫/" title="落叶沉枫">落叶沉枫<sup>1</sup></a></li>
+		
+			<li><a href="/categories/视频介绍/" title="视频介绍">视频介绍<sup>19</sup></a></li>
+		
+			<li><a href="/categories/编程笔记/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/软件使用/" title="软件使用">软件使用<sup>22</sup></a></li>
+		
+			<li><a href="/categories/我的文档/软件使用/" title="软件使用">软件使用<sup>1</sup></a></li>
+		
+			<li><a href="/categories/风起浮茗/" title="风起浮茗">风起浮茗<sup>11</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/-net/" title=".net">.net<sup>1</sup></a></li>
+		
+			<li><a href="/tags/-net文件/" title=".net文件">.net文件<sup>2</sup></a></li>
+		
+			<li><a href="/tags/12-04/" title="12.04">12.04<sup>1</sup></a></li>
+		
+			<li><a href="/tags/80后/" title="80后">80后<sup>2</sup></a></li>
+		
+			<li><a href="/tags/AI/" title="AI">AI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APL/" title="APL">APL<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ASCII/" title="ASCII">ASCII<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Apache/" title="Apache">Apache<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apple/" title="Apple">Apple<sup>2</sup></a></li>
+		
+			<li><a href="/tags/A记录/" title="A记录">A记录<sup>1</sup></a></li>
+		
+			<li><a href="/tags/BSD/" title="BSD">BSD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Booklist/" title="Booklist">Booklist<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Bookmark/" title="Bookmark">Bookmark<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>8</sup></a></li>
+		
+			<li><a href="/tags/CC/" title="CC">CC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CD/" title="CD">CD<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CKeditor/" title="CKeditor">CKeditor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Coursera/" title="Coursera">Coursera<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DM/" title="DM">DM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DVD/" title="DVD">DVD<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="浮茗">浮茗</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
